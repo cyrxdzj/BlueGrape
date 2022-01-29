@@ -2,6 +2,7 @@ package dzj.cyrxdzj.bluegrape;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -39,6 +40,10 @@ public class MyWallpaper extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("MyWallpaper",wallpaper_list[position]);
+                Intent intent=new Intent();
+                intent.setClass(MyWallpaper.this,EditWallpaper.class);
+                intent.putExtra("wallpaper_id",wallpaper_list[position]);
+                MyWallpaper.this.startActivity(intent);
             }
         });
     }

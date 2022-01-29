@@ -4,4 +4,11 @@
     <string name="current_wallpaper">当前使用的壁纸</string>
     <string name="about_this_software">关于本软件</string>
     <string name="new_wallpaper">新建壁纸</string>
+    <string name="edit_wallpaper">编辑壁纸</string>
+    <string name="save_wallpaper">保存壁纸</string>
+    <string name="apply_wallpaper">应用壁纸</string>
+    <string name="delete_wallpaper">删除壁纸</string>
+    <string name="wallpaper_name">壁纸名</string>
+    <string name="fill_method">壁纸填充方法</string>
+    <string name="position">壁纸位置</string>
 </resources>
