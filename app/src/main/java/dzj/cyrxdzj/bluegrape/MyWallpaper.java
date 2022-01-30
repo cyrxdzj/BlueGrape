@@ -56,7 +56,20 @@ public class MyWallpaper extends AppCompatActivity {
             }
         }
         this.wallpaper_list=wallpaper_list_array.toArray(new String[wallpaper_list_array.size()]);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,wallpaper_name_array.toArray(new String[wallpaper_name_array.size()]));
+        String[] wallpaper_name=wallpaper_name_array.toArray(new String[wallpaper_name_array.size()]);
+        for(int i=0;i<wallpaper_name.length-1;i++)
+        {
+            for(int j=i+1;j<wallpaper_name.length;j++)
+            {
+                if(wallpaper_name[i].compareTo(wallpaper_name[j])>0)
+                {
+                    String t=wallpaper_name[i];
+                    wallpaper_name[i]=wallpaper_name[j];
+                    wallpaper_name[j]=t;
+                }
+            }
+        }
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,wallpaper_name);
         ListView my_wallpaper_list = (ListView) findViewById(R.id.my_wallpaper_list);
         my_wallpaper_list.setAdapter(adapter);
     }
@@ -81,10 +94,7 @@ public class MyWallpaper extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        this.wallpaper_list=wallpaper_list_array.toArray(new String[wallpaper_list_array.size()]);
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,wallpaper_name_array.toArray(new String[wallpaper_name_array.size()]));
         my_wallpaper_list = (ListView) findViewById(R.id.my_wallpaper_list);
-        my_wallpaper_list.setAdapter(adapter);
         my_wallpaper_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -100,6 +110,7 @@ public class MyWallpaper extends AppCompatActivity {
     public void onResume()
     {
         super.onResume();
+        Log.d("MyWallpaper","resume");
         refresh_list();
     }
 }
