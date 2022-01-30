@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 
 import java.io.File;
@@ -38,6 +39,12 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(1);
             }
         }
+        //TEST CODE BEGIN
+        Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        this.startActivity(intent);
+        //TEST CODE END
+        startService(new Intent(MainActivity.this, AppListener.class));
         startService(new Intent(MainActivity.this, WallpaperService.class));
     }
     public void open_my_wallpaper(View view)
