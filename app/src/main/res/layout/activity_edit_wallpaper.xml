@@ -12,17 +12,25 @@
         <Button
             android:id="@+id/save_wallpaper"
             android:layout_width="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:onClick="save"
             android:text="@string/save_wallpaper"/>
-
         <Button
             android:id="@+id/apply_wallpaper"
             android:layout_width="0dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="@string/apply_wallpaper"/>
+
+        <Button
+            android:id="@+id/delete_wallpaper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="button_delete"
+            android:text="@string/delete_wallpaper"
+            app:backgroundTint="#FF0000" />
     </LinearLayout>
 
     <ImageView

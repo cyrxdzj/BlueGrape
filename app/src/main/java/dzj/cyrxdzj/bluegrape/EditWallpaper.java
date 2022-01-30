@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -51,34 +50,6 @@ public class EditWallpaper extends AppCompatActivity {
         reader.close();
         return new String(temp);
     }
-    public int read_file(String path,byte[] res) {
-        FileInputStream reader=null;
-        int file_len=0;
-        try {
-            reader = new FileInputStream(new File(path));
-            byte buffer[] = new byte[1024];
-            int len = 0;
-            int cur=0;
-            while ((len = reader.read(buffer,0,buffer.length))>0) {
-                for(int i=0;i<len;i++)
-                {
-                    res[cur+i]=buffer[i];
-                }
-                file_len+=len;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader!=null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return file_len;
-    }
     public void write_file(String path,String content) throws IOException
     {
         FileWriter writer=new FileWriter(new File(path));
@@ -104,6 +75,26 @@ public class EditWallpaper extends AppCompatActivity {
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        dialog.show();
+    }
+    public void show_question_dialog(String title,String content)
+    {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(content)
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        delete();
                         dialog.dismiss();
                     }
                 }).create();
@@ -238,5 +229,26 @@ public class EditWallpaper extends AppCompatActivity {
             e.printStackTrace();
         }
         show_info_dialog(getString(R.string.save_successfully),getString(R.string.save_successfully));
+    }
+    public void button_delete(View view)
+    {
+        show_question_dialog(getString(R.string.confirm_delete),getString(R.string.confirm_delete));
+    }
+    public void delete()
+    {
+        Log.d("EditWallpaper","Delete");
+        File file_obj=new File("/storage/emulated/0/BlueGrape/"+wallpaper_id);
+        delete_dir(file_obj);
+        finish();
+        //file_obj.delete();
+    }
+    private void delete_dir(File file) {
+        File[] list = file.listFiles();
+        if (list != null) {
+            for (File temp : list) {
+                delete_dir(temp);
+            }
+        }
+        file.delete();
     }
 }
