@@ -3,12 +3,14 @@ package dzj.cyrxdzj.bluegrape;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
 import android.content.ContentUris;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.ImageReader;
+import android.icu.text.CaseMap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,26 +24,26 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 public class EditWallpaper extends AppCompatActivity {
 
     private String wallpaper_id;
     public static final int CHOOSE_IMAGE = 2;
+    private EditText wallpaper_name_editor;
+    private SeekBar alpha_seekbar;
+    private Spinner fill_method_spinner,position_spinner;
     public String read_file(String path) throws IOException {
         FileReader reader=new FileReader(new File(path));
         char[] temp=new char[500];
@@ -94,6 +96,19 @@ public class EditWallpaper extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+    public void show_info_dialog(String title,String content)
+    {
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(content)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        dialog.show();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,17 +133,17 @@ public class EditWallpaper extends AppCompatActivity {
             }
             //初始化组件
             refresh_image();
-            EditText wallpaper_name_editor=(EditText)findViewById(R.id.wallpaper_name);
+            wallpaper_name_editor=(EditText)findViewById(R.id.wallpaper_name);
             wallpaper_name_editor.setText(URLDecoder.decode(config.getString("name"),"UTF-8"));
-            SeekBar alpha_seekbar=(SeekBar)findViewById(R.id.alpha);
+            alpha_seekbar=(SeekBar)findViewById(R.id.alpha);
             alpha_seekbar.setProgress(config.getInt("alpha"));
             ArrayAdapter<String> fill_method_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,fill_method_list);
             fill_method_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             ArrayAdapter<String> position_adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,position_list);
             position_adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            Spinner fill_method_spinner=(Spinner)findViewById(R.id.fill_method);
+            fill_method_spinner=(Spinner)findViewById(R.id.fill_method);
             fill_method_spinner.setAdapter(fill_method_adapter);
-            Spinner position_spinner=(Spinner)findViewById(R.id.position);
+            position_spinner=(Spinner)findViewById(R.id.position);
             position_spinner.setAdapter(position_adapter);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -205,5 +220,23 @@ public class EditWallpaper extends AppCompatActivity {
             default:
                 break;
         }
+    }
+    public void save(View view)
+    {
+        try {
+            String save_str = "{\n"+
+                    "\t\"name\":\""+ URLEncoder.encode(wallpaper_name_editor.getText().toString(),"UTF-8")+"\",\n"+
+                    "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
+                    "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
+                    "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
+            Log.d("EditWallpaper",save_str);
+            write_file("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/config.json",save_str);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        show_info_dialog(getString(R.string.save_successfully),getString(R.string.save_successfully));
     }
 }

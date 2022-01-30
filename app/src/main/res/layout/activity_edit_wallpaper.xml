@@ -14,6 +14,7 @@
             android:layout_width="0dp"
             android:layout_weight="0.5"
             android:layout_height="wrap_content"
+            android:onClick="save"
             android:text="@string/save_wallpaper"/>
 
         <Button
