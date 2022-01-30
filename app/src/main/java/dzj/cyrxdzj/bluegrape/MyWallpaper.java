@@ -2,7 +2,10 @@ package dzj.cyrxdzj.bluegrape;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,10 +17,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class MyWallpaper extends AppCompatActivity {
@@ -31,6 +39,12 @@ public class MyWallpaper extends AppCompatActivity {
         reader.read(temp);
         reader.close();
         return new String(temp);
+    }
+    public void write_file(String path,String content) throws IOException
+    {
+        FileWriter writer=new FileWriter(new File(path));
+        writer.write(content);
+        writer.close();
     }
     private String get_wallpaper_name(String wallpaper_id) throws IOException, JSONException {
         String config_str = read_file("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/config.json");
@@ -56,20 +70,7 @@ public class MyWallpaper extends AppCompatActivity {
             }
         }
         this.wallpaper_list=wallpaper_list_array.toArray(new String[wallpaper_list_array.size()]);
-        String[] wallpaper_name=wallpaper_name_array.toArray(new String[wallpaper_name_array.size()]);
-        for(int i=0;i<wallpaper_name.length-1;i++)
-        {
-            for(int j=i+1;j<wallpaper_name.length;j++)
-            {
-                if(wallpaper_name[i].compareTo(wallpaper_name[j])>0)
-                {
-                    String t=wallpaper_name[i];
-                    wallpaper_name[i]=wallpaper_name[j];
-                    wallpaper_name[j]=t;
-                }
-            }
-        }
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,wallpaper_name);
+        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,wallpaper_name_array.toArray(new String[wallpaper_name_array.size()]));
         ListView my_wallpaper_list = (ListView) findViewById(R.id.my_wallpaper_list);
         my_wallpaper_list.setAdapter(adapter);
     }
@@ -112,5 +113,34 @@ public class MyWallpaper extends AppCompatActivity {
         super.onResume();
         Log.d("MyWallpaper","resume");
         refresh_list();
+    }
+    public void new_wallpaper(View view)
+    {
+        try {
+            Date d=new Date();
+            String wallpaper_id="wallpaper-"+d.getTime();
+            Log.d("MyWallpaper",wallpaper_id);
+            File fobj=new File("/storage/emulated/0/BlueGrape/"+wallpaper_id);
+            fobj.mkdirs();
+            fobj=new File("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/config.json");
+            fobj.createNewFile();
+            write_file("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/config.json","{\n"+
+                    "\t\"name\":\""+ URLEncoder.encode("新建壁纸","UTF-8")+"\",\n"+
+                    "\t\"alpha\":25,\n"+
+                    "\t\"fill_method\":\"left-right\",\n"+
+                    "\t\"position\":\"left-top\"\n}");
+            Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.default_image);
+            FileOutputStream writer=new FileOutputStream(new File("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/image.png"));
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,writer);
+            writer.flush();
+            writer.close();
+            Log.d("MyWallpaper",wallpaper_id);
+            Intent intent=new Intent();
+            intent.setClass(MyWallpaper.this,EditWallpaper.class);
+            intent.putExtra("wallpaper_id",wallpaper_id);
+            MyWallpaper.this.startActivity(intent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
