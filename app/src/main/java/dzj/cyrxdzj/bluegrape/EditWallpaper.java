@@ -24,11 +24,12 @@ public class EditWallpaper extends AppCompatActivity {
 
     private String wallpaper_id;
     public String read_file(String path) throws IOException {
-        File file_obj = new File(path);
-        FileInputStream reader=new FileInputStream(file_obj);
-        byte[] temp=new byte[500];
+        Log.d("EditWallpaper",path);
+        FileReader reader=new FileReader(new File(path));
+        char[] temp=new char[500];
         reader.read(temp);
-        return new String(temp,"UTF-8");
+        reader.close();
+        return new String(temp);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,15 +46,14 @@ public class EditWallpaper extends AppCompatActivity {
             e.printStackTrace();
         }
         String[] fill_method_list={"左右填充","上下填充"},position_list={"左/上位置","右/下位置"};
-        Log.d("EditWallpaper",config_str);
         try {
             JSONObject config=new JSONObject(config_str);
-            if(config.getString("fill_method")=="top-bottom")
+            if(config.getString("fill_method").equals("top-bottom"))
             {
                 fill_method_list[0]="上下填充";
                 fill_method_list[1]="左右填充";
             }
-            if(config.getString("position")=="right-bottom")
+            if(config.getString("position").equals("right-bottom"))
             {
                 position_list[0]="右/下位置";
                 position_list[1]="左/上位置";
