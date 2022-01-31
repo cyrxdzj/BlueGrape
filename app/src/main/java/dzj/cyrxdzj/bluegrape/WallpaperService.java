@@ -14,6 +14,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import androidx.annotation.RequiresApi;
 
 public class WallpaperService extends Service {
     public WallpaperService() {
@@ -23,7 +26,7 @@ public class WallpaperService extends Service {
     private WindowManager windowManager;
     private WindowManager.LayoutParams layoutParams;
 
-    private Button button;
+    public static ImageView image_view;
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
@@ -50,18 +53,19 @@ public class WallpaperService extends Service {
         Log.d("WallpaperService","Run");
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         showFloatingWindow();
         return super.onStartCommand(intent, flags, startId);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
-            button = new Button(getApplicationContext());
-            button.setText("Floating Window");
-            button.setBackgroundColor(Color.BLUE);
-            windowManager.addView(button, layoutParams);
+            image_view = new ImageView(getApplicationContext());
+            image_view.setImageResource(R.drawable.default_image);
+            windowManager.addView(image_view, layoutParams);
         }
     }
 }
