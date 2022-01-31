@@ -10,22 +10,25 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 public class WallpaperService extends Service {
-    public WallpaperService() {
-    }
     public static boolean isStarted = false;
 
-    private WindowManager windowManager;
-    private WindowManager.LayoutParams layoutParams;
+    public static WindowManager windowManager;
+    public static WindowManager.LayoutParams layoutParams;
 
+    public static LinearLayout layout;
     public static ImageView image_view;
     @Override
     public IBinder onBind(Intent intent) {
@@ -45,11 +48,11 @@ public class WallpaperService extends Service {
         }
         layoutParams.format = PixelFormat.RGBA_8888;
         layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
-        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
+        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
         layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        layoutParams.height = 100;
-        layoutParams.x = 300;
-        layoutParams.y = 300;
+        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        layoutParams.x = 0;
+        layoutParams.y = 0;
         Log.d("WallpaperService","Run");
     }
 
@@ -63,9 +66,11 @@ public class WallpaperService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
-            image_view = new ImageView(getApplicationContext());
-            image_view.setImageResource(R.drawable.default_image);
-            windowManager.addView(image_view, layoutParams);
+            image_view = new ImageView(this);
+            layout=new LinearLayout(this);
+            //image_view.setImageResource(R.drawable.default_image);
+            layout.addView(image_view);
+            windowManager.addView(layout, layoutParams);
         }
     }
 }
