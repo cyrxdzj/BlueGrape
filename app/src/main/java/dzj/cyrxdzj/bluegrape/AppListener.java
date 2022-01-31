@@ -1,8 +1,15 @@
 package dzj.cyrxdzj.bluegrape;
 
 import android.accessibilityservice.AccessibilityService;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.util.Log;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,7 +34,7 @@ public class AppListener extends AccessibilityService {
         String packageName = event.getPackageName().toString();
         int eventType = event.getEventType();
         Log.d("accessibility", "packageName = " + packageName + " eventType = " + eventType);
-        if(packageName!=last_package_name)
+        if(!packageName.equals(last_package_name))
         {
             last_package_name=packageName;
             refresh();
@@ -51,7 +58,6 @@ public class AppListener extends AccessibilityService {
                 JSONArray apps=now_config.getJSONArray("apps");
                 for(int j=0;j<apps.length();j++)
                 {
-                    Log.d("acc-wallpaper_id-test",apps.getString(j));
                     if(apps.getString(j).equals(this.last_package_name))
                     {
                         Log.d("acc-wallpaper_id-test",now_config.getString("wallpaper_id"));
@@ -63,6 +69,48 @@ public class AppListener extends AccessibilityService {
             if(wallpaper_id!=null)
             {
                 Log.d("acc-wallpaper_id",wallpaper_id);
+                String wallpaper_config_str=read_file("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/config.json");
+                JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
+                WallpaperService.image_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
+                WallpaperService.image_view.setImageURI(Uri.parse("file:///storage/emulated/0/BlueGrape/"+wallpaper_id+"/image.png"));
+                ViewGroup.LayoutParams layoutParams = WallpaperService.image_view.getLayoutParams();
+                Bitmap bitmap= BitmapFactory.decodeFile("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/image.png");
+                int image_width= bitmap.getWidth(),image_height=bitmap.getHeight();
+                int image_view_width,image_view_height;
+                if(wallpaper_config.getString("fill_method").equals("left-right"))
+                {
+                    image_view_width=this.getResources().getDisplayMetrics().widthPixels;
+                    image_view_height= (int) (image_height*(image_view_width*1.0/image_width));
+                    layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
+                }
+                else
+                {
+                    image_view_height=this.getResources().getDisplayMetrics().heightPixels;
+                    image_view_width=(int)(image_width*(image_view_height*1.0/image_height));
+                    layoutParams.height=ViewGroup.LayoutParams.MATCH_PARENT;
+                }
+                /*if(wallpaper_config.getString("position").equals("left-top"))
+                {
+                    WallpaperService.layoutParams.x=WallpaperService.layoutParams.y=0;
+                }
+                else
+                {
+                    if(wallpaper_config.getString("fill_method").equals("left-right"))
+                    {
+                        WallpaperService.layoutParams.x=0;
+                        WallpaperService.layoutParams.y=image_view_height-image_height;
+                    }
+                    else
+                    {
+                        WallpaperService.layoutParams.x=image_view_width-image_width;
+                        WallpaperService.layoutParams.y=0;
+                    }
+                }*/
+                //WallpaperService.layout.setLayoutParams(WallpaperService.layoutParams);
+            }
+            else
+            {
+                WallpaperService.image_view.setAlpha(0f);
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();
