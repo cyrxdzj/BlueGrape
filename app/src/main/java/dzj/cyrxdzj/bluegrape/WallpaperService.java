@@ -42,8 +42,8 @@ public class WallpaperService extends Service {
         layoutParams.format = PixelFormat.RGBA_8888;
         layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
         layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
-        layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+        layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         layoutParams.x = 0;
         layoutParams.y = 0;
         Log.d("WallpaperService","Run");

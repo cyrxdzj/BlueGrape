@@ -5,8 +5,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.ImageView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -78,14 +80,27 @@ public class AppListener extends AccessibilityService {
                 {
                     image_view_width=this.getResources().getDisplayMetrics().widthPixels;
                     image_view_height= (int) (image_height*(image_view_width*1.0/image_width));
-                    layoutParams.width=ViewGroup.LayoutParams.MATCH_PARENT;
                 }
                 else
                 {
                     image_view_height=this.getResources().getDisplayMetrics().heightPixels;
                     image_view_width=(int)(image_width*(image_view_height*1.0/image_height));
-                    layoutParams.height=ViewGroup.LayoutParams.MATCH_PARENT;
                 }
+                layoutParams.width=image_view_width;
+                layoutParams.height=image_view_height;
+                WallpaperService.image_view.setLayoutParams(layoutParams);
+                WallpaperService.image_view.setScaleType(ImageView.ScaleType.FIT_XY);
+                if(wallpaper_config.getString("position").equals("left-top"))
+                {
+                    Log.d("Position","LEFT-TOP");
+                    WallpaperService.image_view.setForegroundGravity(Gravity.START | Gravity.TOP);
+                }
+                else
+                {
+                    Log.d("Position","RIGHT-BOTTOM");
+                    WallpaperService.image_view.setForegroundGravity(Gravity.END | Gravity.BOTTOM);
+                }
+                Log.d("Size",String.valueOf(image_view_width)+" "+String.valueOf(image_view_height));
                 /*if(wallpaper_config.getString("position").equals("left-top"))
                 {
                     WallpaperService.layoutParams.x=WallpaperService.layoutParams.y=0;
