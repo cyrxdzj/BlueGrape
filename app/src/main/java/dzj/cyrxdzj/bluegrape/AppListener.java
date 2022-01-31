@@ -6,10 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import org.json.JSONArray;
 import org.json.JSONException;
