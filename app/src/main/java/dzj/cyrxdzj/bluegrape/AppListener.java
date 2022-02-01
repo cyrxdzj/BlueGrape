@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
+import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 
 import org.json.JSONArray;
@@ -72,7 +73,7 @@ public class AppListener extends AccessibilityService {
                 JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
                 WallpaperService.image_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
                 WallpaperService.image_view.setImageURI(Uri.parse("file:///storage/emulated/0/BlueGrape/"+wallpaper_id+"/image.png"));
-                ViewGroup.LayoutParams layoutParams = WallpaperService.image_view.getLayoutParams();
+                AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) WallpaperService.image_view.getLayoutParams();
                 Bitmap bitmap= BitmapFactory.decodeFile("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/image.png");
                 int image_width= bitmap.getWidth(),image_height=bitmap.getHeight();
                 int image_view_width,image_view_height;
@@ -88,36 +89,30 @@ public class AppListener extends AccessibilityService {
                 }
                 layoutParams.width=image_view_width;
                 layoutParams.height=image_view_height;
-                WallpaperService.image_view.setLayoutParams(layoutParams);
-                WallpaperService.image_view.setScaleType(ImageView.ScaleType.FIT_XY);
+                Log.d("Size",String.valueOf(image_view_width)+" "+String.valueOf(image_view_height));
+                int x,y;
                 if(wallpaper_config.getString("position").equals("left-top"))
                 {
-                    Log.d("Position","LEFT-TOP");
-                    WallpaperService.image_view.setForegroundGravity(Gravity.START | Gravity.TOP);
-                }
-                else
-                {
-                    Log.d("Position","RIGHT-BOTTOM");
-                    WallpaperService.image_view.setForegroundGravity(Gravity.END | Gravity.BOTTOM);
-                }
-                Log.d("Size",String.valueOf(image_view_width)+" "+String.valueOf(image_view_height));
-                /*if(wallpaper_config.getString("position").equals("left-top"))
-                {
-                    WallpaperService.layoutParams.x=WallpaperService.layoutParams.y=0;
+                    x=y=0;
                 }
                 else
                 {
                     if(wallpaper_config.getString("fill_method").equals("left-right"))
                     {
-                        WallpaperService.layoutParams.x=0;
-                        WallpaperService.layoutParams.y=image_view_height-image_height;
+                        x=0;
+                        y=this.getResources().getDisplayMetrics().heightPixels-image_view_height;
                     }
                     else
                     {
-                        WallpaperService.layoutParams.x=image_view_width-image_width;
-                        WallpaperService.layoutParams.y=0;
+                        x=this.getResources().getDisplayMetrics().widthPixels-image_view_width;
+                        y=0;
                     }
-                }*/
+                }
+                layoutParams.x=x;
+                layoutParams.y=y;
+                Log.d("Position",String.valueOf(x)+" "+String.valueOf(y));
+                WallpaperService.image_view.setLayoutParams(layoutParams);
+                WallpaperService.image_view.setScaleType(ImageView.ScaleType.FIT_XY);
                 //WallpaperService.layout.setLayoutParams(WallpaperService.layoutParams);
             }
             else
