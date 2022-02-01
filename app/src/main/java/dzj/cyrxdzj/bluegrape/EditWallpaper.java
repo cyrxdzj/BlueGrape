@@ -79,11 +79,11 @@ public class EditWallpaper extends AppCompatActivity {
                 }).create();
         dialog.show();
     }
-    public void show_question_dialog(String title,String content)
+    public void show_delete_question_dialog()
     {
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(content)
+                .setTitle(getString(R.string.confirm_delete))
+                .setMessage(getString(R.string.confirm_delete))
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -231,7 +231,7 @@ public class EditWallpaper extends AppCompatActivity {
     }
     public void button_delete(View view)
     {
-        show_question_dialog(getString(R.string.confirm_delete),getString(R.string.confirm_delete));
+        show_delete_question_dialog();
     }
     public void delete()
     {
