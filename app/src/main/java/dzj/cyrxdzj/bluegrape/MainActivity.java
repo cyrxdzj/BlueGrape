@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
+    private Intent WallpaperServiceIntent,AppListenerIntent;
     public void write_file(String path,String content) throws IOException
     {
         FileWriter writer=new FileWriter(new File(path));
@@ -44,8 +45,10 @@ public class MainActivity extends AppCompatActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         this.startActivity(intent);
         //TEST CODE END
-        startService(new Intent(MainActivity.this, AppListener.class));
-        startService(new Intent(MainActivity.this, WallpaperService.class));
+        WallpaperServiceIntent=new Intent(MainActivity.this, AppListener.class);
+        AppListenerIntent=new Intent(MainActivity.this, WallpaperService.class);
+        startService(WallpaperServiceIntent);
+        startService(AppListenerIntent);
     }
     public void open_my_wallpaper(View view)
     {
@@ -64,5 +67,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent();
         intent.setClass(MainActivity.this,AboutThisSoftware.class);
         MainActivity.this.startActivity(intent);
+    }
+    public void stop_running(View view)
+    {
+        stopService(WallpaperServiceIntent);
+        stopService(AppListenerIntent);
+        System.exit(0);
     }
 }
