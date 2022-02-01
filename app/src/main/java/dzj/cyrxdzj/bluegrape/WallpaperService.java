@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -21,7 +22,7 @@ public class WallpaperService extends Service {
     public static WindowManager windowManager;
     public static WindowManager.LayoutParams layoutParams;
 
-    public static LinearLayout layout;
+    public static AbsoluteLayout layout;
     public static ImageView image_view;
     @Override
     public IBinder onBind(Intent intent) {
@@ -60,7 +61,7 @@ public class WallpaperService extends Service {
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
             image_view = new ImageView(this);
-            layout=new LinearLayout(this);
+            layout=new AbsoluteLayout(this);
             //image_view.setImageResource(R.drawable.default_image);
             layout.addView(image_view);
             windowManager.addView(layout, layoutParams);
