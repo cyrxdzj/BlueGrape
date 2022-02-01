@@ -14,7 +14,7 @@
     <string name="choose_image">选择图片</string>
     <string name="warning_of_choose_image">注意：对于图片，选择即保存。</string>
     <string name="wallpaper_name">壁纸名</string>
-    <string name="alpha">透明度</string>
+    <string name="alpha">不透明度</string>
     <string name="fill_method">壁纸填充方法</string>
     <string name="position">壁纸位置</string>
     <string name="save_successfully">保存成功</string>
