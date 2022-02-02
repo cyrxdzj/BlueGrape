@@ -20,4 +20,5 @@
     <string name="save_successfully">保存成功</string>
     <string name="confirm_apply">确认应用</string>
     <string name="apply_successful">应用成功</string>
+    <string name="accessibility_permission_requests">程序需要“无障碍”权限以获取当前正在使用的应用后决定是否显示壁纸以及显示哪个壁纸，请在列表中找到“BlueGrape”后手动开启权限。我们尊重您的隐私，绝不使用此权限做不该做的事。</string>
 </resources>
