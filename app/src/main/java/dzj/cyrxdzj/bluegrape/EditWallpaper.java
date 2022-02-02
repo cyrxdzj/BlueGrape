@@ -231,6 +231,32 @@ public class EditWallpaper extends AppCompatActivity {
         }
         show_info_dialog(getString(R.string.save_successfully),getString(R.string.save_successfully));
     }
+    public void save_without_dialog()
+    {
+        try {
+            String save_str = "{\n"+
+                    "\t\"name\":\""+ URLEncoder.encode(wallpaper_name_editor.getText().toString(),"UTF-8")+"\",\n"+
+                    "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
+                    "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
+                    "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
+            Log.d("EditWallpaper",save_str);
+            write_file("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/config.json",save_str);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void apply(View view)
+    {
+        save_without_dialog();
+        Intent intent=new Intent();
+        intent.setClass(this,ApplyWallpaper.class);
+        intent.putExtra("wallpaper_id",wallpaper_id);
+        intent.putExtra("wallpaper_name",wallpaper_name_editor.getText().toString());
+        this.startActivity(intent);
+    }
     public void button_delete(View view)
     {
         show_delete_question_dialog();
