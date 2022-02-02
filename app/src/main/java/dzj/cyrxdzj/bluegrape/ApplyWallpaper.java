@@ -149,15 +149,14 @@ public class ApplyWallpaper extends AppCompatActivity {
                 choose_apps.add(package_array.get(i).package_id);
             }
         }
-        if(choose_apps.size()==0)
-        {
-            return;
-        }
         try {
             List<Pair<String,String[]>> temp_list=new ArrayList<Pair<String,String[]>>();
             ArrayList<String>temp=new ArrayList<String>();
             String result="";
-            temp_list.add(new Pair<String, String[]>(wallpaper_id,choose_apps.toArray(new String[choose_apps.size()])));
+            if(choose_apps.size()!=0)
+            {
+                temp_list.add(new Pair<String, String[]>(wallpaper_id,choose_apps.toArray(new String[choose_apps.size()])));
+            }
             for(int i=0;i<current_wallpaper.length();i++)
             {
                 if(!current_wallpaper.getJSONObject(i).getString("wallpaper_id").equals(wallpaper_id))
