@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.AbsoluteLayout;
@@ -48,6 +49,10 @@ public class AppListener extends AccessibilityService {
     public void refresh()
     {
         Log.d("acc",this.last_package_name);
+        if(!WallpaperService.ready)
+        {
+            return;
+        }
         try {
             String config_str=read_file("/storage/emulated/0/BlueGrape/current_wallpaper.json");
             JSONArray config=new JSONArray(config_str);

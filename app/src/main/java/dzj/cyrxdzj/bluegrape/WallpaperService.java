@@ -24,6 +24,7 @@ public class WallpaperService extends Service {
 
     public static AbsoluteLayout layout;
     public static ImageView image_view;
+    public static boolean ready=false;
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
@@ -60,6 +61,8 @@ public class WallpaperService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
+            ready=true;
+            Log.d("WallpaperService","Ready");
             image_view = new ImageView(this);
             layout=new AbsoluteLayout(this);
             //image_view.setImageResource(R.drawable.default_image);
