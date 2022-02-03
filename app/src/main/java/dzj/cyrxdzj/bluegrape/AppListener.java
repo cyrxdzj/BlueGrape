@@ -72,6 +72,7 @@ public class AppListener extends AccessibilityService {
                 String wallpaper_config_str=read_file("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/config.json");
                 JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
                 WallpaperService.image_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
+                WallpaperService.image_view.setImageResource(R.drawable.default_image);
                 WallpaperService.image_view.setImageURI(Uri.parse("file:///storage/emulated/0/BlueGrape/"+wallpaper_id+"/image.png"));
                 AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) WallpaperService.image_view.getLayoutParams();
                 Bitmap bitmap= BitmapFactory.decodeFile("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/image.png");
