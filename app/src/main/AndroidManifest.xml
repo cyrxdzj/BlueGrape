@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/bluegrape"
         android:supportsRtl="true"
         android:theme="@style/Theme.BlueGrape">
-        <activity android:name=".ApplyWallpaper"></activity>
+        <activity android:name=".ApplyWallpaper" />
 
         <service
             android:name=".AppListener"
@@ -32,7 +32,7 @@
         <service
             android:name=".WallpaperService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
 
         <activity
             android:name=".MainActivity"
@@ -74,6 +74,14 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MyWallpaper" />
+        </activity>
+        <activity
+            android:name=".RewardAndContribution"
+            android:label="@string/reward_and_contribution"
+            android:parentActivityName=".AboutThisSoftware">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".AboutThisSoftware"/>
         </activity>
     </application>
 
