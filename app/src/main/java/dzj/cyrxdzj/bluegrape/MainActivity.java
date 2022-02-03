@@ -4,10 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.AppOpsManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Binder;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
@@ -16,6 +20,8 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -48,6 +54,43 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
+    //判断是否开启悬浮窗权限   context可以用你的Activity.或者tiis
+    public static boolean checkFloatPermission(Context context) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
+            return true;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            try {
+                Class cls = Class.forName("android.content.Context");
+                Field declaredField = cls.getDeclaredField("APP_OPS_SERVICE");
+                declaredField.setAccessible(true);
+                Object obj = declaredField.get(cls);
+                if (!(obj instanceof String)) {
+                    return false;
+                }
+                String str2 = (String) obj;
+                obj = cls.getMethod("getSystemService", String.class).invoke(context, str2);
+                cls = Class.forName("android.app.AppOpsManager");
+                Field declaredField2 = cls.getDeclaredField("MODE_ALLOWED");
+                declaredField2.setAccessible(true);
+                Method checkOp = cls.getMethod("checkOp", Integer.TYPE, Integer.TYPE, String.class);
+                int result = (Integer) checkOp.invoke(obj, 24, Binder.getCallingUid(), context.getPackageName());
+                return result == declaredField2.getInt(cls);
+            } catch (Exception e) {
+                return false;
+            }
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                AppOpsManager appOpsMgr = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
+                if (appOpsMgr == null)
+                    return false;
+                int mode = appOpsMgr.checkOpNoThrow("android:system_alert_window", android.os.Process.myUid(), context
+                        .getPackageName());
+                return mode == AppOpsManager.MODE_ALLOWED || mode == AppOpsManager.MODE_IGNORED;
+            } else {
+                return Settings.canDrawOverlays(context);
+            }
+        }
+    }
     public void show_ask_permission_dialog()
     {
         Context context=this;
@@ -60,6 +103,33 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
+                        dialog.dismiss();
+                        if(!checkFloatPermission(context))
+                        {
+                            show_ask_permission2_dialog();
+                        }
+                    }
+                }).create();
+        dialog.show();
+    }
+    public void show_ask_permission2_dialog()
+    {
+        Context context=this;
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                //.setTitle(title)
+                .setMessage(getString(R.string.overlay_permission_requests))
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        int sdkInt = Build.VERSION.SDK_INT;
+                        if (sdkInt >= Build.VERSION_CODES.O) {//8.0以上
+                            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                            context.startActivity(intent);
+                        } else if (sdkInt >= Build.VERSION_CODES.M) {//6.0-8.0
+                            Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+                            intent.setData(Uri.parse("package:" + getPackageName()));
+                            context.startActivity(intent);
+                        }
                         dialog.dismiss();
                     }
                 }).create();
