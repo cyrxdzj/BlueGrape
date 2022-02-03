@@ -57,17 +57,6 @@ public class EditWallpaper extends AppCompatActivity {
         writer.write(content);
         writer.close();
     }
-    public void write_file(String path,byte[] content) throws IOException
-    {
-        try {
-            FileOutputStream writer = new FileOutputStream(new File(path));
-            writer.write(content, 0, content.length);
-            writer.flush();
-            writer.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
     public void show_info_dialog(String title,String content)
     {
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -84,7 +73,6 @@ public class EditWallpaper extends AppCompatActivity {
     public void show_delete_question_dialog()
     {
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(getString(R.string.confirm_delete))
                 .setMessage(getString(R.string.confirm_delete))
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
