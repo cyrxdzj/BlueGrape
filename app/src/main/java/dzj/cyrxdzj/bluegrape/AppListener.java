@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityService;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Environment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -54,7 +55,7 @@ public class AppListener extends AccessibilityService {
             return;
         }
         try {
-            String config_str=read_file("/storage/emulated/0/BlueGrape/current_wallpaper.json");
+            String config_str=read_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json");
             JSONArray config=new JSONArray(config_str);
             String wallpaper_id=null;
             for(int i=0;i<config.length()&&wallpaper_id==null;i++)
@@ -74,13 +75,13 @@ public class AppListener extends AccessibilityService {
             if(wallpaper_id!=null)
             {
                 Log.d("acc-wallpaper_id",wallpaper_id);
-                String wallpaper_config_str=read_file("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/config.json");
+                String wallpaper_config_str=read_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+wallpaper_id+"/config.json");
                 JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
                 WallpaperService.image_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
                 WallpaperService.image_view.setImageResource(R.drawable.default_image);
                 WallpaperService.image_view.setImageURI(Uri.parse("file:///storage/emulated/0/BlueGrape/"+wallpaper_id+"/image.png"));
                 AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) WallpaperService.image_view.getLayoutParams();
-                Bitmap bitmap= BitmapFactory.decodeFile("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/image.png");
+                Bitmap bitmap= BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+wallpaper_id+"/image.png");
                 int image_width= bitmap.getWidth(),image_height=bitmap.getHeight();
                 int image_view_width,image_view_height;
                 if(wallpaper_config.getString("fill_method").equals("left-right"))
