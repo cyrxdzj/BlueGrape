@@ -3,11 +3,13 @@ package dzj.cyrxdzj.bluegrape;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.app.AlertDialog;
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -94,12 +96,25 @@ public class EditWallpaper extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_wallpaper);
+        try {
+            String[] PERMISSIONS_STORAGE = {
+                    "android.permission.READ_EXTERNAL_STORAGE",
+                    "android.permission.WRITE_EXTERNAL_STORAGE" };
+            int permission = ActivityCompat.checkSelfPermission(this,
+                    "android.permission.WRITE_EXTERNAL_STORAGE");
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // 没有写的权限，去申请写的权限，申请权限
+                ActivityCompat.requestPermissions(this,PERMISSIONS_STORAGE,1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Intent intent=getIntent();
         wallpaper_id=intent.getStringExtra("wallpaper_id");
         Log.d("EditWallpaper",wallpaper_id);
         try {
             //初始化配置
-            String config_str = read_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+wallpaper_id+"/config.json");
+            String config_str = read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
             String[] fill_method_list={"左右填充","上下填充"},position_list={"左/上位置","右/下位置"};
             JSONObject config=new JSONObject(config_str);
             if(config.getString("fill_method").equals("top-bottom"))
@@ -136,7 +151,8 @@ public class EditWallpaper extends AppCompatActivity {
     {
         ImageView wallpaper_view=(ImageView)findViewById(R.id.wallpaper_image);
         wallpaper_view.setImageResource(R.drawable.default_image);
-        wallpaper_view.setImageURI(Uri.parse("file:///storage/emulated/0/BlueGrape/"+wallpaper_id+"/image.png"));
+        wallpaper_view.setImageURI(Uri.parse("file://"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
+        //Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+
     }
     public void choose_image(View view)
     {
@@ -187,7 +203,7 @@ public class EditWallpaper extends AppCompatActivity {
                         Log.d("EditWallpaper",imagePath);
                         Bitmap image= BitmapFactory.decodeFile(imagePath);
                         try {
-                            FileOutputStream writer=new FileOutputStream(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+wallpaper_id+"/image.png"));
+                            FileOutputStream writer=new FileOutputStream(new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
                             image.compress(Bitmap.CompressFormat.PNG,100,writer);
                             writer.flush();
                             writer.close();
@@ -211,7 +227,7 @@ public class EditWallpaper extends AppCompatActivity {
                     "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
                     "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
             Log.d("EditWallpaper",save_str);
-            write_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+wallpaper_id+"/config.json",save_str);
+            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -229,7 +245,7 @@ public class EditWallpaper extends AppCompatActivity {
                     "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
                     "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
             Log.d("EditWallpaper",save_str);
-            write_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+wallpaper_id+"/config.json",save_str);
+            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -253,7 +269,7 @@ public class EditWallpaper extends AppCompatActivity {
     public void delete()
     {
         Log.d("EditWallpaper","Delete");
-        File file_obj=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+wallpaper_id);
+        File file_obj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
         delete_dir(file_obj);
         finish();
         //file_obj.delete();

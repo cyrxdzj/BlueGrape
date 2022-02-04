@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -149,24 +150,18 @@ public class MainActivity extends AppCompatActivity {
             int permission = ActivityCompat.checkSelfPermission(this,
                     "android.permission.WRITE_EXTERNAL_STORAGE");
             if (permission != PackageManager.PERMISSION_GRANTED) {
-                // 没有写的权限，去申请写的权限，申请权限
                 ActivityCompat.requestPermissions(this,PERMISSIONS_STORAGE,1);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //新建BlueGrape文件夹
-        File folder=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape");
-        if(!folder.exists())
-        {
-            folder.mkdir();
-        }
-        File file=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json");
+        File file=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json");
+        Log.d("MainActivity",Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json");
         if(!file.exists())
         {
             try {
                 file.createNewFile();
-                write_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json","[]");
+                write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json","[]");
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);
@@ -175,6 +170,10 @@ public class MainActivity extends AppCompatActivity {
         if(!isAccessibilitySettingsOn(this,AppListener.class.getName()))
         {
             show_ask_permission_dialog();
+        }
+        else if(!checkFloatPermission(this))
+        {
+            show_ask_permission2_dialog();
         }
         WallpaperServiceIntent=new Intent(MainActivity.this, AppListener.class);
         AppListenerIntent=new Intent(MainActivity.this, WallpaperService.class);
