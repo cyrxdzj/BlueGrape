@@ -9,6 +9,7 @@ import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
@@ -57,7 +58,7 @@ public class ApplyWallpaper extends AppCompatActivity {
         wallpaper_name=intent.getStringExtra("wallpaper_name");
         this.setTitle("将壁纸 "+wallpaper_name+" 应用到：");
         try {
-            current_wallpaper=new JSONArray(read_file("/storage/emulated/0/BlueGrape/current_wallpaper.json"));
+            current_wallpaper=new JSONArray(read_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json"));
             JSONArray now_apps=new JSONArray("[]");
             for(int i=0;i<current_wallpaper.length();i++)
             {
@@ -205,7 +206,7 @@ public class ApplyWallpaper extends AppCompatActivity {
             }
             result+="]";
             Log.d("ApplyWallpaper",result);
-            write_file("/storage/emulated/0/BlueGrape/current_wallpaper.json",result);
+            write_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json",result);
             Toast.makeText(this,R.string.apply_successful,Toast.LENGTH_SHORT).show();
             finish();
         } catch (JSONException | IOException e) {

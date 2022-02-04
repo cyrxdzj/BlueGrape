@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,7 +35,7 @@ public class CurrentWallpaper extends AppCompatActivity {
     private ListView apply_list;
     private JSONArray current_wallpaper;
     private String get_wallpaper_name(String wallpaper_id) throws IOException, JSONException {
-        String config_str = read_file("/storage/emulated/0/BlueGrape/"+wallpaper_id+"/config.json");
+        String config_str = read_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+wallpaper_id+"/config.json");
         JSONObject config=new JSONObject(config_str);
         return URLDecoder.decode(config.getString("name"),"UTF-8");
     }
@@ -89,14 +90,14 @@ public class CurrentWallpaper extends AppCompatActivity {
         try {
             wallpaper_list.clear();
             wallpaper_name_list.clear();
-            current_wallpaper=new JSONArray(read_file("/storage/emulated/0/BlueGrape/current_wallpaper.json"));
+            current_wallpaper=new JSONArray(read_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json"));
             String result="";
             boolean is_add=false;
             result+="[";
             for(int i=0;i<current_wallpaper.length();i++)
             {
-                File fobj=new File("/storage/emulated/0/BlueGrape/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
-                Log.d("CurrentWallpaper","/storage/emulated/0/BlueGrape/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
+                File fobj=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
+                Log.d("CurrentWallpaper",Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
                 if(fobj.exists())
                 {
                     if(is_add)
@@ -120,7 +121,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             }
             result+="]";
             Log.d("CurrentWallpaper",result);
-            write_file("/storage/emulated/0/BlueGrape/current_wallpaper.json",result);
+            write_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -130,13 +131,13 @@ public class CurrentWallpaper extends AppCompatActivity {
         try {
             wallpaper_list.clear();
             wallpaper_name_list.clear();
-            current_wallpaper=new JSONArray(read_file("/storage/emulated/0/BlueGrape/current_wallpaper.json"));
+            current_wallpaper=new JSONArray(read_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json"));
             String result="";
             boolean is_add=false;
             result+="[";
             for(int i=0;i<current_wallpaper.length();i++)
             {
-                Log.d("CurrentWallpaper","/storage/emulated/0/BlueGrape/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
+                Log.d("CurrentWallpaper",Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
                 if(!current_wallpaper.getJSONObject(i).getString("wallpaper_id").equals(delete_wallpaper))
                 {
                     if(is_add)
@@ -160,7 +161,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             }
             result+="]";
             Log.d("CurrentWallpaper",result);
-            write_file("/storage/emulated/0/BlueGrape/current_wallpaper.json",result);
+            write_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }

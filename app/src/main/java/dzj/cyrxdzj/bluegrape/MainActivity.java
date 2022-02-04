@@ -1,6 +1,7 @@
 package dzj.cyrxdzj.bluegrape;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.app.ActivityManager;
 import android.app.AlertDialog;
@@ -9,10 +10,12 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Toast;
@@ -139,18 +142,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        try {
+            String[] PERMISSIONS_STORAGE = {
+                "android.permission.READ_EXTERNAL_STORAGE",
+                "android.permission.WRITE_EXTERNAL_STORAGE" };
+            int permission = ActivityCompat.checkSelfPermission(this,
+                    "android.permission.WRITE_EXTERNAL_STORAGE");
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // 没有写的权限，去申请写的权限，申请权限
+                ActivityCompat.requestPermissions(this,PERMISSIONS_STORAGE,1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         //新建BlueGrape文件夹
-        File folder=new File("/storage/emulated/0/BlueGrape");
+        File folder=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape");
         if(!folder.exists())
         {
             folder.mkdir();
         }
-        File file=new File("/storage/emulated/0/BlueGrape/current_wallpaper.json");
+        File file=new File(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json");
         if(!file.exists())
         {
             try {
                 file.createNewFile();
-                write_file("/storage/emulated/0/BlueGrape/current_wallpaper.json","[]");
+                write_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json","[]");
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);
