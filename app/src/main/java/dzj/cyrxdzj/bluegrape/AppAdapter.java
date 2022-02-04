@@ -39,7 +39,6 @@ public class AppAdapter extends BaseAdapter {
         TextView app_name=convertView.findViewById(R.id.app_name);
         TextView package_id=convertView.findViewById(R.id.package_id);
         TextView is_apply=convertView.findViewById(R.id.is_apply);
-        Log.d("AppAdapter",package_id+" "+app_name);
         icon.setImageDrawable((Drawable)data.get(position).app_icon);
         app_name.setText(data.get(position).app_name);
         package_id.setText(data.get(position).package_id);

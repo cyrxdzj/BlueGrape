@@ -32,7 +32,6 @@ import java.util.Map;
 
 public class ApplyWallpaper extends AppCompatActivity {
 
-    public String[] package_id,package_name;
     public JSONArray current_wallpaper;
     public List<App> package_array=new ArrayList<App>();
     public String wallpaper_id,wallpaper_name;
@@ -58,7 +57,7 @@ public class ApplyWallpaper extends AppCompatActivity {
         wallpaper_name=intent.getStringExtra("wallpaper_name");
         this.setTitle("将壁纸 "+wallpaper_name+" 应用到：");
         try {
-            current_wallpaper=new JSONArray(read_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json"));
+            current_wallpaper=new JSONArray(read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json"));
             JSONArray now_apps=new JSONArray("[]");
             for(int i=0;i<current_wallpaper.length();i++)
             {
@@ -86,10 +85,6 @@ public class ApplyWallpaper extends AppCompatActivity {
                 }
                 package_array.add(new App(p.applicationInfo.loadIcon(this.getPackageManager()),p.packageName,p.applicationInfo.loadLabel(this.getPackageManager()).toString(),flag));
                 //Log.d("ApplyWallpaper",p.packageName+" "+p.applicationInfo.loadLabel(this.getPackageManager()).toString());
-            }
-            for(int i=0;i<package_array.size();i++)
-            {
-                Log.d("ApplyWallpaper",package_array.get(i).package_id+" "+package_array.get(i).app_name);
             }
             for(int i=0;i<package_array.size();i++)
             {
@@ -206,7 +201,7 @@ public class ApplyWallpaper extends AppCompatActivity {
             }
             result+="]";
             Log.d("ApplyWallpaper",result);
-            write_file(Environment.getExternalStorageDirectory().getAbsolutePath()+"/BlueGrape/current_wallpaper.json",result);
+            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json",result);
             Toast.makeText(this,R.string.apply_successful,Toast.LENGTH_SHORT).show();
             finish();
         } catch (JSONException | IOException e) {
