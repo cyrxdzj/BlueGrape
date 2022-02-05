@@ -57,7 +57,7 @@ public class ApplyWallpaper extends AppCompatActivity {
         wallpaper_name=intent.getStringExtra("wallpaper_name");
         this.setTitle("将壁纸 "+wallpaper_name+" 应用到：");
         try {
-            current_wallpaper=new JSONArray(read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json"));
+            current_wallpaper=new JSONArray(read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
             JSONArray now_apps=new JSONArray("[]");
             for(int i=0;i<current_wallpaper.length();i++)
             {
@@ -201,7 +201,7 @@ public class ApplyWallpaper extends AppCompatActivity {
             }
             result+="]";
             Log.d("ApplyWallpaper",result);
-            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json",result);
+            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
             Toast.makeText(this,R.string.apply_successful,Toast.LENGTH_SHORT).show();
             finish();
         } catch (JSONException | IOException e) {
