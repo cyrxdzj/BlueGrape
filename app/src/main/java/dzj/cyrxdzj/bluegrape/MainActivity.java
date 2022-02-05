@@ -30,6 +30,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Intent WallpaperServiceIntent,AppListenerIntent;
+    private AlertDialog dialog1,dialog2;
     public void write_file(String path,String content) throws IOException
     {
         FileWriter writer=new FileWriter(new File(path));
@@ -79,8 +80,7 @@ public class MainActivity extends AppCompatActivity {
     public void show_ask_permission_dialog()
     {
         Context context=this;
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                //.setTitle(title)
+        dialog1 = new AlertDialog.Builder(this)
                 .setMessage(getString(R.string.accessibility_permission_requests))
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -90,13 +90,15 @@ public class MainActivity extends AppCompatActivity {
                         context.startActivity(intent);
                         dialog.dismiss();
                     }
-                }).create();
-        dialog.show();
+                })
+                .setCancelable(false)
+                .create();
+        dialog1.show();
     }
     public void show_ask_permission2_dialog()
     {
         Context context=this;
-        AlertDialog dialog = new AlertDialog.Builder(this)
+        dialog2 = new AlertDialog.Builder(this)
                 //.setTitle(title)
                 .setMessage(getString(R.string.overlay_permission_requests))
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -113,8 +115,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                         dialog.dismiss();
                     }
-                }).create();
-        dialog.show();
+                })
+                .setCancelable(false)
+                .create();
+        dialog2.show();
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        File folder=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
+        File folder=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files");
         if(!folder.exists())
         {
             folder.mkdirs();
@@ -167,10 +171,18 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onResume();
         Log.d("MainActivity","Resume");
+        check_permission();
+    }
+    private void check_permission()
+    {
         if(!isAccessibilitySettingsOn(this))
         {
             Log.d("MainActivity","AccessibilitySettingsOff");
             show_ask_permission_dialog();
+        }
+        if(dialog1.isShowing())
+        {
+            return;
         }
         if(!checkFloatPermission(this))
         {

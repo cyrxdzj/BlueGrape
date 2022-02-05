@@ -90,7 +90,7 @@ public class CurrentWallpaper extends AppCompatActivity {
         try {
             wallpaper_list.clear();
             wallpaper_name_list.clear();
-            current_wallpaper=new JSONArray(read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json"));
+            current_wallpaper=new JSONArray(read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
             String result="";
             boolean is_add=false;
             result+="[";
@@ -121,7 +121,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             }
             result+="]";
             Log.d("CurrentWallpaper",result);
-            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json",result);
+            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -131,7 +131,7 @@ public class CurrentWallpaper extends AppCompatActivity {
         try {
             wallpaper_list.clear();
             wallpaper_name_list.clear();
-            current_wallpaper=new JSONArray(read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json"));
+            current_wallpaper=new JSONArray(read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
             String result="";
             boolean is_add=false;
             result+="[";
@@ -161,7 +161,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             }
             result+="]";
             Log.d("CurrentWallpaper",result);
-            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/filescurrent_wallpaper.json",result);
+            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
