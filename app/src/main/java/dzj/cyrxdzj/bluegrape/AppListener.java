@@ -58,7 +58,7 @@ public class AppListener extends AccessibilityService {
             String config_str=read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
             JSONArray config=new JSONArray(config_str);
             String wallpaper_id=null;
-            for(int i=0;i<config.length()&&wallpaper_id==null;i++)
+            for(int i=0;i<config.length();i++)
             {
                 JSONObject now_config=config.getJSONObject(i);
                 JSONArray apps=now_config.getJSONArray("apps");
