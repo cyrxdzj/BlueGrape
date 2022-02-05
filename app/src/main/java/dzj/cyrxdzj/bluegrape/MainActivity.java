@@ -19,7 +19,7 @@ import android.os.Environment;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+import android.view.accessibility.AccessibilityManager;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -36,29 +36,10 @@ public class MainActivity extends AppCompatActivity {
         writer.write(content);
         writer.close();
     }
-    public static boolean isAccessibilitySettingsOn(Context context, String className) {
-        if (context == null) {
-            return false;
-        }
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        if (activityManager != null) {
-            List<ActivityManager.RunningServiceInfo> runningServices =
-                    activityManager.getRunningServices(100);// 获取正在运行的服务列表
-            if (runningServices.size() < 0) {
-                return false;
-            }
-            for (int i = 0; i < runningServices.size(); i++) {
-                ComponentName service = runningServices.get(i).service;
-                if (service.getClassName().equals(className)) {
-                    return true;
-                }
-            }
-            return false;
-        } else {
-            return false;
-        }
+    public static boolean isAccessibilitySettingsOn(Context context) {
+        AccessibilityManager accessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
+        return accessibilityManager.isEnabled();
     }
-    //判断是否开启悬浮窗权限   context可以用你的Activity.或者tiis
     public static boolean checkFloatPermission(Context context) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT)
             return true;
@@ -108,10 +89,6 @@ public class MainActivity extends AppCompatActivity {
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                         dialog.dismiss();
-                        if(!checkFloatPermission(context))
-                        {
-                            show_ask_permission2_dialog();
-                        }
                     }
                 }).create();
         dialog.show();
@@ -172,18 +149,33 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(1);
             }
         }
-        if(!isAccessibilitySettingsOn(this,AppListener.class.getName()))
+        /*if(!isAccessibilitySettingsOn(this,AppListener.class.getName()))
         {
             show_ask_permission_dialog();
         }
         else if(!checkFloatPermission(this))
         {
             show_ask_permission2_dialog();
-        }
+        }*/
         WallpaperServiceIntent=new Intent(MainActivity.this, AppListener.class);
         AppListenerIntent=new Intent(MainActivity.this, WallpaperService.class);
         startService(WallpaperServiceIntent);
         startService(AppListenerIntent);
+    }
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        Log.d("MainActivity","Resume");
+        if(!isAccessibilitySettingsOn(this))
+        {
+            Log.d("MainActivity","AccessibilitySettingsOff");
+            show_ask_permission_dialog();
+        }
+        if(!checkFloatPermission(this))
+        {
+            show_ask_permission2_dialog();
+        }
     }
     public void open_my_wallpaper(View view)
     {
