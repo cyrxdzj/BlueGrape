@@ -179,9 +179,6 @@ public class MainActivity extends AppCompatActivity {
         {
             Log.d("MainActivity","AccessibilitySettingsOff");
             show_ask_permission_dialog();
-        }
-        if(dialog1.isShowing())
-        {
             return;
         }
         if(!checkFloatPermission(this))
