@@ -69,7 +69,7 @@ public class AppListener extends AccessibilityService {
                     }
                 }
             }
-            if(wallpaper_id!=null)
+            if(wallpaper_id!=null&&!MainActivity.is_pause)
             {
                 Log.d("acc-wallpaper_id",wallpaper_id);
                 String wallpaper_config_str=read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");

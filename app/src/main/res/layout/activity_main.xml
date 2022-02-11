@@ -30,19 +30,34 @@
         android:id="@+id/about_this_software"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/about_this_software"
         android:onClick="open_about_this_software"
+        android:text="@string/about_this_software"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/current_wallpaper" />
 
-    <Button
-        android:id="@+id/button"
+
+    <LinearLayout
+        android:id="@+id/buttons_in_main"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="stop_running"
-        android:text="@string/stop_running"
-        app:backgroundTint="#FF0000"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/about_this_software" />
+        app:layout_constraintTop_toBottomOf="@+id/about_this_software">
+
+        <Button
+            android:id="@+id/pause_or_continue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="pause_or_continue" />
+
+        <Button
+            android:id="@+id/stop_running"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="stop_running"
+            android:text="@string/stop_running"
+            app:backgroundTint="#FF0000" />
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
