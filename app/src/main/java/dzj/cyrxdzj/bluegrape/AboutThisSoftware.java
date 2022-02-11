@@ -77,6 +77,12 @@ public class AboutThisSoftware extends AppCompatActivity {
         intent.setClass(this,RewardAndContribution.class);
         this.startActivity(intent);
     }
+    public void feedback(View view)
+    {
+        Uri uri = Uri.parse("https://www.wjx.cn/vj/w7Os0kb.aspx");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
     public void check_update(View view)
     {
         Context context=this;
