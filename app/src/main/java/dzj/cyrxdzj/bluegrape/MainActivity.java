@@ -11,6 +11,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Binder;
 import android.os.Build;
@@ -20,6 +21,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
+import android.widget.Button;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -30,6 +32,7 @@ import java.lang.reflect.Method;
 public class MainActivity extends AppCompatActivity {
     private Intent WallpaperServiceIntent,AppListenerIntent;
     private AlertDialog dialog1,dialog2;
+    public static boolean is_pause=false;
     public void write_file(String path,String content) throws IOException
     {
         FileWriter writer=new FileWriter(new File(path));
@@ -152,14 +155,6 @@ public class MainActivity extends AppCompatActivity {
                 System.exit(1);
             }
         }
-        /*if(!isAccessibilitySettingsOn(this,AppListener.class.getName()))
-        {
-            show_ask_permission_dialog();
-        }
-        else if(!checkFloatPermission(this))
-        {
-            show_ask_permission2_dialog();
-        }*/
         WallpaperServiceIntent=new Intent(MainActivity.this, AppListener.class);
         AppListenerIntent=new Intent(MainActivity.this, WallpaperService.class);
         startService(WallpaperServiceIntent);
@@ -171,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         Log.d("MainActivity","Resume");
         check_permission();
+        update_pause_status();
     }
     private void check_permission()
     {
@@ -183,6 +179,20 @@ public class MainActivity extends AppCompatActivity {
         if(!checkFloatPermission(this))
         {
             show_ask_permission2_dialog();
+        }
+    }
+    private void update_pause_status()
+    {
+        Button pause_or_continue_button=(Button)findViewById(R.id.pause_or_continue);
+        if(is_pause)
+        {
+            pause_or_continue_button.setText(R.string.continue_running);
+            pause_or_continue_button.setBackgroundColor(Color.GREEN);
+        }
+        else
+        {
+            pause_or_continue_button.setText(R.string.pause_running);
+            pause_or_continue_button.setBackgroundColor(Color.rgb(0x62,0,0xee));
         }
     }
     public void open_my_wallpaper(View view)
@@ -202,6 +212,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=new Intent();
         intent.setClass(MainActivity.this,AboutThisSoftware.class);
         MainActivity.this.startActivity(intent);
+    }
+    public void pause_or_continue(View view)
+    {
+        this.is_pause=!this.is_pause;
+        update_pause_status();
     }
     public void stop_running(View view)
     {
