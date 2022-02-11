@@ -20,8 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.BlueGrape"
         android:requestLegacyExternalStorage="true">
-        <activity android:name=".ApplyWallpaper"
-            android:requestLegacyExternalStorage="true"/>
 
         <service
             android:name=".AppListener"
@@ -86,6 +84,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MyWallpaper" />
+        </activity>
+        <activity android:name=".ApplyWallpaper"
+            android:requestLegacyExternalStorage="true"
+            android:parentActivityName=".EditWallpaper">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EditWallpaper" />
         </activity>
         <activity
             android:name=".RewardAndContribution"
