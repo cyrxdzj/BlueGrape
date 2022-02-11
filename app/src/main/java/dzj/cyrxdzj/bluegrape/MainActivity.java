@@ -26,7 +26,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private Intent WallpaperServiceIntent,AppListenerIntent;
