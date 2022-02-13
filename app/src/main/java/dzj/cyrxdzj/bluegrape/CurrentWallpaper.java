@@ -96,7 +96,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             for(int i=0;i<current_wallpaper.length();i++)
             {
                 File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
-                Log.d("CurrentWallpaper",Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
+                Log.d("CurrentWallpaper","This wallpaper will be checked:"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
                 if(fobj.exists())
                 {
                     if(is_add)
@@ -119,7 +119,7 @@ public class CurrentWallpaper extends AppCompatActivity {
                 }
             }
             result+="]";
-            Log.d("CurrentWallpaper",result);
+            Log.d("CurrentWallpaper","Config content:\n"+result);
             write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -136,7 +136,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             result+="[";
             for(int i=0;i<current_wallpaper.length();i++)
             {
-                Log.d("CurrentWallpaper",Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
+                Log.d("CurrentWallpaper","This wallpaper will be checked:"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
                 if(!current_wallpaper.getJSONObject(i).getString("wallpaper_id").equals(delete_wallpaper))
                 {
                     if(is_add)
@@ -159,7 +159,7 @@ public class CurrentWallpaper extends AppCompatActivity {
                 }
             }
             result+="]";
-            Log.d("CurrentWallpaper",result);
+            Log.d("CurrentWallpaper","Config content:\n"+result);
             write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -184,9 +184,8 @@ public class CurrentWallpaper extends AppCompatActivity {
                     for(int i=0;i<current_wallpaper.getJSONObject(position).getJSONArray("apps").length();i++)
                     {
                         show_info+=context.getPackageManager().getApplicationInfo(current_wallpaper.getJSONObject(position).getJSONArray("apps").getString(i),0).loadLabel(context.getPackageManager()).toString()+"\n";
-                        Log.d("CurrentWallpaper",current_wallpaper.getJSONObject(position).getJSONArray("apps").getString(i));
+                        Log.d("CurrentWallpaper","This APP is using this wallpaper: "+current_wallpaper.getJSONObject(position).getJSONArray("apps").getString(i));
                     }
-                    Log.d("CurrentWallpaper",show_info);
                     show_info_dialog("",show_info);
                 }
                 catch (JSONException | PackageManager.NameNotFoundException e) {

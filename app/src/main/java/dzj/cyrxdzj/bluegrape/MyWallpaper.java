@@ -100,7 +100,7 @@ public class MyWallpaper extends AppCompatActivity {
         my_wallpaper_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("MyWallpaper",wallpaper_list[position]);
+                Log.d("MyWallpaper","This wallpaper was clicked: "+wallpaper_list[position]);
                 Intent intent=new Intent();
                 intent.setClass(MyWallpaper.this,EditWallpaper.class);
                 intent.putExtra("wallpaper_id",wallpaper_list[position]);
@@ -112,7 +112,7 @@ public class MyWallpaper extends AppCompatActivity {
     public void onResume()
     {
         super.onResume();
-        Log.d("MyWallpaper","resume");
+        Log.d("MyWallpaper","Activity resume");
         refresh_list();
     }
     public void new_wallpaper(View view)
@@ -120,7 +120,7 @@ public class MyWallpaper extends AppCompatActivity {
         try {
             Date d=new Date();
             String wallpaper_id="wallpaper-"+d.getTime();
-            Log.d("MyWallpaper",wallpaper_id);
+            Log.d("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
             File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
             fobj.mkdirs();
             fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
@@ -135,7 +135,6 @@ public class MyWallpaper extends AppCompatActivity {
             bitmap.compress(Bitmap.CompressFormat.PNG,100,writer);
             writer.flush();
             writer.close();
-            Log.d("MyWallpaper",wallpaper_id);
             Intent intent=new Intent();
             intent.setClass(MyWallpaper.this,EditWallpaper.class);
             intent.putExtra("wallpaper_id",wallpaper_id);

@@ -83,7 +83,6 @@ public class ApplyWallpaper extends AppCompatActivity {
                     }
                 }
                 package_array.add(new App(p.applicationInfo.loadIcon(this.getPackageManager()),p.packageName,p.applicationInfo.loadLabel(this.getPackageManager()).toString(),flag));
-                //Log.d("ApplyWallpaper",p.packageName+" "+p.applicationInfo.loadLabel(this.getPackageManager()).toString());
             }
             for(int i=0;i<package_array.size();i++)
             {
@@ -111,7 +110,7 @@ public class ApplyWallpaper extends AppCompatActivity {
             apps.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Log.d("ApplyWallpaper",package_array.get(position).package_id);
+                    Log.d("ApplyWallpaper","Clicked APP id: "+package_array.get(position).package_id);
                     if(package_array.get(position).is_apply)
                     {
                         package_array.get(position).is_apply=false;
@@ -199,7 +198,7 @@ public class ApplyWallpaper extends AppCompatActivity {
                 result+=",\"wallpaper_id\":\""+temp_list.get(i).first+"\"}";
             }
             result+="]";
-            Log.d("ApplyWallpaper",result);
+            Log.d("ApplyWallpaper","Config content:\n"+result);
             write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
             Toast.makeText(this,R.string.apply_successful,Toast.LENGTH_SHORT).show();
             finish();

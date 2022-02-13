@@ -111,7 +111,7 @@ public class EditWallpaper extends AppCompatActivity {
         }
         Intent intent=getIntent();
         wallpaper_id=intent.getStringExtra("wallpaper_id");
-        Log.d("EditWallpaper",wallpaper_id);
+        Log.d("EditWallpaper","This wallpaper will be edited: "+wallpaper_id);
         try {
             //初始化配置
             String config_str = read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
@@ -200,7 +200,7 @@ public class EditWallpaper extends AppCompatActivity {
                             //如果是file类型的Uri，直接获取图片路径即可
                             imagePath = uri.getPath();
                         }
-                        Log.d("EditWallpaper",imagePath);
+                        Log.d("EditWallpaper","Image path is: "+imagePath);
                         Bitmap image= BitmapFactory.decodeFile(imagePath);
                         try {
                             FileOutputStream writer=new FileOutputStream(new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
@@ -226,7 +226,7 @@ public class EditWallpaper extends AppCompatActivity {
                     "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
                     "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
                     "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
-            Log.d("EditWallpaper",save_str);
+            Log.d("EditWallpaper","Config content:\n"+save_str);
             write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
 
         } catch (UnsupportedEncodingException e) {
@@ -244,7 +244,7 @@ public class EditWallpaper extends AppCompatActivity {
                     "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
                     "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
                     "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
-            Log.d("EditWallpaper",save_str);
+            Log.d("EditWallpaper","Config content:\n"+save_str);
             write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
 
         } catch (UnsupportedEncodingException e) {
@@ -268,7 +268,7 @@ public class EditWallpaper extends AppCompatActivity {
     }
     public void delete()
     {
-        Log.d("EditWallpaper","Delete");
+        Log.d("EditWallpaper","This wallpaper will be deleted");
         File file_obj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
         delete_dir(file_obj);
         finish();
