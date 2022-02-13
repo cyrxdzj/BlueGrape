@@ -52,7 +52,7 @@ public class AboutThisSoftware extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("AboutThisSoftware",now_version+" "+latest_version+" "+url);
+                        Log.d("AboutThisSoftware","Info: "+now_version+" "+latest_version+" "+url);
                         Toast.makeText(context,"将会打开浏览器下载安装包。下载完成后，您可能要在通知栏中或其它地方手动操作。",Toast.LENGTH_LONG).show();
                         Uri uri = Uri.parse(url);
                         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
@@ -93,7 +93,7 @@ public class AboutThisSoftware extends AppCompatActivity {
                     HttpURLConnection connection=(HttpURLConnection)update_url.openConnection();
                     connection.setRequestMethod("GET");
                     assert connection.getResponseCode()==200;
-                    Log.d("AboutThisSoftware", String.valueOf(connection.getResponseCode()));
+                    Log.d("AboutThisSoftware","Response status: "+String.valueOf(connection.getResponseCode()));
                     InputStream stream=connection.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
                     StringBuilder temp= new StringBuilder();
@@ -102,7 +102,7 @@ public class AboutThisSoftware extends AppCompatActivity {
                         temp.append(line).append("\n");
                     }
                     String response=temp.toString();
-                    Log.d("AboutThisSoftware", response);
+                    Log.d("AboutThisSoftware","Response content:\n"+response);
                     JSONObject apks=new JSONObject(response);
                     if(!apks.getString("latest_version").equals(get_version()))
                     {

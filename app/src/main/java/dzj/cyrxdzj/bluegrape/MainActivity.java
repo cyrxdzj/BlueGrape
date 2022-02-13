@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             folder.mkdirs();
         }
         File file=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
-        Log.d("MainActivity",Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
+        Log.d("MainActivity","Files will storage at here: "+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
         if(!file.exists())
         {
             try {
@@ -164,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        Log.d("MainActivity","Resume");
+        Log.d("MainActivity","Activity resume");
         check_permission();
         update_pause_status();
     }
@@ -172,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
     {
         if(!isAccessibilitySettingsOn(this))
         {
-            Log.d("MainActivity","AccessibilitySettingsOff");
+            Log.d("MainActivity","Accessibility settings off");
             show_ask_permission_dialog();
             return;
         }
