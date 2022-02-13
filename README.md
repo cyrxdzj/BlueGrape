@@ -12,7 +12,7 @@ BlueGrape是一个透明壁纸软件。它可以为你的APP创建透明壁纸�
 
 ## 二、安装
 
-请访问[发行版](https://gitee.com/cyrxdzj/BlueGrape/releases)以下载安装。
+请访问[BlueGrape官网](https://cyrxdzj.github.io/BlueGrapeWeb/)或[发行版](https://gitee.com/cyrxdzj/BlueGrape/releases)以下载安装。
 
 ## 三、使用
 
