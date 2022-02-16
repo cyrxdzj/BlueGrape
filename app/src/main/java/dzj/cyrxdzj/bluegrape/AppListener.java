@@ -32,7 +32,7 @@ public class AppListener extends AccessibilityService {
     public void onAccessibilityEvent(AccessibilityEvent event) {
         String packageName = event.getPackageName().toString();
         int eventType = event.getEventType();
-        Log.d("accessibility", "packageName = " + packageName + " eventType = " + eventType);
+        Log.d("AppListener", "Event infomation: "+"packageName = " + packageName + " eventType = " + eventType);
         if(!packageName.equals(last_package_name))
         {
             last_package_name=packageName;
@@ -46,7 +46,7 @@ public class AppListener extends AccessibilityService {
     }
     public void refresh()
     {
-        Log.d("acc",this.last_package_name);
+        Log.d("AppListener","Now package name: "+this.last_package_name);
         if(!WallpaperService.ready)
         {
             return;
@@ -63,7 +63,7 @@ public class AppListener extends AccessibilityService {
                 {
                     if(apps.getString(j).equals(this.last_package_name))
                     {
-                        Log.d("acc-wallpaper_id-test",now_config.getString("wallpaper_id"));
+                        Log.d("AppListener","Config wallpaper ID: "+now_config.getString("wallpaper_id"));
                         wallpaper_id=now_config.getString("wallpaper_id");
                         break;
                     }
@@ -71,7 +71,7 @@ public class AppListener extends AccessibilityService {
             }
             if(wallpaper_id!=null&&!MainActivity.is_pause)
             {
-                Log.d("acc-wallpaper_id",wallpaper_id);
+                Log.d("AppListener","Use wallpaper ID: "+wallpaper_id);
                 String wallpaper_config_str=read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
                 JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
                 WallpaperService.image_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
@@ -93,7 +93,7 @@ public class AppListener extends AccessibilityService {
                 }
                 layoutParams.width=image_view_width;
                 layoutParams.height=image_view_height;
-                Log.d("Size",String.valueOf(image_view_width)+" "+String.valueOf(image_view_height));
+                Log.d("AppListener","Image size: "+String.valueOf(image_view_width)+" "+String.valueOf(image_view_height));
                 int x,y;
                 if(wallpaper_config.getString("position").equals("left-top"))
                 {
@@ -114,7 +114,7 @@ public class AppListener extends AccessibilityService {
                 }
                 layoutParams.x=x;
                 layoutParams.y=y;
-                Log.d("Position",String.valueOf(x)+" "+String.valueOf(y));
+                Log.d("AppListener","Image position: "+String.valueOf(x)+" "+String.valueOf(y));
                 WallpaperService.image_view.setLayoutParams(layoutParams);
                 WallpaperService.image_view.setScaleType(ImageView.ScaleType.FIT_XY);
                 //WallpaperService.layout.setLayoutParams(WallpaperService.layoutParams);
