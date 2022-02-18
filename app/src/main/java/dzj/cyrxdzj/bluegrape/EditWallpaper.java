@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.ContentUris;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Looper;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -25,6 +27,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 
@@ -103,7 +106,6 @@ public class EditWallpaper extends AppCompatActivity {
             int permission = ActivityCompat.checkSelfPermission(this,
                     "android.permission.WRITE_EXTERNAL_STORAGE");
             if (permission != PackageManager.PERMISSION_GRANTED) {
-                // 没有写的权限，去申请写的权限，申请权限
                 ActivityCompat.requestPermissions(this,PERMISSIONS_STORAGE,1);
             }
         } catch (Exception e) {
@@ -204,10 +206,14 @@ public class EditWallpaper extends AppCompatActivity {
                         Bitmap image= BitmapFactory.decodeFile(imagePath);
                         try {
                             FileOutputStream writer=new FileOutputStream(new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
+                            ProgressDialog dialog = new ProgressDialog(this);
+                            dialog.setMessage(getString(R.string.copying_image));
+                            dialog.show();
                             image.compress(Bitmap.CompressFormat.PNG,100,writer);
                             writer.flush();
                             writer.close();
                             refresh_image();
+                            dialog.dismiss();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
