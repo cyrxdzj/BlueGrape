@@ -204,19 +204,19 @@ public class EditWallpaper extends AppCompatActivity {
                         }
                         Log.d("EditWallpaper","Image path is: "+imagePath);
                         Bitmap image= BitmapFactory.decodeFile(imagePath);
+                        ProgressDialog loading_dialog = new ProgressDialog(this);
+                        loading_dialog.setMessage(getString(R.string.copying_image));
+                        loading_dialog.show();
                         try {
                             FileOutputStream writer=new FileOutputStream(new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
-                            ProgressDialog dialog = new ProgressDialog(this);
-                            dialog.setMessage(getString(R.string.copying_image));
-                            dialog.show();
                             image.compress(Bitmap.CompressFormat.PNG,100,writer);
                             writer.flush();
                             writer.close();
                             refresh_image();
-                            dialog.dismiss();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                        loading_dialog.dismiss();
                     }
                 }
                 break;
