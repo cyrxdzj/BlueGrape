@@ -29,10 +29,9 @@
         android:id="@+id/reward_and_contribution"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:onClick="reward_and_contribution"
         android:text="@string/reward_and_contribution"
-        app:layout_constraintTop_toBottomOf="@+id/app_version"
+        app:layout_constraintTop_toBottomOf="@+id/build_time"
         tools:layout_editor_absoluteX="157dp" />
 
     <Button
@@ -52,5 +51,15 @@
         android:text="@string/feedback"
         app:layout_constraintTop_toBottomOf="@+id/reward_and_contribution"
         tools:layout_editor_absoluteX="160dp" />
+
+    <TextView
+        android:id="@+id/build_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@+id/app_version"
+        tools:layout_editor_absoluteX="105dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
