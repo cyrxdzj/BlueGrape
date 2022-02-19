@@ -68,6 +68,8 @@ public class AboutThisSoftware extends AppCompatActivity {
         setContentView(R.layout.activity_about_this_software);
         TextView app_version=(TextView)findViewById(R.id.app_version);
         app_version.setText("Version "+get_version());
+        TextView build_time=(TextView)findViewById(R.id.build_time);
+        build_time.setText("Build Time "+BuildConfig.BUILD_TIME);
     }
     public void reward_and_contribution(View view)
     {
