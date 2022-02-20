@@ -8,6 +8,7 @@ import androidx.core.app.ActivityCompat;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentUris;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -203,20 +204,37 @@ public class EditWallpaper extends AppCompatActivity {
                             imagePath = uri.getPath();
                         }
                         Log.d("EditWallpaper","Image path is: "+imagePath);
-                        Bitmap image= BitmapFactory.decodeFile(imagePath);
-                        ProgressDialog loading_dialog = new ProgressDialog(this);
+                        Context context=this;
+                        String finalImagePath = imagePath;
+                        ProgressDialog loading_dialog = new ProgressDialog(context);
                         loading_dialog.setMessage(getString(R.string.copying_image));
                         loading_dialog.show();
-                        try {
-                            FileOutputStream writer=new FileOutputStream(new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
-                            image.compress(Bitmap.CompressFormat.PNG,100,writer);
-                            writer.flush();
-                            writer.close();
-                            refresh_image();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        loading_dialog.dismiss();
+                        new Thread()
+                        {
+                            @Override
+                            public void run()
+                            {
+                                Looper.prepare();
+                                try {
+                                    Bitmap image= BitmapFactory.decodeFile(finalImagePath);
+                                    FileOutputStream writer=new FileOutputStream(new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
+                                    image.compress(Bitmap.CompressFormat.PNG,100,writer);
+                                    writer.flush();
+                                    writer.close();
+                                    //refresh_image();
+                                    ImageView wallpaper_view=(ImageView)findViewById(R.id.wallpaper_image);
+                                    wallpaper_view.post(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            refresh_image();
+                                        }
+                                    });
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                loading_dialog.dismiss();
+                            }
+                        }.start();
                     }
                 }
                 break;

@@ -51,6 +51,7 @@ public class AppListener extends AccessibilityService {
         {
             return;
         }
+        Log.d("AppListener","Wallpaper Service ready");
         try {
             String config_str=read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
             JSONArray config=new JSONArray(config_str);
