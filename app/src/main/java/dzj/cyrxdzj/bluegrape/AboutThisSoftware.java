@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -86,7 +87,10 @@ public class AboutThisSoftware extends AppCompatActivity {
     public void check_update(View view)
     {
         Context context=this;
-        Thread request_thread=new Thread(new Runnable() {
+        ProgressDialog loading_dialog = new ProgressDialog(context);
+        loading_dialog.setMessage(getString(R.string.checking_update));
+        loading_dialog.show();
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -120,9 +124,9 @@ public class AboutThisSoftware extends AppCompatActivity {
                 } finally {
                     Looper.loop();
                 }
+                loading_dialog.dismiss();
             }
-        });
-        request_thread.start();
+        }).start();
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
