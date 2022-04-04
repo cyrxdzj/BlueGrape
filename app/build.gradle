@@ -3,15 +3,23 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('C:\\Users\\cyrxdzj\\cyrxdzj-key.jks')
+            storePassword 'd301d31156'
+            keyAlias 'cyrxdzj'
+            keyPassword 'd301d31156'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion '30.0.3'
 
     defaultConfig {
         applicationId "dzj.cyrxdzj.bluegrape"
         minSdkVersion 16
-        targetSdkVersion 31
-        versionCode 3
-        versionName '1.0.3'
+        targetSdk 25
+        versionCode 4
+        versionName '1.0.4'
         buildConfigField "String", "BUILD_TIME", getDate()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

@@ -1,6 +1,11 @@
 package dzj.cyrxdzj.bluegrape;
 
 import android.accessibilityservice.AccessibilityService;
+import android.app.ActivityManager;
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -28,11 +33,46 @@ public class AppListener extends AccessibilityService {
         reader.close();
         return new String(temp);
     }
+    public static boolean isInputMethodApp(Context context, String strPkgName) {
+        PackageManager pkm = context.getPackageManager();
+        boolean bIsIME = false;
+        PackageInfo pkgInfo;
+        try {
+            pkgInfo = pkm.getPackageInfo(strPkgName, PackageManager.GET_SERVICES);
+            ServiceInfo[] servicesInfos = pkgInfo.services;
+            if(null != servicesInfos){
+                for (int i = 0; i < servicesInfos.length; i++) {
+                    ServiceInfo sInfo = servicesInfos[i];
+                    if(null != sInfo.permission && sInfo.permission.equals("android.permission.BIND_INPUT_METHOD")){
+                        Log.i("isInputMethodApp ", strPkgName);
+                        bIsIME = true;
+                        break;
+                    };
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return bIsIME;
+    }
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
         String packageName = event.getPackageName().toString();
         int eventType = event.getEventType();
         Log.d("AppListener", "Event infomation: "+"packageName = " + packageName + " eventType = " + eventType);
+        Log.d("AppListener", "Now Activity class name: "+((ActivityManager)getSystemService(this.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getClassName());
+        if(isInputMethodApp(this,packageName))
+        {
+            return;
+        }
+        if(packageName.equals("com.android.systemui"))
+        {
+            return;
+        }
         if(!packageName.equals(last_package_name))
         {
             last_package_name=packageName;
