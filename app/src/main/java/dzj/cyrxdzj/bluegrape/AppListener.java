@@ -69,10 +69,10 @@ public class AppListener extends AccessibilityService {
         {
             return;
         }
-        if(packageName.equals("com.android.systemui"))
+        /*if(packageName.equals("com.android.systemui"))
         {
             return;
-        }
+        }*/
         if(!packageName.equals(last_package_name))
         {
             last_package_name=packageName;
