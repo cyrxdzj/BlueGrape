@@ -2,7 +2,10 @@ package dzj.cyrxdzj.bluegrape;
 
 import android.accessibilityservice.AccessibilityService;
 import android.app.ActivityManager;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
@@ -10,7 +13,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
+import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
@@ -82,7 +87,34 @@ public class AppListener extends AccessibilityService {
 
     @Override
     public void onInterrupt() {
+    }
 
+    @Override
+    public boolean onUnbind(Intent intent) {
+        Log.d("AppListener","Close.");
+        Context context=this;
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setMessage(getString(R.string.accessibility_permission_requests_on_close))
+                .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        context.startActivity(intent);
+                        dialog.dismiss();
+                    }
+                })
+                .setCancelable(false)
+                .create();
+        dialog.getWindow().setType(WindowManager.LayoutParams.TYPE_SYSTEM_ALERT);
+        dialog.show();
+        return false;
     }
     public void refresh()
     {
