@@ -63,16 +63,16 @@ public class AppListener extends AccessibilityService {
     public void onAccessibilityEvent(AccessibilityEvent event) {
         String packageName = event.getPackageName().toString();
         int eventType = event.getEventType();
-        Log.d("AppListener", "Event infomation: "+"packageName = " + packageName + " eventType = " + eventType);
+        Log.d("AppListener", "Event infomation: "+"packageName = " + packageName + " eventType = " + eventType+" eventClass = "+event.getClassName());
         Log.d("AppListener", "Now Activity class name: "+((ActivityManager)getSystemService(this.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getClassName());
         if(isInputMethodApp(this,packageName))
         {
             return;
         }
-        /*if(packageName.equals("com.android.systemui"))
+        if(event.getClassName().equals("com.android.server.am.AppErrorDialog"))
         {
             return;
-        }*/
+        }
         if(!packageName.equals(last_package_name))
         {
             last_package_name=packageName;
