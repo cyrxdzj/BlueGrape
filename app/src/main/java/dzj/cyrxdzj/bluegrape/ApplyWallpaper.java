@@ -3,9 +3,12 @@ package dzj.cyrxdzj.bluegrape;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
@@ -47,6 +50,31 @@ public class ApplyWallpaper extends AppCompatActivity {
         writer.write(content);
         writer.close();
     }
+    public static boolean isInputMethodApp(Context context, String strPkgName) {
+        PackageManager pkm = context.getPackageManager();
+        boolean bIsIME = false;
+        PackageInfo pkgInfo;
+        try {
+            pkgInfo = pkm.getPackageInfo(strPkgName, PackageManager.GET_SERVICES);
+            ServiceInfo[] servicesInfos = pkgInfo.services;
+            if(null != servicesInfos){
+                for (int i = 0; i < servicesInfos.length; i++) {
+                    ServiceInfo sInfo = servicesInfos[i];
+                    if(null != sInfo.permission && sInfo.permission.equals("android.permission.BIND_INPUT_METHOD")){
+                        bIsIME = true;
+                        break;
+                    };
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+        return bIsIME;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +97,7 @@ public class ApplyWallpaper extends AppCompatActivity {
             //List<String> package_id_array=new ArrayList<String>(),package_name=new ArrayList<String>();
             for(PackageInfo p:package_list)
             {
-                if((p.applicationInfo.flags&ApplicationInfo.FLAG_SYSTEM)!=0)
+                if((p.applicationInfo.flags&ApplicationInfo.FLAG_SYSTEM)!=0||isInputMethodApp(this,p.packageName))
                 {
                     continue;
                 }

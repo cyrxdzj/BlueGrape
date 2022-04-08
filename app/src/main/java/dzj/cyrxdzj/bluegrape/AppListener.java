@@ -49,7 +49,6 @@ public class AppListener extends AccessibilityService {
                 for (int i = 0; i < servicesInfos.length; i++) {
                     ServiceInfo sInfo = servicesInfos[i];
                     if(null != sInfo.permission && sInfo.permission.equals("android.permission.BIND_INPUT_METHOD")){
-                        Log.i("isInputMethodApp ", strPkgName);
                         bIsIME = true;
                         break;
                     };
