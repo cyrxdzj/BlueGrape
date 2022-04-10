@@ -31,7 +31,7 @@
     <string name="accessibility_permission_requests_on_close">Android系统关闭了程序的无障碍权限，这有可能不是您的本意。打开无障碍权限设置吗？\n请在列表中找到“BlueGrape”后手动开启权限。\n如果您觉得这个对话框弹出太频繁，可以停止BlueGrape运行。</string>
     <string name="overlay_permission_requests">程序需要“在应用上层显示”权限以显示壁纸。请授权。</string>
     <string name="check_update">检查更新</string>
-    <string name="checking_update">正在检查更新</string>
+    <string name="checking_update">正在检查更新，点击空白处可取消。</string>
     <string name="feedback">意见反馈</string>
     <string name="reward_and_contribution">赞赏与贡献</string>
 </resources>

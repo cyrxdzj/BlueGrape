@@ -90,11 +90,12 @@ public class AboutThisSoftware extends AppCompatActivity {
         ProgressDialog loading_dialog = new ProgressDialog(context);
         loading_dialog.setMessage(getString(R.string.checking_update));
         loading_dialog.show();
-        new Thread(new Runnable() {
+        new Thread()
+        {
             @Override
             public void run() {
+                Looper.prepare();
                 try {
-                    Looper.prepare();
                     URL update_url=new URL("https://cyrxdzj.github.io/BlueGrapeWeb/apks.json");
                     HttpURLConnection connection=(HttpURLConnection)update_url.openConnection();
                     connection.setRequestMethod("GET");
@@ -122,11 +123,11 @@ public class AboutThisSoftware extends AppCompatActivity {
                     e.printStackTrace();
                     Toast.makeText(context,"检查更新时遇到错误",Toast.LENGTH_SHORT).show();
                 } finally {
-                    Looper.loop();
+                    loading_dialog.dismiss();
                 }
-                loading_dialog.dismiss();
+                Looper.loop();
             }
-        }).start();
+        }.start();
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
