@@ -219,4 +219,22 @@ public class MainActivity extends AppCompatActivity {
         stopService(AppListenerIntent);
         System.exit(0);
     }
+    public void feedback(View view)
+    {
+        Uri uri = Uri.parse("https://www.wjx.cn/vj/w7Os0kb.aspx");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+    public void using_document(View view)
+    {
+        Uri uri = Uri.parse("https://gitee.com/cyrxdzj/BlueGrape/blob/master/README.md");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+    public void open_web(View view)
+    {
+        Uri uri = Uri.parse("https://cyrxdzj.github.io/BlueGrapeWeb");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
 }

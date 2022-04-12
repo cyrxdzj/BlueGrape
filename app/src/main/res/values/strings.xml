@@ -33,6 +33,8 @@
     <string name="check_update">检查更新</string>
     <string name="checking_update">正在检查更新，点击空白处可取消。</string>
     <string name="feedback">意见反馈</string>
+    <string name="using_document">使用文档</string>
+    <string name="open_web">打开官网</string>
     <string name="reward_and_contribution">赞赏与贡献</string>
     <string name="info_text_load_failed">图片加载失败</string>
 </resources>
