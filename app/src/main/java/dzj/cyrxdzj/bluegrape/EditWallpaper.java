@@ -208,6 +208,7 @@ public class EditWallpaper extends AppCompatActivity {
                         String finalImagePath = imagePath;
                         ProgressDialog loading_dialog = new ProgressDialog(context);
                         loading_dialog.setMessage(getString(R.string.copying_image));
+                        loading_dialog.setCancelable(false);
                         loading_dialog.show();
                         new Thread()
                         {

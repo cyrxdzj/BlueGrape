@@ -21,7 +21,6 @@ import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -65,20 +64,20 @@ public class AppListener extends AccessibilityService {
     }
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-        String packageName = event.getPackageName().toString(), className = event.getClassName().toString();
+        String packageName = event.getPackageName().toString();
         String activityName=((ActivityManager)getSystemService(this.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getClassName();
         int eventType = event.getEventType();
-        Log.d("AppListener", "Event infomation: "+"packageName = " + packageName+" eventType = "+eventType + " eventTypeByString = " + AccessibilityEvent.eventTypeToString(eventType)+" eventClass = "+className);
+        Log.d("AppListener", "Event infomation: "+"packageName = " + packageName+" eventType = "+eventType + " eventTypeByString = " + AccessibilityEvent.eventTypeToString(eventType));
         Log.d("AppListener", "Now Activity class name: "+activityName);
         if(isInputMethodApp(this,packageName))
         {
             return;
         }
-        if(className.equals("com.android.server.am.AppErrorDialog"))
+        if(activityName.equals("com.android.server.am.AppErrorDialog"))
         {
             return;
         }
-        if(activityName.indexOf(packageName)!=0&&packageName.equals("com.android.systemui"))
+        if(/*activityName.indexOf(packageName)!=0&&*/packageName.equals("com.android.systemui"))
         {
             return;
         }
@@ -122,6 +121,7 @@ public class AppListener extends AccessibilityService {
     }
     public void refresh()
     {
+        WallpaperService.info_text_view.setText("");
         Log.d("AppListener","Now package name: "+this.last_package_name);
         if(!WallpaperService.ready)
         {
@@ -194,13 +194,14 @@ public class AppListener extends AccessibilityService {
                 Log.d("AppListener","Image position: "+String.valueOf(x)+" "+String.valueOf(y));
                 WallpaperService.image_view.setLayoutParams(layoutParams);
                 WallpaperService.image_view.setScaleType(ImageView.ScaleType.FIT_XY);
-                //WallpaperService.layout.setLayoutParams(WallpaperService.layoutParams);
             }
             else
             {
                 WallpaperService.image_view.setAlpha(0f);
             }
-        } catch (IOException | JSONException e) {
+            Log.d("AppListener",WallpaperService.info_text_view.getText().toString());
+        } catch (Exception e) {
+            WallpaperService.info_text_view.setText(R.string.info_text_load_failed);
             e.printStackTrace();
         }
     }
