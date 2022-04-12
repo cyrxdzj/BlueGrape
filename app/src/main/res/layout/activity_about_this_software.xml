@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:onClick="check_update"
         android:text="@string/check_update"
-        app:layout_constraintTop_toBottomOf="@+id/feedback"
+        app:layout_constraintTop_toBottomOf="@+id/using_document"
         tools:layout_editor_absoluteX="193dp" />
 
     <Button
@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:onClick="feedback"
         android:text="@string/feedback"
-        app:layout_constraintTop_toBottomOf="@+id/reward_and_contribution"
+        app:layout_constraintTop_toBottomOf="@+id/open_web"
         tools:layout_editor_absoluteX="160dp" />
 
     <TextView
@@ -61,5 +61,22 @@
         android:textSize="20sp"
         app:layout_constraintTop_toBottomOf="@+id/app_version"
         tools:layout_editor_absoluteX="105dp" />
+
+    <Button
+        android:id="@+id/using_document"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="using_document"
+        android:text="@string/using_document"
+        app:layout_constraintTop_toBottomOf="@+id/feedback" />
+
+    <Button
+        android:id="@+id/open_web"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="open_web"
+        android:text="@string/open_web"
+        app:layout_constraintTop_toBottomOf="@+id/reward_and_contribution"
+        tools:layout_editor_absoluteX="120dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

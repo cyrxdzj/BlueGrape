@@ -61,19 +61,43 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView13"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/text_buttons"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:text="@string/main_page_text"
-        android:visibility="invisible"
+        android:gravity="center"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/feedback_text_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:onClick="feedback"
+            android:text="@string/feedback" />
+
+        <TextView
+            android:id="@+id/using_document_text_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
+            android:layout_weight="1"
+            android:onClick="using_document"
+            android:text="@string/using_document" />
+
+        <TextView
+            android:id="@+id/open_web_text_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="open_web"
+            android:text="@string/open_web" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
