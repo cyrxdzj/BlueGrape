@@ -34,4 +34,5 @@
     <string name="checking_update">正在检查更新，点击空白处可取消。</string>
     <string name="feedback">意见反馈</string>
     <string name="reward_and_contribution">赞赏与贡献</string>
+    <string name="info_text_load_failed">图片加载失败</string>
 </resources>
