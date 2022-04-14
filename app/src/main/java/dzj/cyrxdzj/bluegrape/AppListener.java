@@ -73,11 +73,7 @@ public class AppListener extends AccessibilityService {
         {
             return;
         }
-        if(activityName.equals("com.android.server.am.AppErrorDialog"))
-        {
-            return;
-        }
-        if(/*activityName.indexOf(packageName)!=0&&*/packageName.equals("com.android.systemui"))
+        if(packageName.equals("com.android.systemui")&&!activityName.equals("com.android.systemui.recents.RecentsActivity"))
         {
             return;
         }
