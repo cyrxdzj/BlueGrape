@@ -6,18 +6,36 @@
     android:layout_height="match_parent"
     tools:context=".MyWallpaper">
 
-    <Button
-        android:id="@+id/new_wallpaper"
+    <LinearLayout
+        android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="new_wallpaper"
-        android:text="@string/new_wallpaper" />
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/new_wallpaper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="new_wallpaper"
+            android:text="@string/new_wallpaper" />
+
+        <Button
+            android:id="@+id/new_video_wallpaper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="new_video_wallpaper"
+            android:text="@string/new_video_wallpaper" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/my_wallpaper_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/new_wallpaper">
+        app:layout_constraintTop_toBottomOf="@+id/buttons">
 
     </ListView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

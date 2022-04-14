@@ -34,6 +34,7 @@ public class MyWallpaper extends AppCompatActivity {
     private String[] wallpaper_list={},wallpaper_name_list={};
     private ArrayAdapter<String> adapter;
     private ListView my_wallpaper_list;
+    private CommonUtil util=new CommonUtil();
     public String read_file(String path) throws IOException {
         FileReader reader=new FileReader(new File(path));
         char[] temp=new char[500];
@@ -102,7 +103,14 @@ public class MyWallpaper extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("MyWallpaper","This wallpaper was clicked: "+wallpaper_list[position]);
                 Intent intent=new Intent();
-                intent.setClass(MyWallpaper.this,EditWallpaper.class);
+                if(util.is_video(wallpaper_list[position]))
+                {
+                    intent.setClass(MyWallpaper.this,EditVideoWallpaper.class);
+                }
+                else
+                {
+                    intent.setClass(MyWallpaper.this,EditWallpaper.class);
+                }
                 intent.putExtra("wallpaper_id",wallpaper_list[position]);
                 MyWallpaper.this.startActivity(intent);
             }
@@ -137,6 +145,32 @@ public class MyWallpaper extends AppCompatActivity {
             writer.close();
             Intent intent=new Intent();
             intent.setClass(MyWallpaper.this,EditWallpaper.class);
+            intent.putExtra("wallpaper_id",wallpaper_id);
+            MyWallpaper.this.startActivity(intent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void new_video_wallpaper(View view)
+    {
+        try {
+            Date d=new Date();
+            String wallpaper_id="wallpaper-"+d.getTime();
+            Log.d("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
+            File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
+            fobj.mkdirs();
+            fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+            fobj.createNewFile();
+            fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/video_wallpaper");
+            fobj.createNewFile();
+            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json","{\n"+
+                    "\t\"name\":\""+ URLEncoder.encode("新建视频壁纸","UTF-8")+"\",\n"+
+                    "\t\"wallpaper_path\":\"none\",\n"+
+                    "\t\"alpha\":25,\n"+
+                    "\t\"fill_method\":\"left-right\",\n"+
+                    "\t\"position\":\"left-top\"\n}");
+            Intent intent=new Intent();
+            intent.setClass(MyWallpaper.this,EditVideoWallpaper.class);
             intent.putExtra("wallpaper_id",wallpaper_id);
             MyWallpaper.this.startActivity(intent);
         } catch (IOException e) {
