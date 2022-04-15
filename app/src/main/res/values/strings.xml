@@ -41,6 +41,6 @@
     <string name="using_document">使用文档</string>
     <string name="open_web">打开官网</string>
     <string name="reward_and_contribution">赞赏与贡献</string>
-    <string name="info_text_load_failed">图片加载失败</string>
+    <string name="info_text_load_failed">壁纸加载失败</string>
     <string name="gif_unsupported">不支持GIF。但这个网站可能对您有所帮助：</string>
 </resources>

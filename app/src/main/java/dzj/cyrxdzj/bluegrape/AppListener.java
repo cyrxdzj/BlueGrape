@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.Settings;
@@ -19,6 +20,7 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
+import android.widget.VideoView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -141,53 +143,125 @@ public class AppListener extends AccessibilityService {
                 Log.d("AppListener","Use wallpaper ID: "+wallpaper_id);
                 String wallpaper_config_str=util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
                 JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
-                WallpaperService.image_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
-                WallpaperService.image_view.setImageResource(R.drawable.default_image);
-                WallpaperService.image_view.setImageURI(Uri.parse("file://"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
-                AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) WallpaperService.image_view.getLayoutParams();
-                Bitmap bitmap= BitmapFactory.decodeFile(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png");
-                int image_width= bitmap.getWidth(),image_height=bitmap.getHeight();
-                int image_view_width,image_view_height;
-                if(wallpaper_config.getString("fill_method").equals("left-right"))
+                if(!util.is_video(wallpaper_id))
                 {
-                    image_view_width=this.getResources().getDisplayMetrics().widthPixels;
-                    image_view_height= (int) (image_height*(image_view_width*1.0/image_width));
-                }
-                else
-                {
-                    image_view_height=this.getResources().getDisplayMetrics().heightPixels;
-                    image_view_width=(int)(image_width*(image_view_height*1.0/image_height));
-                }
-                layoutParams.width=image_view_width;
-                layoutParams.height=image_view_height;
-                Log.d("AppListener","Image size: "+String.valueOf(image_view_width)+" "+String.valueOf(image_view_height));
-                int x,y;
-                if(wallpaper_config.getString("position").equals("left-top"))
-                {
-                    x=y=0;
-                }
-                else
-                {
+                    WallpaperService.video_view.setAlpha(0f);
+                    WallpaperService.video_view.pause();
+                    WallpaperService.image_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
+                    WallpaperService.image_view.setImageResource(R.drawable.default_image);
+                    WallpaperService.image_view.setImageURI(Uri.parse("file://"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
+                    AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) WallpaperService.image_view.getLayoutParams();
+                    Bitmap bitmap= BitmapFactory.decodeFile(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png");
+                    int image_width= bitmap.getWidth(),image_height=bitmap.getHeight();
+                    int image_view_width,image_view_height;
                     if(wallpaper_config.getString("fill_method").equals("left-right"))
                     {
-                        x=0;
-                        y=this.getResources().getDisplayMetrics().heightPixels-image_view_height;
+                        image_view_width=this.getResources().getDisplayMetrics().widthPixels;
+                        image_view_height= (int) (image_height*(image_view_width*1.0/image_width));
                     }
                     else
                     {
-                        x=this.getResources().getDisplayMetrics().widthPixels-image_view_width;
-                        y=0;
+                        image_view_height=this.getResources().getDisplayMetrics().heightPixels;
+                        image_view_width=(int)(image_width*(image_view_height*1.0/image_height));
                     }
+                    layoutParams.width=image_view_width;
+                    layoutParams.height=image_view_height;
+                    Log.d("AppListener","Image size: "+String.valueOf(image_view_width)+" "+String.valueOf(image_view_height));
+                    int x,y;
+                    if(wallpaper_config.getString("position").equals("left-top"))
+                    {
+                        x=y=0;
+                    }
+                    else
+                    {
+                        if(wallpaper_config.getString("fill_method").equals("left-right"))
+                        {
+                            x=0;
+                            y=this.getResources().getDisplayMetrics().heightPixels-image_view_height;
+                        }
+                        else
+                        {
+                            x=this.getResources().getDisplayMetrics().widthPixels-image_view_width;
+                            y=0;
+                        }
+                    }
+                    layoutParams.x=x;
+                    layoutParams.y=y;
+                    Log.d("AppListener","Image position: "+String.valueOf(x)+" "+String.valueOf(y));
+                    WallpaperService.image_view.setLayoutParams(layoutParams);
+                    WallpaperService.image_view.setScaleType(ImageView.ScaleType.FIT_XY);
                 }
-                layoutParams.x=x;
-                layoutParams.y=y;
-                Log.d("AppListener","Image position: "+String.valueOf(x)+" "+String.valueOf(y));
-                WallpaperService.image_view.setLayoutParams(layoutParams);
-                WallpaperService.image_view.setScaleType(ImageView.ScaleType.FIT_XY);
+                else
+                {
+                    String wallpaper_path=wallpaper_config.getString("wallpaper_path");
+                    WallpaperService.image_view.setAlpha(0f);
+                    WallpaperService.video_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
+                    int video_size[]={0,0};
+                    WallpaperService.video_view.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                        @Override
+                        public void onPrepared(MediaPlayer mp) {
+                            mp.start();
+                            mp.setLooping(true);
+                            mp.setVolume(0f,0f);
+                            video_size[0]=mp.getVideoWidth();
+                            video_size[1]=mp.getVideoHeight();
+                            Log.d("AppListenerTest",String.valueOf(video_size[0])+" "+String.valueOf(video_size[1]));
+                        }
+                    });
+                    if(wallpaper_path.equals("none"))
+                    {
+                        WallpaperService.video_view.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/raw/default_video"));
+                    }
+                    else
+                    {
+                        WallpaperService.video_view.setVideoURI(Uri.parse("file://"+wallpaper_path));
+                    }
+                    AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) WallpaperService.video_view.getLayoutParams();
+                    int video_width=video_size[0],video_height=video_size[1];
+                    int video_view_width,video_view_height;
+                    if(wallpaper_config.getString("fill_method").equals("left-right"))
+                    {
+                        video_view_width=this.getResources().getDisplayMetrics().widthPixels;
+                        video_view_height= (int) (video_height*(video_view_width*1.0/video_width));
+                    }
+                    else
+                    {
+                        video_view_height=this.getResources().getDisplayMetrics().heightPixels;
+                        video_view_width=(int)(video_width*(video_view_height*1.0/video_height));
+                    }
+                    //video_view_height=405;
+                    layoutParams.width=video_view_width;
+                    layoutParams.height=video_view_height;
+                    Log.d("AppListener","Video size: "+String.valueOf(video_view_width)+" "+String.valueOf(video_view_height));
+                    int x,y;
+                    if(wallpaper_config.getString("position").equals("left-top"))
+                    {
+                        x=y=0;
+                    }
+                    else
+                    {
+                        if(wallpaper_config.getString("fill_method").equals("left-right"))
+                        {
+                            x=0;
+                            y=this.getResources().getDisplayMetrics().heightPixels-video_view_height;
+                        }
+                        else
+                        {
+                            x=this.getResources().getDisplayMetrics().widthPixels-video_view_width;
+                            y=0;
+                        }
+                    }
+                    layoutParams.x=x;
+                    layoutParams.y=y;
+                    Log.d("AppListener","Image position: "+String.valueOf(x)+" "+String.valueOf(y));
+                    WallpaperService.video_view.setLayoutParams(layoutParams);
+                }
             }
             else
             {
                 WallpaperService.image_view.setAlpha(0f);
+                WallpaperService.video_view.setAlpha(0f);
+                WallpaperService.video_view.pause();
             }
             Log.d("AppListener",WallpaperService.info_text_view.getText().toString());
         } catch (Exception e) {
