@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Environment;
@@ -196,28 +197,28 @@ public class AppListener extends AccessibilityService {
                     String wallpaper_path=wallpaper_config.getString("wallpaper_path");
                     WallpaperService.image_view.setAlpha(0f);
                     WallpaperService.video_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
-                    int video_size[]={0,0};
                     WallpaperService.video_view.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
                         public void onPrepared(MediaPlayer mp) {
                             mp.start();
                             mp.setLooping(true);
                             mp.setVolume(0f,0f);
-                            video_size[0]=mp.getVideoWidth();
-                            video_size[1]=mp.getVideoHeight();
-                            Log.d("AppListenerTest",String.valueOf(video_size[0])+" "+String.valueOf(video_size[1]));
                         }
                     });
+                    MediaMetadataRetriever retriever = new MediaMetadataRetriever();
                     if(wallpaper_path.equals("none"))
                     {
                         WallpaperService.video_view.setVideoURI(Uri.parse("android.resource://" + getPackageName() + "/raw/default_video"));
+                        retriever.setDataSource(this,Uri.parse("android.resource://" + getPackageName() + "/raw/default_video"));
                     }
                     else
                     {
                         WallpaperService.video_view.setVideoURI(Uri.parse("file://"+wallpaper_path));
+                        retriever.setDataSource(this,Uri.parse("file://"+wallpaper_path));
                     }
                     AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) WallpaperService.video_view.getLayoutParams();
-                    int video_width=video_size[0],video_height=video_size[1];
+                    int video_width=Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH));
+                    int video_height=Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
                     int video_view_width,video_view_height;
                     if(wallpaper_config.getString("fill_method").equals("left-right"))
                     {
@@ -229,7 +230,6 @@ public class AppListener extends AccessibilityService {
                         video_view_height=this.getResources().getDisplayMetrics().heightPixels;
                         video_view_width=(int)(video_width*(video_view_height*1.0/video_height));
                     }
-                    //video_view_height=405;
                     layoutParams.width=video_view_width;
                     layoutParams.height=video_view_height;
                     Log.d("AppListener","Video size: "+String.valueOf(video_view_width)+" "+String.valueOf(video_view_height));
