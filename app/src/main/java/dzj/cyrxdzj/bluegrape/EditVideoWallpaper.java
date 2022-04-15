@@ -266,6 +266,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+            save_without_dialog();
             this.finish();
             return true;
         }
