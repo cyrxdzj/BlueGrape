@@ -35,21 +35,8 @@ public class MyWallpaper extends AppCompatActivity {
     private ArrayAdapter<String> adapter;
     private ListView my_wallpaper_list;
     private CommonUtil util=new CommonUtil();
-    public String read_file(String path) throws IOException {
-        FileReader reader=new FileReader(new File(path));
-        char[] temp=new char[500];
-        reader.read(temp);
-        reader.close();
-        return new String(temp);
-    }
-    public void write_file(String path,String content) throws IOException
-    {
-        FileWriter writer=new FileWriter(new File(path));
-        writer.write(content);
-        writer.close();
-    }
     private String get_wallpaper_name(String wallpaper_id) throws IOException, JSONException {
-        String config_str = read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+        String config_str = util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
         JSONObject config=new JSONObject(config_str);
         return URLDecoder.decode(config.getString("name"),"UTF-8");
     }
@@ -133,7 +120,7 @@ public class MyWallpaper extends AppCompatActivity {
             fobj.mkdirs();
             fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
             fobj.createNewFile();
-            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json","{\n"+
+            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json","{\n"+
                     "\t\"name\":\""+ URLEncoder.encode("新建壁纸","UTF-8")+"\",\n"+
                     "\t\"alpha\":25,\n"+
                     "\t\"fill_method\":\"left-right\",\n"+
@@ -163,7 +150,7 @@ public class MyWallpaper extends AppCompatActivity {
             fobj.createNewFile();
             fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/video_wallpaper");
             fobj.createNewFile();
-            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json","{\n"+
+            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json","{\n"+
                     "\t\"name\":\""+ URLEncoder.encode("新建视频壁纸","UTF-8")+"\",\n"+
                     "\t\"wallpaper_path\":\"none\",\n"+
                     "\t\"alpha\":25,\n"+

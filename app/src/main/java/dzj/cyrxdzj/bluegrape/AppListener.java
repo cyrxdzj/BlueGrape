@@ -30,13 +30,7 @@ import java.io.IOException;
 public class AppListener extends AccessibilityService {
 
     private String last_package_name="";
-    public String read_file(String path) throws IOException {
-        FileReader reader=new FileReader(new File(path));
-        char[] temp=new char[500];
-        reader.read(temp);
-        reader.close();
-        return new String(temp);
-    }
+    private CommonUtil util=new CommonUtil();
     public static boolean isInputMethodApp(Context context, String strPkgName) {
         PackageManager pkm = context.getPackageManager();
         boolean bIsIME = false;
@@ -125,7 +119,7 @@ public class AppListener extends AccessibilityService {
         }
         Log.d("AppListener","Wallpaper Service ready");
         try {
-            String config_str=read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
+            String config_str=util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
             JSONArray config=new JSONArray(config_str);
             String wallpaper_id=null;
             for(int i=0;i<config.length();i++)
@@ -145,7 +139,7 @@ public class AppListener extends AccessibilityService {
             if(wallpaper_id!=null&&!MainActivity.is_pause)
             {
                 Log.d("AppListener","Use wallpaper ID: "+wallpaper_id);
-                String wallpaper_config_str=read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+                String wallpaper_config_str=util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
                 JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
                 WallpaperService.image_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
                 WallpaperService.image_view.setImageResource(R.drawable.default_image);

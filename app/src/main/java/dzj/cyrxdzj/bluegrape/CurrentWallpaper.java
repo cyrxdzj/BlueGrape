@@ -33,23 +33,11 @@ public class CurrentWallpaper extends AppCompatActivity {
     private List<String> wallpaper_list=new ArrayList<String>(),wallpaper_name_list=new ArrayList<String>();
     private ListView apply_list;
     private JSONArray current_wallpaper;
+    private CommonUtil util=new CommonUtil();
     private String get_wallpaper_name(String wallpaper_id) throws IOException, JSONException {
-        String config_str = read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+        String config_str = util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
         JSONObject config=new JSONObject(config_str);
         return URLDecoder.decode(config.getString("name"),"UTF-8");
-    }
-    public String read_file(String path) throws IOException {
-        FileReader reader=new FileReader(new File(path));
-        char[] temp=new char[500];
-        reader.read(temp);
-        reader.close();
-        return new String(temp);
-    }
-    public void write_file(String path,String content) throws IOException
-    {
-        FileWriter writer=new FileWriter(new File(path));
-        writer.write(content);
-        writer.close();
     }
     public void show_info_dialog(String title,String content)
     {
@@ -89,7 +77,7 @@ public class CurrentWallpaper extends AppCompatActivity {
         try {
             wallpaper_list.clear();
             wallpaper_name_list.clear();
-            current_wallpaper=new JSONArray(read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
+            current_wallpaper=new JSONArray(util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
             String result="";
             boolean is_add=false;
             result+="[";
@@ -120,7 +108,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             }
             result+="]";
             Log.d("CurrentWallpaper","Config content:\n"+result);
-            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
+            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -130,7 +118,7 @@ public class CurrentWallpaper extends AppCompatActivity {
         try {
             wallpaper_list.clear();
             wallpaper_name_list.clear();
-            current_wallpaper=new JSONArray(read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
+            current_wallpaper=new JSONArray(util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
             String result="";
             boolean is_add=false;
             result+="[";
@@ -160,7 +148,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             }
             result+="]";
             Log.d("CurrentWallpaper","Config content:\n"+result);
-            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
+            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }

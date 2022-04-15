@@ -33,12 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private Intent WallpaperServiceIntent,AppListenerIntent;
     private AlertDialog dialog1,dialog2;
     public static boolean is_pause=false;
-    public void write_file(String path,String content) throws IOException
-    {
-        FileWriter writer=new FileWriter(new File(path));
-        writer.write(content);
-        writer.close();
-    }
+    private CommonUtil util=new CommonUtil();
     public static boolean isAccessibilitySettingsOn(Context context) {
         AccessibilityManager accessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
         return accessibilityManager.isEnabled();
@@ -139,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
         {
             try {
                 file.createNewFile();
-                write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json","[]");
+                util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json","[]");
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);

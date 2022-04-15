@@ -37,19 +37,7 @@ public class ApplyWallpaper extends AppCompatActivity {
     public JSONArray current_wallpaper;
     public List<App> package_array=new ArrayList<App>();
     public String wallpaper_id,wallpaper_name;
-    public String read_file(String path) throws IOException {
-        FileReader reader=new FileReader(new File(path));
-        char[] temp=new char[500];
-        reader.read(temp);
-        reader.close();
-        return new String(temp);
-    }
-    public void write_file(String path,String content) throws IOException
-    {
-        FileWriter writer=new FileWriter(new File(path));
-        writer.write(content);
-        writer.close();
-    }
+    private CommonUtil util=new CommonUtil();
     public static boolean isInputMethodApp(Context context, String strPkgName) {
         PackageManager pkm = context.getPackageManager();
         boolean bIsIME = false;
@@ -84,7 +72,7 @@ public class ApplyWallpaper extends AppCompatActivity {
         wallpaper_name=intent.getStringExtra("wallpaper_name");
         this.setTitle("将壁纸 "+wallpaper_name+" 应用到：");
         try {
-            current_wallpaper=new JSONArray(read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
+            current_wallpaper=new JSONArray(util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
             JSONArray now_apps=new JSONArray("[]");
             for(int i=0;i<current_wallpaper.length();i++)
             {
@@ -227,7 +215,7 @@ public class ApplyWallpaper extends AppCompatActivity {
             }
             result+="]";
             Log.d("ApplyWallpaper","Config content:\n"+result);
-            write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
+            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
             Toast.makeText(this,R.string.apply_successful,Toast.LENGTH_SHORT).show();
             finish();
         } catch (JSONException | IOException e) {
