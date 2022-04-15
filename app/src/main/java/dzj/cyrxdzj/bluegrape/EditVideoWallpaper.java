@@ -93,7 +93,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
         }
         Intent intent=getIntent();
         wallpaper_id=intent.getStringExtra("wallpaper_id");
-        Log.d("EditWallpaper","This wallpaper will be edited: "+wallpaper_id);
+        Log.d("EditVideoWallpaper","This wallpaper will be edited: "+wallpaper_id);
         try {
             //初始化配置
             String config_str = util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
@@ -148,32 +148,51 @@ public class EditVideoWallpaper extends AppCompatActivity {
         }
         else
         {
-            wallpaper_view.setVideoPath(wallpaper_path);
+            //wallpaper_view.setVideoPath(wallpaper_path);
+            wallpaper_view.setVideoURI(Uri.parse("file://"+wallpaper_path));
         }
     }
     public void choose_video(View view)
     {
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("video/");
+        intent.setType("video/*");
         startActivityForResult(intent,CHOOSE_VIDEO);
     }
     private String getVideoPath(Uri uri)
     {
-        Cursor cursor = getContentResolver().query(uri, null, null,
-                null, null);
-        cursor.moveToFirst();
-        // String imgNo = cursor.getString(0); // 图片编号
-        String v_path = cursor.getString(1); // 图片文件路径
-        String v_name = cursor.getString(3); // 图片文件名
-        return v_path+"/"+v_name;
+        Log.d("EditVideoWallpaper", String.valueOf(uri));
+        String v_path=null;
+        try {
+            Cursor cursor = getContentResolver().query(uri, null, null,
+                    null, null);
+            if(cursor!=null)
+            {
+                cursor.moveToFirst();
+                v_path = cursor.getString(1);
+                cursor.close();
+            }
+            else
+            {
+                v_path=String.valueOf(uri).replace("file://","");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return v_path;
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==CHOOSE_VIDEO&&resultCode==RESULT_OK)
         {
-            wallpaper_path=getVideoPath(data.getData());
-            Log.d("EditWallpaper","Video path is: "+wallpaper_path);
+            String path=getVideoPath(data.getData());
+            Log.d("EditVideoWallpaper","Video path is: "+wallpaper_path);
+            if(path==null)
+            {
+                show_info_dialog("",getString(R.string.choose_video_failed));
+                return;
+            }
+            wallpaper_path=path;
             refresh_video();
         }
     }
@@ -182,11 +201,11 @@ public class EditVideoWallpaper extends AppCompatActivity {
         try {
             String save_str = "{\n"+
                     "\t\"name\":\""+ URLEncoder.encode(wallpaper_name_editor.getText().toString(),"UTF-8")+"\",\n"+
-                    "\t\"path\":\""+wallpaper_path+"\",\n"+
+                    "\t\"wallpaper_path\":\""+wallpaper_path+"\",\n"+
                     "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
                     "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
                     "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
-            Log.d("EditWallpaper","Config content:\n"+save_str);
+            Log.d("EditVideoWallpaper","Config content:\n"+save_str);
             util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
 
         } catch (UnsupportedEncodingException e) {
@@ -201,10 +220,11 @@ public class EditVideoWallpaper extends AppCompatActivity {
         try {
             String save_str = "{\n"+
                     "\t\"name\":\""+ URLEncoder.encode(wallpaper_name_editor.getText().toString(),"UTF-8")+"\",\n"+
+                    "\t\"wallpaper_path\":\""+wallpaper_path+"\",\n"+
                     "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
                     "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
                     "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
-            Log.d("EditWallpaper","Config content:\n"+save_str);
+            Log.d("EditVideoWallpaper","Config content:\n"+save_str);
             util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
 
         } catch (UnsupportedEncodingException e) {
@@ -228,7 +248,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
     }
     public void delete()
     {
-        Log.d("EditWallpaper","This wallpaper will be deleted");
+        Log.d("EditVideoWallpaper","This wallpaper will be deleted");
         File file_obj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
         delete_dir(file_obj);
         finish();

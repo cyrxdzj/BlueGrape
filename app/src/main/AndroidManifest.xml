@@ -20,9 +20,6 @@
         android:roundIcon="@mipmap/bluegrape"
         android:supportsRtl="true"
         android:theme="@style/Theme.BlueGrape">
-        <activity
-            android:name=".EditVideoWallpaper"
-            android:exported="false" />
 
         <service
             android:name=".AppListener"
@@ -82,6 +79,15 @@
         <activity
             android:name=".EditWallpaper"
             android:label="@string/edit_wallpaper"
+            android:parentActivityName=".MyWallpaper"
+            android:requestLegacyExternalStorage="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MyWallpaper" />
+        </activity>
+        <activity
+            android:name=".EditVideoWallpaper"
+            android:label="@string/edit_video_wallpaper"
             android:parentActivityName=".MyWallpaper"
             android:requestLegacyExternalStorage="true">
             <meta-data
