@@ -161,7 +161,6 @@ public class ApplyWallpaper extends AppCompatActivity {
         }
         try {
             List<Pair<String,String[]>> temp_list=new ArrayList<Pair<String,String[]>>();
-            ArrayList<String>temp=new ArrayList<String>();
             String result="";
             if(choose_apps.size()!=0)
             {
@@ -171,6 +170,7 @@ public class ApplyWallpaper extends AppCompatActivity {
             {
                 if(!current_wallpaper.getJSONObject(i).getString("wallpaper_id").equals(wallpaper_id))
                 {
+                    ArrayList<String>temp=new ArrayList<String>();
                     for(int j=0;j<current_wallpaper.getJSONObject(i).getJSONArray("apps").length();j++)
                     {
                         boolean flag=true;
