@@ -219,6 +219,13 @@ public class AppListener extends AccessibilityService {
                     AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) WallpaperService.video_view.getLayoutParams();
                     int video_width=Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH));
                     int video_height=Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
+                    Log.d("AppListenerTest",retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION));
+                    if(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION).equals("90"))
+                    {
+                        int t=video_width;
+                        video_width=video_height;
+                        video_height=t;
+                    }
                     int video_view_width,video_view_height;
                     if(wallpaper_config.getString("fill_method").equals("left-right"))
                     {
@@ -232,6 +239,7 @@ public class AppListener extends AccessibilityService {
                     }
                     layoutParams.width=video_view_width;
                     layoutParams.height=video_view_height;
+                    Log.d("AppListener","Video raw size: "+String.valueOf(video_width)+" "+String.valueOf(video_height));
                     Log.d("AppListener","Video size: "+String.valueOf(video_view_width)+" "+String.valueOf(video_view_height));
                     int x,y;
                     if(wallpaper_config.getString("position").equals("left-top"))

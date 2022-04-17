@@ -2,6 +2,7 @@ package dzj.cyrxdzj.bluegrape;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -12,6 +13,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -180,12 +182,14 @@ public class EditVideoWallpaper extends AppCompatActivity {
         }
         return v_path;
     }
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==CHOOSE_VIDEO&&resultCode==RESULT_OK)
         {
-            String path=getVideoPath(data.getData());
+            //String path=getVideoPath(data.getData());
+            String path=GetPathFromUri.getPath(this,data.getData());
             Log.d("EditVideoWallpaper","Video path is: "+wallpaper_path);
             if(path==null)
             {
