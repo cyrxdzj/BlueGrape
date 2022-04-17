@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.VideoView;
 
 import androidx.annotation.RequiresApi;
 

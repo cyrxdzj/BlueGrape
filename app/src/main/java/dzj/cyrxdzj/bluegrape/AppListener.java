@@ -21,14 +21,10 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
-import android.widget.VideoView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class AppListener extends AccessibilityService {
 

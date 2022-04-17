@@ -3,10 +3,8 @@ package dzj.cyrxdzj.bluegrape;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import android.app.ActivityManager;
 import android.app.AlertDialog;
 import android.app.AppOpsManager;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,9 +22,7 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {

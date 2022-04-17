@@ -24,9 +24,6 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
