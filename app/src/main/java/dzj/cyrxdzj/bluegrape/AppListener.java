@@ -110,7 +110,14 @@ public class AppListener extends AccessibilityService {
     }
     public void refresh()
     {
-        WallpaperService.info_text_view.setText("");
+        try
+        {
+            WallpaperService.info_text_view.setText("");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
         Log.d("AppListener","Now package name: "+this.last_package_name);
         if(!WallpaperService.ready)
         {
@@ -215,7 +222,6 @@ public class AppListener extends AccessibilityService {
                     AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) WallpaperService.video_view.getLayoutParams();
                     int video_width=Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH));
                     int video_height=Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
-                    Log.d("AppListenerTest",retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION));
                     if(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION).equals("90"))
                     {
                         int t=video_width;
@@ -267,9 +273,15 @@ public class AppListener extends AccessibilityService {
                 WallpaperService.video_view.setAlpha(0f);
                 WallpaperService.video_view.pause();
             }
-            Log.d("AppListener",WallpaperService.info_text_view.getText().toString());
         } catch (Exception e) {
-            WallpaperService.info_text_view.setText(R.string.info_text_load_failed);
+            try
+            {
+                WallpaperService.info_text_view.setText(R.string.info_text_load_failed);
+            }
+            catch (Exception ex)
+            {
+                ex.printStackTrace();
+            }
             e.printStackTrace();
         }
     }
