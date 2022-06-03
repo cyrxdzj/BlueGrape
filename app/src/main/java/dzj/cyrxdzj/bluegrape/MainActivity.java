@@ -85,8 +85,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        LogUtils.getConfig().setLogHeadSwitch(false);
-        LogUtils.getConfig().setBorderSwitch(false);
+        LogUtils.Config log_config=LogUtils.getConfig();
+        log_config.setLogHeadSwitch(false);
+        log_config.setBorderSwitch(false);
         try {
             String[] PERMISSIONS_STORAGE = {
                 "android.permission.READ_EXTERNAL_STORAGE",
@@ -104,6 +105,9 @@ public class MainActivity extends AppCompatActivity {
         {
             folder.mkdirs();
         }
+        log_config.setDir(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/log");
+        log_config.setFilePrefix("BlueGrape-Log-"+BuildConfig.VERSION_NAME);
+        log_config.setLog2FileSwitch(true);
         File file=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
         LogUtils.dTag("MainActivity","Files will storage at here: "+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
         if(!file.exists())
