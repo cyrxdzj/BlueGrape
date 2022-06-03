@@ -1,5 +1,6 @@
 package dzj.cyrxdzj.bluegrape;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -20,6 +21,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
+
+import com.blankj.utilcode.util.PermissionUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -141,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
         startService(WallpaperServiceIntent);
         startService(AppListenerIntent);
     }
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onResume()
     {
@@ -149,15 +153,18 @@ public class MainActivity extends AppCompatActivity {
         check_permission();
         update_pause_status();
     }
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void check_permission()
     {
         if(!isAccessibilitySettingsOn(this))
+        //if(!PermissionUtils.isGranted("android.permission.BIND_ACCESSIBILITY_SERVICE"))
         {
             Log.d("MainActivity","Accessibility settings off");
             show_ask_permission_dialog();
             return;
         }
-        if(!checkFloatPermission(this))
+        //if(!checkFloatPermission(this))
+        if(!PermissionUtils.isGrantedDrawOverlays())
         {
             Log.d("MainActivity","Float settings off");
             show_ask_permission2_dialog();
