@@ -107,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
         }
         log_config.setDir(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/log");
         log_config.setFilePrefix("BlueGrape-Log-"+BuildConfig.VERSION_NAME);
+        log_config.addFileExtraHead("Build Time",BuildConfig.BUILD_TIME);
+        log_config.addFileExtraHead("Build Type",BuildConfig.BUILD_TYPE);
         log_config.setLog2FileSwitch(true);
         File file=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
         LogUtils.dTag("MainActivity","Files will storage at here: "+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
