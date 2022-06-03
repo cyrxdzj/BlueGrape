@@ -17,11 +17,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.Settings;
-import android.util.Log;
+;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 
 import java.io.File;
@@ -36,32 +37,6 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isAccessibilitySettingsOn(Context context) {
         AccessibilityManager accessibilityManager = (AccessibilityManager) context.getSystemService(Context.ACCESSIBILITY_SERVICE);
         return accessibilityManager.isEnabled();
-    }
-    public static boolean checkFloatPermission(Context context) {
-        try {
-            Object object = context.getSystemService(Context.APP_OPS_SERVICE);
-            if (object == null) {
-                return false;
-            }
-            Class localClass = object.getClass();
-            Class[] arrayOfClass = new Class[3];
-            arrayOfClass[0] = Integer.TYPE;
-            arrayOfClass[1] = Integer.TYPE;
-            arrayOfClass[2] = String.class;
-            Method method = localClass.getMethod("checkOp", arrayOfClass);
-            if (method == null) {
-                return false;
-            }
-            Object[] arrayOfObject1 = new Object[3];
-            arrayOfObject1[0] = 24;
-            arrayOfObject1[1] = Binder.getCallingUid();
-            arrayOfObject1[2] = context.getPackageName();
-            int m = ((Integer) method.invoke(object, arrayOfObject1));
-            return m == AppOpsManager.MODE_ALLOWED;
-        } catch (Exception ex) {
-
-        }
-        return false;
     }
     public void show_ask_permission_dialog()
     {
@@ -110,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        LogUtils.getConfig().setLogHeadSwitch(false);
+        LogUtils.getConfig().setBorderSwitch(false);
         try {
             String[] PERMISSIONS_STORAGE = {
                 "android.permission.READ_EXTERNAL_STORAGE",
@@ -128,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             folder.mkdirs();
         }
         File file=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
-        Log.d("MainActivity","Files will storage at here: "+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
+        LogUtils.dTag("MainActivity","Files will storage at here: "+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
         if(!file.exists())
         {
             try {
@@ -149,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume()
     {
         super.onResume();
-        Log.d("MainActivity","Activity resume");
+        LogUtils.dTag("MainActivity","Activity resume");
         check_permission();
         update_pause_status();
     }
@@ -159,19 +136,19 @@ public class MainActivity extends AppCompatActivity {
         if(!isAccessibilitySettingsOn(this))
         //if(!PermissionUtils.isGranted("android.permission.BIND_ACCESSIBILITY_SERVICE"))
         {
-            Log.d("MainActivity","Accessibility settings off");
+            LogUtils.dTag("MainActivity","Accessibility settings off");
             show_ask_permission_dialog();
             return;
         }
         //if(!checkFloatPermission(this))
         if(!PermissionUtils.isGrantedDrawOverlays())
         {
-            Log.d("MainActivity","Float settings off");
+            LogUtils.dTag("MainActivity","Float settings off");
             show_ask_permission2_dialog();
         }
         else
         {
-            Log.d("MainActivity","Float settings on");
+            LogUtils.dTag("MainActivity","Float settings on");
         }
     }
     private void update_pause_status()

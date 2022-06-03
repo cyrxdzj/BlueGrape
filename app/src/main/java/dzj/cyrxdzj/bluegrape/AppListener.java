@@ -16,11 +16,13 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.Settings;
-import android.util.Log;
+;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
+
+import com.blankj.utilcode.util.LogUtils;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -60,8 +62,8 @@ public class AppListener extends AccessibilityService {
         String packageName = event.getPackageName().toString();
         String activityName=((ActivityManager)getSystemService(this.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getClassName();
         int eventType = event.getEventType();
-        Log.d("AppListener", "Event infomation: "+"packageName = " + packageName+" eventType = "+eventType + " eventTypeByString = " + AccessibilityEvent.eventTypeToString(eventType));
-        Log.d("AppListener", "Now Activity class name: "+activityName);
+        LogUtils.dTag("AppListener", "Event infomation: "+"packageName = " + packageName+" eventType = "+eventType + " eventTypeByString = " + AccessibilityEvent.eventTypeToString(eventType));
+        LogUtils.dTag("AppListener", "Now Activity class name: "+activityName);
         if(isInputMethodApp(this,packageName))
         {
             return;
@@ -83,7 +85,7 @@ public class AppListener extends AccessibilityService {
 
     @Override
     public boolean onUnbind(Intent intent) {
-        Log.d("AppListener","Close.");
+        LogUtils.dTag("AppListener","Close.");
         Context context=this;
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setMessage(getString(R.string.accessibility_permission_requests_on_close))
@@ -118,12 +120,12 @@ public class AppListener extends AccessibilityService {
         {
             e.printStackTrace();
         }
-        Log.d("AppListener","Now package name: "+this.last_package_name);
+        LogUtils.dTag("AppListener","Now package name: "+this.last_package_name);
         if(!WallpaperService.ready)
         {
             return;
         }
-        Log.d("AppListener","Wallpaper Service ready");
+        LogUtils.dTag("AppListener","Wallpaper Service ready");
         try {
             String config_str=util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
             JSONArray config=new JSONArray(config_str);
@@ -136,7 +138,7 @@ public class AppListener extends AccessibilityService {
                 {
                     if(apps.getString(j).equals(this.last_package_name))
                     {
-                        Log.d("AppListener","Config wallpaper ID: "+now_config.getString("wallpaper_id"));
+                        LogUtils.dTag("AppListener","Config wallpaper ID: "+now_config.getString("wallpaper_id"));
                         wallpaper_id=now_config.getString("wallpaper_id");
                         break;
                     }
@@ -144,7 +146,7 @@ public class AppListener extends AccessibilityService {
             }
             if(wallpaper_id!=null&&!MainActivity.is_pause)
             {
-                Log.d("AppListener","Use wallpaper ID: "+wallpaper_id);
+                LogUtils.dTag("AppListener","Use wallpaper ID: "+wallpaper_id);
                 String wallpaper_config_str=util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
                 JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
                 if(!util.is_video(wallpaper_id))
@@ -170,7 +172,7 @@ public class AppListener extends AccessibilityService {
                     }
                     layoutParams.width=image_view_width;
                     layoutParams.height=image_view_height;
-                    Log.d("AppListener","Image size: "+String.valueOf(image_view_width)+" "+String.valueOf(image_view_height));
+                    LogUtils.dTag("AppListener","Image size: "+String.valueOf(image_view_width)+" "+String.valueOf(image_view_height));
                     int x,y;
                     if(wallpaper_config.getString("position").equals("left-top"))
                     {
@@ -191,7 +193,7 @@ public class AppListener extends AccessibilityService {
                     }
                     layoutParams.x=x;
                     layoutParams.y=y;
-                    Log.d("AppListener","Image position: "+String.valueOf(x)+" "+String.valueOf(y));
+                    LogUtils.dTag("AppListener","Image position: "+String.valueOf(x)+" "+String.valueOf(y));
                     WallpaperService.image_view.setLayoutParams(layoutParams);
                     WallpaperService.image_view.setScaleType(ImageView.ScaleType.FIT_XY);
                 }
@@ -241,8 +243,8 @@ public class AppListener extends AccessibilityService {
                     }
                     layoutParams.width=video_view_width;
                     layoutParams.height=video_view_height;
-                    Log.d("AppListener","Video raw size: "+String.valueOf(video_width)+" "+String.valueOf(video_height));
-                    Log.d("AppListener","Video size: "+String.valueOf(video_view_width)+" "+String.valueOf(video_view_height));
+                    LogUtils.dTag("AppListener","Video raw size: "+String.valueOf(video_width)+" "+String.valueOf(video_height));
+                    LogUtils.dTag("AppListener","Video size: "+String.valueOf(video_view_width)+" "+String.valueOf(video_view_height));
                     int x,y;
                     if(wallpaper_config.getString("position").equals("left-top"))
                     {
@@ -263,7 +265,7 @@ public class AppListener extends AccessibilityService {
                     }
                     layoutParams.x=x;
                     layoutParams.y=y;
-                    Log.d("AppListener","Image position: "+String.valueOf(x)+" "+String.valueOf(y));
+                    LogUtils.dTag("AppListener","Image position: "+String.valueOf(x)+" "+String.valueOf(y));
                     WallpaperService.video_view.setLayoutParams(layoutParams);
                 }
             }

@@ -22,7 +22,7 @@ import android.os.Environment;
 import android.os.Looper;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.util.Log;
+;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -30,6 +30,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+
+import com.blankj.utilcode.util.LogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -99,7 +101,7 @@ public class EditWallpaper extends AppCompatActivity {
         }
         Intent intent=getIntent();
         wallpaper_id=intent.getStringExtra("wallpaper_id");
-        Log.d("EditWallpaper","This wallpaper will be edited: "+wallpaper_id);
+        LogUtils.dTag("EditWallpaper","This wallpaper will be edited: "+wallpaper_id);
         try {
             //初始化配置
             String config_str = util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
@@ -188,7 +190,7 @@ public class EditWallpaper extends AppCompatActivity {
                             //如果是file类型的Uri，直接获取图片路径即可
                             imagePath = uri.getPath();
                         }
-                        Log.d("EditWallpaper","Image path is: "+imagePath);
+                        LogUtils.dTag("EditWallpaper","Image path is: "+imagePath);
                         Context context=this;
                         String finalImagePath = imagePath;
                         ProgressDialog loading_dialog = new ProgressDialog(context);
@@ -236,7 +238,7 @@ public class EditWallpaper extends AppCompatActivity {
                     "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
                     "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
                     "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
-            Log.d("EditWallpaper","Config content:\n"+save_str);
+            LogUtils.dTag("EditWallpaper","Config content:\n"+save_str);
             util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
 
         } catch (UnsupportedEncodingException e) {
@@ -254,7 +256,7 @@ public class EditWallpaper extends AppCompatActivity {
                     "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
                     "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
                     "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
-            Log.d("EditWallpaper","Config content:\n"+save_str);
+            LogUtils.dTag("EditWallpaper","Config content:\n"+save_str);
             util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
 
         } catch (UnsupportedEncodingException e) {
@@ -278,7 +280,7 @@ public class EditWallpaper extends AppCompatActivity {
     }
     public void delete()
     {
-        Log.d("EditWallpaper","This wallpaper will be deleted");
+        LogUtils.dTag("EditWallpaper","This wallpaper will be deleted");
         File file_obj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
         delete_dir(file_obj);
         finish();

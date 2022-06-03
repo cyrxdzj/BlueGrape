@@ -7,7 +7,7 @@ import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.util.Log;
+;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 
+import com.blankj.utilcode.util.LogUtils;
 import com.warnyul.android.widget.FastVideoView;
 
 public class WallpaperService extends Service {
@@ -53,7 +54,7 @@ public class WallpaperService extends Service {
         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         layoutParams.x = 0;
         layoutParams.y = 0;
-        Log.d("WallpaperService","Run");
+        LogUtils.dTag("WallpaperService","Run");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -67,7 +68,7 @@ public class WallpaperService extends Service {
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
             ready=true;
-            Log.d("WallpaperService","Ready");
+            LogUtils.dTag("WallpaperService","Ready");
             image_view = new ImageView(this);
             video_view = new FastVideoView(this);
             info_text_view=new TextView(this);

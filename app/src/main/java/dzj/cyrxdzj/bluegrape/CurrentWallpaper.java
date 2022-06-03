@@ -9,12 +9,14 @@ import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
+;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.blankj.utilcode.util.LogUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -82,7 +84,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             for(int i=0;i<current_wallpaper.length();i++)
             {
                 File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
-                Log.d("CurrentWallpaper","This wallpaper will be checked:"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
+                LogUtils.dTag("CurrentWallpaper","This wallpaper will be checked:"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
                 if(fobj.exists())
                 {
                     if(is_add)
@@ -105,7 +107,7 @@ public class CurrentWallpaper extends AppCompatActivity {
                 }
             }
             result+="]";
-            Log.d("CurrentWallpaper","Config content:\n"+result);
+            LogUtils.dTag("CurrentWallpaper","Config content:\n"+result);
             util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -122,7 +124,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             result+="[";
             for(int i=0;i<current_wallpaper.length();i++)
             {
-                Log.d("CurrentWallpaper","This wallpaper will be checked:"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
+                LogUtils.dTag("CurrentWallpaper","This wallpaper will be checked:"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
                 if(!current_wallpaper.getJSONObject(i).getString("wallpaper_id").equals(delete_wallpaper))
                 {
                     if(is_add)
@@ -145,7 +147,7 @@ public class CurrentWallpaper extends AppCompatActivity {
                 }
             }
             result+="]";
-            Log.d("CurrentWallpaper","Config content:\n"+result);
+            LogUtils.dTag("CurrentWallpaper","Config content:\n"+result);
             util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
@@ -170,7 +172,7 @@ public class CurrentWallpaper extends AppCompatActivity {
                     for(int i=0;i<current_wallpaper.getJSONObject(position).getJSONArray("apps").length();i++)
                     {
                         show_info+=context.getPackageManager().getApplicationInfo(current_wallpaper.getJSONObject(position).getJSONArray("apps").getString(i),0).loadLabel(context.getPackageManager()).toString()+"\n";
-                        Log.d("CurrentWallpaper","This APP is using this wallpaper: "+current_wallpaper.getJSONObject(position).getJSONArray("apps").getString(i));
+                        LogUtils.dTag("CurrentWallpaper","This APP is using this wallpaper: "+current_wallpaper.getJSONObject(position).getJSONArray("apps").getString(i));
                     }
                     show_info_dialog("",show_info);
                 }

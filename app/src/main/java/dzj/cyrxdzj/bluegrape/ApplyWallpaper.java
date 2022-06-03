@@ -12,7 +12,7 @@ import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
+;
 import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,6 +20,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.blankj.utilcode.util.LogUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -123,7 +125,7 @@ public class ApplyWallpaper extends AppCompatActivity {
             apps.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Log.d("ApplyWallpaper","Clicked APP id: "+package_array.get(position).package_id);
+                    LogUtils.dTag("ApplyWallpaper","Clicked APP id: "+package_array.get(position).package_id);
                     if(package_array.get(position).is_apply)
                     {
                         package_array.get(position).is_apply=false;
@@ -211,7 +213,7 @@ public class ApplyWallpaper extends AppCompatActivity {
                 result+=",\"wallpaper_id\":\""+temp_list.get(i).first+"\"}";
             }
             result+="]";
-            Log.d("ApplyWallpaper","Config content:\n"+result);
+            LogUtils.dTag("ApplyWallpaper","Config content:\n"+result);
             util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
             Toast.makeText(this,R.string.apply_successful,Toast.LENGTH_SHORT).show();
             finish();

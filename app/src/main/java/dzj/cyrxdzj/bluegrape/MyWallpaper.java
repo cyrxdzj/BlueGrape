@@ -8,12 +8,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Environment;
-import android.util.Log;
+;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import com.blankj.utilcode.util.LogUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -86,7 +88,7 @@ public class MyWallpaper extends AppCompatActivity {
         my_wallpaper_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d("MyWallpaper","This wallpaper was clicked: "+wallpaper_list[position]);
+                LogUtils.dTag("MyWallpaper","This wallpaper was clicked: "+wallpaper_list[position]);
                 Intent intent=new Intent();
                 if(util.is_video(wallpaper_list[position]))
                 {
@@ -105,7 +107,7 @@ public class MyWallpaper extends AppCompatActivity {
     public void onResume()
     {
         super.onResume();
-        Log.d("MyWallpaper","Activity resume");
+        LogUtils.dTag("MyWallpaper","Activity resume");
         refresh_list();
     }
     public void new_wallpaper(View view)
@@ -113,7 +115,7 @@ public class MyWallpaper extends AppCompatActivity {
         try {
             Date d=new Date();
             String wallpaper_id="wallpaper-"+d.getTime();
-            Log.d("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
+            LogUtils.dTag("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
             File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
             fobj.mkdirs();
             fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
@@ -141,7 +143,7 @@ public class MyWallpaper extends AppCompatActivity {
         try {
             Date d=new Date();
             String wallpaper_id="wallpaper-"+d.getTime();
-            Log.d("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
+            LogUtils.dTag("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
             File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
             fobj.mkdirs();
             fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
