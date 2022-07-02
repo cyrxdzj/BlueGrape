@@ -88,6 +88,12 @@ public class MainActivity extends AppCompatActivity {
         LogUtils.Config log_config=LogUtils.getConfig();
         log_config.setLogHeadSwitch(false);
         log_config.setBorderSwitch(false);
+        log_config.setDir(getCacheDir().getAbsolutePath()+"/log");
+        log_config.setFilePrefix("BlueGrape-Log-"+BuildConfig.VERSION_NAME);
+        log_config.addFileExtraHead("Build Time",BuildConfig.BUILD_TIME);
+        log_config.addFileExtraHead("Build Type",BuildConfig.BUILD_TYPE);
+        log_config.setSaveDays(30);
+        log_config.setLog2FileSwitch(true);
         try {
             String[] PERMISSIONS_STORAGE = {
                 "android.permission.READ_EXTERNAL_STORAGE",
@@ -105,11 +111,7 @@ public class MainActivity extends AppCompatActivity {
         {
             folder.mkdirs();
         }
-        log_config.setDir(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/log");
-        log_config.setFilePrefix("BlueGrape-Log-"+BuildConfig.VERSION_NAME);
-        log_config.addFileExtraHead("Build Time",BuildConfig.BUILD_TIME);
-        log_config.addFileExtraHead("Build Type",BuildConfig.BUILD_TYPE);
-        log_config.setLog2FileSwitch(true);
+        //LogUtils.dTag("MainActivityTest",getCacheDir().getAbsolutePath());
         File file=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
         LogUtils.dTag("MainActivity","Files will storage at here: "+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
         if(!file.exists())
