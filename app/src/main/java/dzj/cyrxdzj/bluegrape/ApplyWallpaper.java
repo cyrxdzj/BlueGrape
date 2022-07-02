@@ -17,7 +17,9 @@ import android.util.Pair;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -70,6 +72,19 @@ public class ApplyWallpaper extends AppCompatActivity {
         wallpaper_id=intent.getStringExtra("wallpaper_id");
         wallpaper_name=intent.getStringExtra("wallpaper_name");
         this.setTitle("将壁纸 "+wallpaper_name+" 应用到：");
+        refresh_list(false);
+        Switch show_system_app_switch=(Switch) findViewById(R.id.show_system_app);
+        show_system_app_switch.setOnCheckedChangeListener(
+                new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        refresh_list(isChecked);
+                    }
+                }
+        );
+    }
+    private void refresh_list(boolean show_system_app)
+    {
         try {
             current_wallpaper=new JSONArray(util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
             JSONArray now_apps=new JSONArray("[]");
@@ -81,10 +96,10 @@ public class ApplyWallpaper extends AppCompatActivity {
                 }
             }
             List<PackageInfo> package_list = this.getPackageManager().getInstalledPackages(0);
-            //List<String> package_id_array=new ArrayList<String>(),package_name=new ArrayList<String>();
+            package_array.clear();
             for(PackageInfo p:package_list)
             {
-                if((p.applicationInfo.flags&ApplicationInfo.FLAG_SYSTEM)!=0||isInputMethodApp(this,p.packageName))
+                if((p.applicationInfo.flags&ApplicationInfo.FLAG_SYSTEM)!=0&&(!show_system_app))
                 {
                     continue;
                 }
