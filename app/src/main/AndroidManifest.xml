@@ -20,6 +20,9 @@
         android:roundIcon="@mipmap/bluegrape"
         android:supportsRtl="true"
         android:theme="@style/Theme.BlueGrape">
+        <activity
+            android:name=".EditHtmlWallpaper"
+            android:exported="false" />
 
         <service
             android:name=".AppListener"

@@ -11,6 +11,7 @@ import android.provider.Settings;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebView;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ public class WallpaperService extends Service {
     public static AbsoluteLayout layout;
     public static ImageView image_view;
     public static FastVideoView video_view;
+    public static WebView html_view;
     public static TextView info_text_view;
     public static boolean ready=false;
     @Override
@@ -71,13 +73,13 @@ public class WallpaperService extends Service {
             LogUtils.dTag("WallpaperService","Ready");
             image_view = new ImageView(this);
             video_view = new FastVideoView(this);
+            html_view = new WebView(this);
             info_text_view=new TextView(this);
             info_text_view.setTextColor(Color.argb(255,0,0,255));
-            //info_text_view.setText("Hello");
             layout=new AbsoluteLayout(this);
-            //image_view.setImageResource(R.drawable.default_image);
             layout.addView(image_view);
             layout.addView(video_view);
+            layout.addView(html_view);
             layout.addView(info_text_view);
             windowManager.addView(layout, layoutParams);
         }

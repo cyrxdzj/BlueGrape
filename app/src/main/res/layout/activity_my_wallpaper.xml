@@ -28,6 +28,14 @@
             android:layout_weight="1"
             android:onClick="new_video_wallpaper"
             android:text="@string/new_video_wallpaper" />
+
+        <Button
+            android:id="@+id/new_html_wallpaper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="new_html_wallpaper"
+            android:text="@string/new_html_wallpaper" />
     </LinearLayout>
 
     <ListView

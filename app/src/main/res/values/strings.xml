@@ -7,9 +7,11 @@
     <string name="continue_running">继续运行</string>
     <string name="stop_running">停止运行</string>
     <string name="main_page_text">BlueGrape使用“无障碍”权限检测当前运行的应用程序以决定播放何种壁纸，但这是一个较为高级的权限，Android系统可能会时不时关闭它。当权限关闭时，BlueGrape会弹出弹窗。不便之处，敬请谅解。</string>
-    <string name="new_wallpaper">新建壁纸</string>
+    <string name="new_wallpaper">新建图片壁纸</string>
     <string name="new_video_wallpaper">新建视频壁纸</string>
+    <string name="new_html_wallpaper">新建HTML壁纸</string>
     <string name="creating_new_wallpaper">正在新建</string>
+    <string name="load_failed">在加载壁纸时出现错误</string>
     <string name="edit_wallpaper">编辑壁纸</string>
     <string name="edit_video_wallpaper">编辑视频壁纸</string>
     <string name="save_wallpaper">保存壁纸</string>
@@ -27,6 +29,7 @@
     <string name="fill_method">壁纸填充方法</string>
     <string name="position">壁纸位置</string>
     <string name="save_successfully">保存成功</string>
+    <string name="save_failed">在保存时出现了错误</string>
     <string name="confirm_apply">确认应用</string>
     <string name="show_system_app">显示系统应用</string>
     <string name="apply_successful">应用成功</string>
@@ -44,4 +47,10 @@
     <string name="reward_and_contribution">赞赏与贡献</string>
     <string name="info_text_load_failed">壁纸加载失败</string>
     <string name="gif_unsupported">不支持GIF。但这个网站可能对您有所帮助：</string>
+    <string name="input_url">输入壁纸URL</string>
+    <string name="OK">好的</string>
+    <string name="CANCEL">取消</string>
+    <string name="confirm_download_under_4g">注意，您正处于移动数据网络下，继续下载会消耗流量。真的要继续吗？（土豪请自便）</string>
+    <string name="downloading_wallpaper">壁纸正在下载中</string>
+    <string name="download_failed">下载壁纸时出现了错误</string>
 </resources>

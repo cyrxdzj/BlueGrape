@@ -51,19 +51,6 @@ public class EditWallpaper extends AppCompatActivity {
     private SeekBar alpha_seekbar;
     private Spinner fill_method_spinner,position_spinner;
     private CommonUtil util=new CommonUtil();
-    public void show_info_dialog(String title,String content)
-    {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(content)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).create();
-        dialog.show();
-    }
     public void show_delete_question_dialog()
     {
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -87,18 +74,7 @@ public class EditWallpaper extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_wallpaper);
-        try {
-            String[] PERMISSIONS_STORAGE = {
-                    "android.permission.READ_EXTERNAL_STORAGE",
-                    "android.permission.WRITE_EXTERNAL_STORAGE" };
-            int permission = ActivityCompat.checkSelfPermission(this,
-                    "android.permission.WRITE_EXTERNAL_STORAGE");
-            if (permission != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this,PERMISSIONS_STORAGE,1);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        util.ask_permission(this);
         Intent intent=getIntent();
         wallpaper_id=intent.getStringExtra("wallpaper_id");
         LogUtils.dTag("EditWallpaper","This wallpaper will be edited: "+wallpaper_id);
@@ -131,9 +107,8 @@ public class EditWallpaper extends AppCompatActivity {
             fill_method_spinner.setAdapter(fill_method_adapter);
             position_spinner=(Spinner)findViewById(R.id.position);
             position_spinner.setAdapter(position_adapter);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
+            util.show_info_dialog(getString(R.string.load_failed),getString(R.string.load_failed),this);
             e.printStackTrace();
         }
     }
@@ -233,41 +208,30 @@ public class EditWallpaper extends AppCompatActivity {
     public void save(View view)
     {
         try {
-            String save_str = "{\n"+
-                    "\t\"name\":\""+ URLEncoder.encode(wallpaper_name_editor.getText().toString(),"UTF-8")+"\",\n"+
-                    "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
-                    "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
-                    "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
-            LogUtils.dTag("EditWallpaper","Config content:\n"+save_str);
-            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+            save_without_dialog();
+            util.show_info_dialog(getString(R.string.save_successfully),getString(R.string.save_successfully),this);
         }
-        show_info_dialog(getString(R.string.save_successfully),getString(R.string.save_successfully));
+        catch (Exception ex) {
+            util.show_info_dialog(getString(R.string.save_failed),getString(R.string.save_failed),this);
+        }
     }
-    public void save_without_dialog()
-    {
-        try {
-            String save_str = "{\n"+
-                    "\t\"name\":\""+ URLEncoder.encode(wallpaper_name_editor.getText().toString(),"UTF-8")+"\",\n"+
-                    "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
-                    "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
-                    "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
-            LogUtils.dTag("EditWallpaper","Config content:\n"+save_str);
-            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
-
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void save_without_dialog() throws IOException {
+        String save_str = "{\n"+
+                "\t\"name\":\""+ URLEncoder.encode(wallpaper_name_editor.getText().toString(),"UTF-8")+"\",\n"+
+                "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+",\n"+
+                "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
+                "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
+        LogUtils.dTag("EditWallpaper","Config content:\n"+save_str);
+        util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
     }
     public void apply(View view)
     {
-        save_without_dialog();
+        try {
+            save_without_dialog();
+        }
+        catch (Exception ex) {
+            util.show_info_dialog(getString(R.string.save_failed),getString(R.string.save_failed),this);
+        }
         Intent intent=new Intent();
         intent.setClass(this,ApplyWallpaper.class);
         intent.putExtra("wallpaper_id",wallpaper_id);
@@ -282,23 +246,18 @@ public class EditWallpaper extends AppCompatActivity {
     {
         LogUtils.dTag("EditWallpaper","This wallpaper will be deleted");
         File file_obj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
-        delete_dir(file_obj);
+        util.delete_dir(file_obj);
         finish();
-        //file_obj.delete();
-    }
-    private void delete_dir(File file) {
-        File[] list = file.listFiles();
-        if (list != null) {
-            for (File temp : list) {
-                delete_dir(temp);
-            }
-        }
-        file.delete();
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            save_without_dialog();
+            try {
+                save_without_dialog();
+            }
+            catch (Exception ex) {
+                util.show_info_dialog(getString(R.string.save_failed),getString(R.string.save_failed),this);
+            }
             this.finish();
             return true;
         }
