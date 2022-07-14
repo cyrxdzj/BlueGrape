@@ -130,6 +130,7 @@ public class MyWallpaper extends AppCompatActivity {
                 if(download_wallpaper_id.get(download_id)!=null)
                 {
                     try {
+                        LogUtils.dTag("MyWallpaper","Download done.");
                         String wallpaper_id=download_wallpaper_id.get(download_id);
                         String zip_path=download_path.get(download_id);
                         ZipUtils.unzipFile(zip_path,util.get_storage_path()+wallpaper_id+"/src");
