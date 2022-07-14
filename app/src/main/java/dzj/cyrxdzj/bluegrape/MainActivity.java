@@ -106,19 +106,19 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        File folder=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files");
+        File folder=new File(util.get_storage_path());
         if(!folder.exists())
         {
             folder.mkdirs();
         }
         //LogUtils.dTag("MainActivityTest",getCacheDir().getAbsolutePath());
-        File file=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
-        LogUtils.dTag("MainActivity","Files will storage at here: "+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
+        File file=new File(util.get_storage_path()+"current_wallpaper.json");
+        LogUtils.dTag("MainActivity","Files will storage at here: "+util.get_storage_path()+"current_wallpaper.json");
         if(!file.exists())
         {
             try {
                 file.createNewFile();
-                util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json","[]");
+                util.write_file(util.get_storage_path()+"current_wallpaper.json","[]");
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);

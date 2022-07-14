@@ -134,7 +134,7 @@ public class AppListener extends AccessibilityService {
         }
         LogUtils.dTag("AppListener","Wallpaper Service ready");
         try {
-            String config_str=util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json");
+            String config_str=util.read_file(util.get_storage_path()+"current_wallpaper.json");
             JSONArray config=new JSONArray(config_str);
             String wallpaper_id=null;
             for(int i=0;i<config.length();i++)
@@ -154,7 +154,7 @@ public class AppListener extends AccessibilityService {
             if(wallpaper_id!=null&&!MainActivity.is_pause)
             {
                 LogUtils.dTag("AppListener","Use wallpaper ID: "+wallpaper_id);
-                String wallpaper_config_str=util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+                String wallpaper_config_str=util.read_file(util.get_storage_path()+wallpaper_id+"/config.json");
                 JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
                 if(util.is_image(wallpaper_id))
                 {
@@ -162,9 +162,9 @@ public class AppListener extends AccessibilityService {
                     make_all_alpha();
                     WallpaperService.image_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
                     WallpaperService.image_view.setImageResource(R.drawable.default_image);
-                    WallpaperService.image_view.setImageURI(Uri.parse("file://"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
+                    WallpaperService.image_view.setImageURI(Uri.parse("file://"+util.get_storage_path()+wallpaper_id+"/image.png"));
                     AbsoluteLayout.LayoutParams layoutParams = (AbsoluteLayout.LayoutParams) WallpaperService.image_view.getLayoutParams();
-                    Bitmap bitmap= BitmapFactory.decodeFile(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png");
+                    Bitmap bitmap= BitmapFactory.decodeFile(util.get_storage_path()+wallpaper_id+"/image.png");
                     int image_width= bitmap.getWidth(),image_height=bitmap.getHeight();
                     int image_view_width,image_view_height;
                     if(wallpaper_config.getString("fill_method").equals("left-right"))
@@ -279,7 +279,7 @@ public class AppListener extends AccessibilityService {
                 {
                     make_all_alpha();
                     WallpaperService.html_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
-                    WallpaperService.html_view.loadUrl("file://"+Environment.getDataDirectory()+ String.format("/data/dzj.cyrxdzj.bluegrape/files/%s/src/index.html", wallpaper_id));
+                    WallpaperService.html_view.loadUrl("file://"+util.get_storage_path()+wallpaper_id+"/src/index.html");
                     AbsoluteLayout.LayoutParams layoutParams=(AbsoluteLayout.LayoutParams)WallpaperService.html_view.getLayoutParams();
                     layoutParams.height=this.getResources().getDisplayMetrics().heightPixels;
                     layoutParams.width=this.getResources().getDisplayMetrics().widthPixels;

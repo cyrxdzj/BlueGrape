@@ -86,7 +86,7 @@ public class ApplyWallpaper extends AppCompatActivity {
     private void refresh_list(boolean show_system_app)
     {
         try {
-            current_wallpaper=new JSONArray(util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
+            current_wallpaper=new JSONArray(util.read_file(util.get_storage_path()+"current_wallpaper.json"));
             JSONArray now_apps=new JSONArray("[]");
             for(int i=0;i<current_wallpaper.length();i++)
             {
@@ -229,7 +229,7 @@ public class ApplyWallpaper extends AppCompatActivity {
             }
             result+="]";
             LogUtils.dTag("ApplyWallpaper","Config content:\n"+result);
-            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
+            util.write_file(util.get_storage_path()+"current_wallpaper.json",result);
             Toast.makeText(this,R.string.apply_successful,Toast.LENGTH_SHORT).show();
             finish();
         } catch (JSONException | IOException e) {

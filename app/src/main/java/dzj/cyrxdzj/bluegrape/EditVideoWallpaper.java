@@ -86,7 +86,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
         LogUtils.dTag("EditVideoWallpaper","This wallpaper will be edited: "+wallpaper_id);
         try {
             //初始化配置
-            String config_str = util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+            String config_str = util.read_file(util.get_storage_path()+wallpaper_id+"/config.json");
             String[] fill_method_list={"左右填充","上下填充"},position_list={"左/上位置","右/下位置"};
             JSONObject config=new JSONObject(config_str);
             if(config.getString("fill_method").equals("top-bottom"))
@@ -205,7 +205,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
                 "\t\"fill_method\":\""+(fill_method_spinner.getSelectedItem().toString()=="左右填充"?"left-right":"top-bottom")+"\",\n"+
                 "\t\"position\":\""+(position_spinner.getSelectedItem().toString()=="左/上位置"?"left-top":"right-bottom")+"\"\n}";
         LogUtils.dTag("EditVideoWallpaper","Config content:\n"+save_str);
-        util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json",save_str);
+        util.write_file(util.get_storage_path()+wallpaper_id+"/config.json",save_str);
     }
     public void apply(View view)
     {
@@ -228,7 +228,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
     public void delete()
     {
         LogUtils.dTag("EditVideoWallpaper","This wallpaper will be deleted");
-        File file_obj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
+        File file_obj=new File(util.get_storage_path()+wallpaper_id);
         util.delete_dir(file_obj);
         finish();
     }

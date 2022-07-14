@@ -52,13 +52,13 @@ public class MyWallpaper extends AppCompatActivity {
     private Map<Long,String> download_path=new HashMap<Long,String>();
     private BroadcastReceiver download_done_receiver;
     private String get_wallpaper_name(String wallpaper_id) throws IOException, JSONException {
-        String config_str = util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+        String config_str = util.read_file(util.get_storage_path()+wallpaper_id+"/config.json");
         JSONObject config=new JSONObject(config_str);
         return URLDecoder.decode(config.getString("name"),"UTF-8");
     }
     public void refresh_list()
     {
-        File folder=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files");
+        File folder=new File(util.get_storage_path());
         String[] get_wallpaper_list=folder.list();
         List<String> wallpaper_list_array=new ArrayList<String>(),wallpaper_name_array=new ArrayList<String>();
         for(int i=0;i<get_wallpaper_list.length;i++)
@@ -84,7 +84,7 @@ public class MyWallpaper extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_wallpaper);
         //初始化壁纸列表
-        File folder=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files");
+        File folder=new File(util.get_storage_path());
         String[] get_wallpaper_list=folder.list();
         List<String> wallpaper_list_array=new ArrayList<String>(),wallpaper_name_array=new ArrayList<String>();
         for(int i=0;i<get_wallpaper_list.length;i++)
@@ -157,17 +157,17 @@ public class MyWallpaper extends AppCompatActivity {
             Date d=new Date();
             String wallpaper_id="wallpaper-"+d.getTime();
             LogUtils.dTag("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
-            File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
+            File fobj=new File(util.get_storage_path()+wallpaper_id);
             fobj.mkdirs();
-            fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+            fobj=new File(util.get_storage_path()+wallpaper_id+"/config.json");
             fobj.createNewFile();
-            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json","{\n"+
+            util.write_file(util.get_storage_path()+wallpaper_id+"/config.json","{\n"+
                     "\t\"name\":\""+ URLEncoder.encode("新建壁纸","UTF-8")+"\",\n"+
                     "\t\"alpha\":25,\n"+
                     "\t\"fill_method\":\"left-right\",\n"+
                     "\t\"position\":\"left-top\"\n}");
             Bitmap bitmap= BitmapFactory.decodeResource(getResources(),R.drawable.default_image);
-            FileOutputStream writer=new FileOutputStream(new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/image.png"));
+            FileOutputStream writer=new FileOutputStream(new File(util.get_storage_path()+wallpaper_id+"/image.png"));
             bitmap.compress(Bitmap.CompressFormat.PNG,100,writer);
             writer.flush();
             writer.close();
@@ -185,13 +185,13 @@ public class MyWallpaper extends AppCompatActivity {
             Date d=new Date();
             String wallpaper_id="wallpaper-"+d.getTime();
             LogUtils.dTag("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
-            File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
+            File fobj=new File(util.get_storage_path()+wallpaper_id);
             fobj.mkdirs();
-            fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+            fobj=new File(util.get_storage_path()+wallpaper_id+"/config.json");
             fobj.createNewFile();
-            fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/video_wallpaper");
+            fobj=new File(util.get_storage_path()+wallpaper_id+"/video_wallpaper");
             fobj.createNewFile();
-            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json","{\n"+
+            util.write_file(util.get_storage_path()+wallpaper_id+"/config.json","{\n"+
                     "\t\"name\":\""+ URLEncoder.encode("新建视频壁纸","UTF-8")+"\",\n"+
                     "\t\"wallpaper_path\":\"none\",\n"+
                     "\t\"alpha\":25,\n"+
@@ -230,13 +230,13 @@ public class MyWallpaper extends AppCompatActivity {
             Date d=new Date();
             String wallpaper_id="wallpaper-"+d.getTime();
             LogUtils.dTag("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
-            File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id);
+            File fobj=new File(util.get_storage_path()+wallpaper_id);
             fobj.mkdirs();
-            fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+            fobj=new File(util.get_storage_path()+wallpaper_id+"/config.json");
             fobj.createNewFile();
-            fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/html_wallpaper");
+            fobj=new File(util.get_storage_path()+wallpaper_id+"/html_wallpaper");
             fobj.createNewFile();
-            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json","{\n"+
+            util.write_file(util.get_storage_path()+wallpaper_id+"/config.json","{\n"+
                     "\t\"name\":\""+ URLEncoder.encode("新建HTML壁纸","UTF-8")+"\",\n"+
                     "\t\"alpha\":25\n"+
                     "}");

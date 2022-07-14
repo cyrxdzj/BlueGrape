@@ -35,7 +35,7 @@ public class CurrentWallpaper extends AppCompatActivity {
     private JSONArray current_wallpaper;
     private CommonUtil util=new CommonUtil();
     private String get_wallpaper_name(String wallpaper_id) throws IOException, JSONException {
-        String config_str = util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/config.json");
+        String config_str = util.read_file(util.get_storage_path()+wallpaper_id+"/config.json");
         JSONObject config=new JSONObject(config_str);
         return URLDecoder.decode(config.getString("name"),"UTF-8");
     }
@@ -77,14 +77,14 @@ public class CurrentWallpaper extends AppCompatActivity {
         try {
             wallpaper_list.clear();
             wallpaper_name_list.clear();
-            current_wallpaper=new JSONArray(util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
+            current_wallpaper=new JSONArray(util.read_file(util.get_storage_path()+"current_wallpaper.json"));
             String result="";
             boolean is_add=false;
             result+="[";
             for(int i=0;i<current_wallpaper.length();i++)
             {
-                File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
-                LogUtils.dTag("CurrentWallpaper","This wallpaper will be checked:"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
+                File fobj=new File(util.get_storage_path()+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
+                LogUtils.dTag("CurrentWallpaper","This wallpaper will be checked:"+util.get_storage_path()+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
                 if(fobj.exists())
                 {
                     if(is_add)
@@ -108,7 +108,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             }
             result+="]";
             LogUtils.dTag("CurrentWallpaper","Config content:\n"+result);
-            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
+            util.write_file(util.get_storage_path()+"current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
@@ -118,13 +118,13 @@ public class CurrentWallpaper extends AppCompatActivity {
         try {
             wallpaper_list.clear();
             wallpaper_name_list.clear();
-            current_wallpaper=new JSONArray(util.read_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json"));
+            current_wallpaper=new JSONArray(util.read_file(util.get_storage_path()+"current_wallpaper.json"));
             String result="";
             boolean is_add=false;
             result+="[";
             for(int i=0;i<current_wallpaper.length();i++)
             {
-                LogUtils.dTag("CurrentWallpaper","This wallpaper will be checked:"+Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
+                LogUtils.dTag("CurrentWallpaper","This wallpaper will be checked:"+util.get_storage_path()+current_wallpaper.getJSONObject(i).getString("wallpaper_id"));
                 if(!current_wallpaper.getJSONObject(i).getString("wallpaper_id").equals(delete_wallpaper))
                 {
                     if(is_add)
@@ -148,7 +148,7 @@ public class CurrentWallpaper extends AppCompatActivity {
             }
             result+="]";
             LogUtils.dTag("CurrentWallpaper","Config content:\n"+result);
-            util.write_file(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json",result);
+            util.write_file(util.get_storage_path()+"current_wallpaper.json",result);
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }

@@ -23,12 +23,12 @@ public class CommonUtil {
     }
     public boolean is_video(String wallpaper_id)
     {
-        File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/video_wallpaper");
+        File fobj=new File(get_storage_path()+wallpaper_id+"/video_wallpaper");
         return fobj.exists();
     }
     public boolean is_html(String wallpaper_id)
     {
-        File fobj=new File(Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/"+wallpaper_id+"/html_wallpaper");
+        File fobj=new File(get_storage_path()+wallpaper_id+"/html_wallpaper");
         return fobj.exists();
     }
     public String read_file(String path) throws IOException {
