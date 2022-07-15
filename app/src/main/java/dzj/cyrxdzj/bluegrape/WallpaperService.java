@@ -1,5 +1,6 @@
 package dzj.cyrxdzj.bluegrape;
 
+import android.annotation.SuppressLint;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,9 +10,12 @@ import android.os.IBinder;
 import android.provider.Settings;
 ;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -20,6 +24,9 @@ import androidx.annotation.RequiresApi;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.warnyul.android.widget.FastVideoView;
+
+import java.io.ByteArrayInputStream;
+import java.nio.charset.StandardCharsets;
 
 public class WallpaperService extends Service {
     public static boolean isStarted = false;
@@ -32,12 +39,28 @@ public class WallpaperService extends Service {
     public static FastVideoView video_view;
     public static WebView html_view;
     public static TextView info_text_view;
+    private CommonUtil util=new CommonUtil();
     public static boolean ready=false;
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
+    private WebViewClient web_view_client=new WebViewClient(){
+        @Override
+        public WebResourceResponse shouldInterceptRequest(WebView html_view, String url)
+        {
+            LogUtils.dTag("WallpaperService","Request: "+url);
+            if(url.startsWith("file://")&&!url.startsWith("file://"+util.get_storage_path()+AppListener.wallpaper_id+"/src"))
+            {
+                return new WebResourceResponse("text/html","utf-8",new ByteArrayInputStream("Wallpaper access to file protocol paths other than whitelist is prohibited.".getBytes()));
+            }
+            else
+            {
+                return null;
+            }
+        }
+    };
     @Override
     public void onCreate() {
         super.onCreate();
@@ -66,6 +89,7 @@ public class WallpaperService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void showFloatingWindow() {
         if (Settings.canDrawOverlays(this)) {
@@ -74,6 +98,11 @@ public class WallpaperService extends Service {
             image_view = new ImageView(this);
             video_view = new FastVideoView(this);
             html_view = new WebView(this);
+            html_view.setWebViewClient(web_view_client);
+            html_view.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
+            html_view.getSettings().setJavaScriptEnabled(true);
+            html_view.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
+            html_view.getSettings().setAllowFileAccessFromFileURLs(false);
             info_text_view=new TextView(this);
             info_text_view.setTextColor(Color.argb(255,0,0,255));
             layout=new AbsoluteLayout(this);

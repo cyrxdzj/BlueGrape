@@ -5,17 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 ;
+import android.os.Looper;
+import android.text.InputType;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -35,11 +39,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipFile;
 
 public class MyWallpaper extends AppCompatActivity {
 
@@ -51,6 +57,8 @@ public class MyWallpaper extends AppCompatActivity {
     private Map<Long,String> download_wallpaper_id=new HashMap<Long,String>();
     private Map<Long,String> download_path=new HashMap<Long,String>();
     private BroadcastReceiver download_done_receiver;
+    private ProgressDialog loading_dialog;
+    private Context context=this;
     private String get_wallpaper_name(String wallpaper_id) throws IOException, JSONException {
         String config_str = util.read_file(util.get_storage_path()+wallpaper_id+"/config.json");
         JSONObject config=new JSONObject(config_str);
@@ -133,7 +141,20 @@ public class MyWallpaper extends AppCompatActivity {
                         LogUtils.dTag("MyWallpaper","Download done.");
                         String wallpaper_id=download_wallpaper_id.get(download_id);
                         String zip_path=download_path.get(download_id);
-                        ZipUtils.unzipFile(zip_path,util.get_storage_path()+wallpaper_id+"/src");
+                        File zip_file_object=new File(zip_path);
+                        try {
+                            ZipUtils.unzipFile(zip_path,util.get_storage_path()+wallpaper_id+"/src");
+                        }
+                        catch (IllegalArgumentException e)
+                        {
+                            e.printStackTrace();
+                            util.show_info_dialog("",getString(R.string.unzip_failed),context);
+                        }
+                        zip_file_object.delete();
+                        Intent done_intent=new Intent();
+                        done_intent.setClass(MyWallpaper.this,EditHtmlWallpaper.class);
+                        done_intent.putExtra("wallpaper_id",wallpaper_id);
+                        MyWallpaper.this.startActivity(done_intent);
                     }
                     catch (Exception e)
                     {
@@ -242,6 +263,8 @@ public class MyWallpaper extends AppCompatActivity {
                     "\t\"alpha\":25\n"+
                     "}");
             input_url_view=new EditText(this);
+            input_url_view.setMaxLines(1);
+            input_url_view.setInputType(InputType.TYPE_CLASS_TEXT);
             AlertDialog dialog = new AlertDialog.Builder(this)
                     //.setTitle(getString(R.string.input_url))
                     .setMessage(R.string.input_url)
@@ -280,7 +303,7 @@ public class MyWallpaper extends AppCompatActivity {
             Uri path=Uri.fromFile(new File(this.getExternalFilesDir("") + String.format("/download/%s.zip", util.format_time(date))));
             request_wallpaper.setDestinationUri(path);
             request_wallpaper.setMimeType("application/zip");
-            request_wallpaper.setTitle(getString(R.string.downloading_wallpaper));
+            request_wallpaper.setTitle(getString(R.string.wallpaper_download_task));
             request_wallpaper.setDescription(getString(R.string.downloading_wallpaper));
             request_wallpaper.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             Long download_id=manager.enqueue(request_wallpaper);
@@ -288,6 +311,46 @@ public class MyWallpaper extends AppCompatActivity {
             download_path.put(download_id,path.getPath());
             LogUtils.vTag("MyWallpaperTest",download_id);
             LogUtils.dTag("MyWallpaper","Wallpaper will be downloaded at "+path.getPath());
+            new Thread()
+            {
+                @Override
+                public void run()
+                {
+                    Looper.prepare();
+                    loading_dialog = new ProgressDialog(context);
+                    loading_dialog.setMessage(getString(R.string.downloading_wallpaper));
+                    loading_dialog.setCancelable(false);
+                    loading_dialog.show();
+                    while(true)
+                    {
+                        try {
+                            DownloadManager.Query query = new DownloadManager.Query().setFilterById(download_id);
+                            Cursor c =  manager.query(query);
+                            if(c.moveToFirst())
+                            {
+                                int downloadBytesIdx = c.getColumnIndexOrThrow(
+                                        DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
+                                int totalBytesIdx = c.getColumnIndexOrThrow(
+                                        DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+                                long downloadBytes = c.getLong(downloadBytesIdx);
+                                long totalBytes = c.getLong(totalBytesIdx);
+                                loading_dialog.setMessage(getString(R.string.downloading_wallpaper)+" "+String.valueOf(downloadBytes*100.0/totalBytes)+"%");
+                                if(downloadBytes==totalBytes)
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ex.printStackTrace();
+                            util.show_info_dialog("",getString(R.string.download_failed),context);
+                            break;
+                        }
+                    }
+                    loading_dialog.dismiss();
+                }
+            }.start();
         } catch (Exception e){
             util.show_info_dialog("",getString(R.string.download_failed),this);
             e.printStackTrace();
@@ -306,5 +369,4 @@ public class MyWallpaper extends AppCompatActivity {
         super.onDestroy();
         unregisterReceiver(download_done_receiver);
     }
-
 }

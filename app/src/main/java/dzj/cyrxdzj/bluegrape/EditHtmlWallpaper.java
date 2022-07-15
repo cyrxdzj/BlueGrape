@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -107,7 +106,7 @@ public class EditHtmlWallpaper extends AppCompatActivity {
         String save_str = "{\n"+
                 "\t\"name\":\""+ URLEncoder.encode(wallpaper_name_editor.getText().toString(),"UTF-8")+"\",\n"+
                 "\t\"alpha\":"+String.valueOf(alpha_seekbar.getProgress())+"\n}";
-        LogUtils.dTag("EditVideoWallpaper","Config content:\n"+save_str);
+        LogUtils.dTag("EditHtmlWallpaper","Config content:\n"+save_str);
         util.write_file(util.get_storage_path()+wallpaper_id+"/config.json",save_str);
     }
     public void apply(View view)
@@ -130,7 +129,7 @@ public class EditHtmlWallpaper extends AppCompatActivity {
     }
     public void delete()
     {
-        LogUtils.dTag("EditVideoWallpaper","This wallpaper will be deleted");
+        LogUtils.dTag("EditHtmlWallpaper","This wallpaper will be deleted");
         File file_obj=new File(util.get_storage_path()+wallpaper_id);
         util.delete_dir(file_obj);
         finish();

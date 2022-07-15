@@ -19,6 +19,9 @@ import android.provider.Settings;
 ;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
+import android.webkit.WebResourceResponse;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 
@@ -32,6 +35,7 @@ public class AppListener extends AccessibilityService {
 
     private String last_package_name="";
     private CommonUtil util=new CommonUtil();
+    public static String wallpaper_id="";
     public static boolean isInputMethodApp(Context context, String strPkgName) {
         PackageManager pkm = context.getPackageManager();
         boolean bIsIME = false;
@@ -153,6 +157,7 @@ public class AppListener extends AccessibilityService {
             }
             if(wallpaper_id!=null&&!MainActivity.is_pause)
             {
+                this.wallpaper_id=wallpaper_id;
                 LogUtils.dTag("AppListener","Use wallpaper ID: "+wallpaper_id);
                 String wallpaper_config_str=util.read_file(util.get_storage_path()+wallpaper_id+"/config.json");
                 JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
@@ -290,9 +295,7 @@ public class AppListener extends AccessibilityService {
             }
             else
             {
-                WallpaperService.image_view.setAlpha(0f);
-                WallpaperService.video_view.setAlpha(0f);
-                WallpaperService.video_view.pause();
+                make_all_alpha();
             }
         } catch (Exception e) {
             try

@@ -12,8 +12,9 @@
     <string name="new_html_wallpaper">新建HTML壁纸</string>
     <string name="creating_new_wallpaper">正在新建</string>
     <string name="load_failed">在加载壁纸时出现错误</string>
-    <string name="edit_wallpaper">编辑壁纸</string>
+    <string name="edit_wallpaper">编辑图片壁纸</string>
     <string name="edit_video_wallpaper">编辑视频壁纸</string>
+    <string name="edit_html_wallpaper">编辑HTML壁纸</string>
     <string name="save_wallpaper">保存壁纸</string>
     <string name="apply_wallpaper">应用壁纸</string>
     <string name="delete_wallpaper">删除壁纸</string>
@@ -51,6 +52,8 @@
     <string name="OK">好的</string>
     <string name="CANCEL">取消</string>
     <string name="confirm_download_under_4g">注意，您正处于移动数据网络下，继续下载会消耗流量。真的要继续吗？（土豪请自便）</string>
-    <string name="downloading_wallpaper">壁纸正在下载中</string>
-    <string name="download_failed">下载壁纸时出现了错误</string>
+    <string name="wallpaper_download_task">壁纸下载程序</string>
+    <string name="downloading_wallpaper">壁纸正在下载中……</string>
+    <string name="download_failed">下载壁纸时出现了错误。</string>
+    <string name="unzip_failed">解压壁纸时遇到了错误，也许壁纸还能用。</string>
 </resources>

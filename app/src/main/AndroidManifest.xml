@@ -20,15 +20,11 @@
         android:roundIcon="@mipmap/bluegrape"
         android:supportsRtl="true"
         android:theme="@style/Theme.BlueGrape">
-        <activity
-            android:name=".EditHtmlWallpaper"
-            android:exported="false" />
 
         <service
             android:name=".AppListener"
             android:directBootAware="true"
             android:enabled="true"
-            android:exported="true"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
@@ -40,8 +36,7 @@
         </service>
         <service
             android:name=".WallpaperService"
-            android:enabled="true"
-            android:exported="true" />
+            android:enabled="true"/>
 
         <activity
             android:name=".MainActivity"
@@ -92,6 +87,15 @@
         <activity
             android:name=".EditVideoWallpaper"
             android:label="@string/edit_video_wallpaper"
+            android:parentActivityName=".MyWallpaper"
+            android:requestLegacyExternalStorage="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MyWallpaper" />
+        </activity>
+        <activity
+            android:name=".EditHtmlWallpaper"
+            android:label="@string/edit_html_wallpaper"
             android:parentActivityName=".MyWallpaper"
             android:requestLegacyExternalStorage="true">
             <meta-data
