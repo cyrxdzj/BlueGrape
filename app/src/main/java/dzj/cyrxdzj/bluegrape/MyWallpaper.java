@@ -3,6 +3,7 @@ package dzj.cyrxdzj.bluegrape;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
@@ -56,6 +57,7 @@ public class MyWallpaper extends AppCompatActivity {
     private EditText input_url_view;
     private Map<Long,String> download_wallpaper_id=new HashMap<Long,String>();
     private Map<Long,String> download_path=new HashMap<Long,String>();
+    private Map<Long, Boolean> download_cancel=new HashMap<Long, Boolean>();
     private BroadcastReceiver download_done_receiver;
     private ProgressDialog loading_dialog;
     private Context context=this;
@@ -138,9 +140,24 @@ public class MyWallpaper extends AppCompatActivity {
                 if(download_wallpaper_id.get(download_id)!=null)
                 {
                     try {
+                        if(download_cancel.get(download_id)!=null)
+                        {
+                            LogUtils.dTag("MyWallpaper","Download canceled.");
+                            return;
+                        }
                         LogUtils.dTag("MyWallpaper","Download done.");
                         String wallpaper_id=download_wallpaper_id.get(download_id);
                         String zip_path=download_path.get(download_id);
+                        File fobj=new File(util.get_storage_path()+wallpaper_id);
+                        fobj.mkdirs();
+                        fobj=new File(util.get_storage_path()+wallpaper_id+"/config.json");
+                        fobj.createNewFile();
+                        fobj=new File(util.get_storage_path()+wallpaper_id+"/html_wallpaper");
+                        fobj.createNewFile();
+                        util.write_file(util.get_storage_path()+wallpaper_id+"/config.json","{\n"+
+                                "\t\"name\":\""+ URLEncoder.encode("新建HTML壁纸","UTF-8")+"\",\n"+
+                                "\t\"alpha\":25\n"+
+                                "}");
                         File zip_file_object=new File(zip_path);
                         try {
                             ZipUtils.unzipFile(zip_path,util.get_storage_path()+wallpaper_id+"/src");
@@ -248,51 +265,37 @@ public class MyWallpaper extends AppCompatActivity {
     }
     public void new_html_wallpaper(View view)
     {
-        try {
-            Date d=new Date();
-            String wallpaper_id="wallpaper-"+d.getTime();
-            LogUtils.dTag("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
-            File fobj=new File(util.get_storage_path()+wallpaper_id);
-            fobj.mkdirs();
-            fobj=new File(util.get_storage_path()+wallpaper_id+"/config.json");
-            fobj.createNewFile();
-            fobj=new File(util.get_storage_path()+wallpaper_id+"/html_wallpaper");
-            fobj.createNewFile();
-            util.write_file(util.get_storage_path()+wallpaper_id+"/config.json","{\n"+
-                    "\t\"name\":\""+ URLEncoder.encode("新建HTML壁纸","UTF-8")+"\",\n"+
-                    "\t\"alpha\":25\n"+
-                    "}");
-            input_url_view=new EditText(this);
-            input_url_view.setMaxLines(1);
-            input_url_view.setInputType(InputType.TYPE_CLASS_TEXT);
-            AlertDialog dialog = new AlertDialog.Builder(this)
-                    //.setTitle(getString(R.string.input_url))
-                    .setMessage(R.string.input_url)
-                    .setView(input_url_view)
-                    .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if(NetworkUtils.isMobileData())
-                            {
-                                show_download_question_dialog(input_url_view.getText().toString(),wallpaper_id);
-                            }
-                            else
-                            {
-                                download_wallpaper(input_url_view.getText().toString(),wallpaper_id);
-                            }
-                            dialog.dismiss();
+        Date d=new Date();
+        String wallpaper_id="wallpaper-"+d.getTime();
+        LogUtils.dTag("MyWallpaper","The ID of the new wallpaper is: "+wallpaper_id);
+        input_url_view=new EditText(this);
+        input_url_view.setMaxLines(1);
+        input_url_view.setInputType(InputType.TYPE_CLASS_TEXT);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                //.setTitle(getString(R.string.input_url))
+                .setMessage(R.string.input_url)
+                .setView(input_url_view)
+                .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(NetworkUtils.isMobileData())
+                        {
+                            show_download_question_dialog(input_url_view.getText().toString(),wallpaper_id);
                         }
-                    })
-                    .setNegativeButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
+                        else
+                        {
+                            download_wallpaper(input_url_view.getText().toString(),wallpaper_id);
                         }
-                    }).create();
-            dialog.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).create();
+        dialog.show();
     }
     private void download_wallpaper(String url,String wallpaper_id)
     {
@@ -315,11 +318,26 @@ public class MyWallpaper extends AppCompatActivity {
             loading_dialog.setMessage(getString(R.string.downloading_wallpaper));
             loading_dialog.setCancelable(false);
             loading_dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-            loading_dialog.setMax(1);
+            loading_dialog.setMax(100);
             loading_dialog.setProgress(0);
+            loading_dialog.setProgressNumberFormat("Please wait.");
+            loading_dialog.setButton(ProgressDialog.BUTTON_NEGATIVE, getString(R.string.CANCEL), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    try {
+                        download_cancel.put(download_id,true);
+                        LogUtils.iTag("MyWallpaper","Download canceled.");
+                    }
+                    catch (Exception e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            });
             loading_dialog.show();
             new Thread()
             {
+                @SuppressLint("DefaultLocale")
                 @Override
                 public void run()
                 {
@@ -328,6 +346,13 @@ public class MyWallpaper extends AppCompatActivity {
                     while(true)
                     {
                         try {
+                            if(download_cancel.get(download_id)!=null)
+                            {
+                                manager.remove(download_id);
+                                loading_dialog.dismiss();
+                                util.show_info_dialog("",getString(R.string.download_canceled),context);
+                                break;
+                            }
                             DownloadManager.Query query = new DownloadManager.Query().setFilterById(download_id);
                             Cursor c =  manager.query(query);
                             if(c.moveToFirst())
@@ -338,14 +363,18 @@ public class MyWallpaper extends AppCompatActivity {
                                     case DownloadManager.STATUS_FAILED:
                                         throw new Exception("Download Failed.");
                                 }
+                                //LogUtils.vTag("MyWallpaperTest",c.getString(c.getColumnIndex(DownloadManager.COLUMN_REASON)));
                                 int downloadBytesIdx = c.getColumnIndexOrThrow(
                                         DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
                                 int totalBytesIdx = c.getColumnIndexOrThrow(
                                         DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
                                 long downloadBytes = c.getLong(downloadBytesIdx);
                                 long totalBytes = c.getLong(totalBytesIdx);
-                                loading_dialog.setMax(totalBytesIdx);
-                                loading_dialog.setProgress(downloadBytesIdx);
+                                loading_dialog.setProgress((int)(downloadBytes*100/totalBytes));
+                                /*LogUtils.vTag("MyWallpaperTest",String.valueOf(downloadBytes*100/totalBytes));
+                                LogUtils.vTag("MyWallpaperTest"+" "+String.valueOf(downloadBytes),String.valueOf(totalBytes));*/
+                                //loading_dialog.setProgress(50);
+                                loading_dialog.setProgressNumberFormat(String.format("%.2fKB/%.2fKB",downloadBytes/1024.0,totalBytes/1024.0));
                                 if(downloadBytes==totalBytes)
                                 {
                                     break;
@@ -356,6 +385,7 @@ public class MyWallpaper extends AppCompatActivity {
                         {
                             ex.printStackTrace();
                             util.show_info_dialog("",getString(R.string.download_failed),context);
+                            loading_dialog.dismiss();
                             break;
                         }
                     }
