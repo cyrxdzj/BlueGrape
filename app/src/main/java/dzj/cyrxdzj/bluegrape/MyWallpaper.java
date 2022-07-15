@@ -311,16 +311,20 @@ public class MyWallpaper extends AppCompatActivity {
             download_path.put(download_id,path.getPath());
             LogUtils.vTag("MyWallpaperTest",download_id);
             LogUtils.dTag("MyWallpaper","Wallpaper will be downloaded at "+path.getPath());
+            loading_dialog = new ProgressDialog(context);
+            loading_dialog.setMessage(getString(R.string.downloading_wallpaper));
+            loading_dialog.setCancelable(false);
+            loading_dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            loading_dialog.setMax(1);
+            loading_dialog.setProgress(0);
+            loading_dialog.show();
             new Thread()
             {
                 @Override
                 public void run()
                 {
                     Looper.prepare();
-                    loading_dialog = new ProgressDialog(context);
-                    loading_dialog.setMessage(getString(R.string.downloading_wallpaper));
-                    loading_dialog.setCancelable(false);
-                    loading_dialog.show();
+                    LogUtils.dTag("MyWallpaper","Download started.");
                     while(true)
                     {
                         try {
@@ -328,13 +332,20 @@ public class MyWallpaper extends AppCompatActivity {
                             Cursor c =  manager.query(query);
                             if(c.moveToFirst())
                             {
+                                int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
+                                switch (status)
+                                {
+                                    case DownloadManager.STATUS_FAILED:
+                                        throw new Exception("Download Failed.");
+                                }
                                 int downloadBytesIdx = c.getColumnIndexOrThrow(
                                         DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
                                 int totalBytesIdx = c.getColumnIndexOrThrow(
                                         DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
                                 long downloadBytes = c.getLong(downloadBytesIdx);
                                 long totalBytes = c.getLong(totalBytesIdx);
-                                loading_dialog.setMessage(getString(R.string.downloading_wallpaper)+" "+String.valueOf(downloadBytes*100.0/totalBytes)+"%");
+                                loading_dialog.setMax(totalBytesIdx);
+                                loading_dialog.setProgress(downloadBytesIdx);
                                 if(downloadBytes==totalBytes)
                                 {
                                     break;
