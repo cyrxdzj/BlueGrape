@@ -209,10 +209,10 @@ public class EditWallpaper extends AppCompatActivity {
     {
         try {
             save_without_dialog();
-            util.show_info_dialog(getString(R.string.save_successfully),getString(R.string.save_successfully),this);
+            util.show_info_dialog("",getString(R.string.save_successfully),this);
         }
         catch (Exception ex) {
-            util.show_info_dialog(getString(R.string.save_failed),getString(R.string.save_failed),this);
+            util.show_info_dialog("",getString(R.string.save_failed),this);
         }
     }
     public void save_without_dialog() throws IOException {
@@ -230,7 +230,7 @@ public class EditWallpaper extends AppCompatActivity {
             save_without_dialog();
         }
         catch (Exception ex) {
-            util.show_info_dialog(getString(R.string.save_failed),getString(R.string.save_failed),this);
+            util.show_info_dialog("",getString(R.string.save_failed),this);
         }
         Intent intent=new Intent();
         intent.setClass(this,ApplyWallpaper.class);
@@ -256,7 +256,7 @@ public class EditWallpaper extends AppCompatActivity {
                 save_without_dialog();
             }
             catch (Exception ex) {
-                util.show_info_dialog(getString(R.string.save_failed),getString(R.string.save_failed),this);
+                util.show_info_dialog("",getString(R.string.save_failed),this);
             }
             this.finish();
             return true;

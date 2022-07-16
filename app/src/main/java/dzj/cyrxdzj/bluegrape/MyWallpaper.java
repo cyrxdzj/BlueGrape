@@ -357,13 +357,14 @@ public class MyWallpaper extends AppCompatActivity {
                             Cursor c =  manager.query(query);
                             if(c.moveToFirst())
                             {
-                                int status = c.getInt(c.getColumnIndex(DownloadManager.COLUMN_STATUS));
-                                switch (status)
+                                //LogUtils.vTag("MyWallpaperTest",c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON)));
+                                int status=c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON));
+                                LogUtils.vTag("MyWallpaperTest",String.valueOf(status));
+                                if((status>=1000&&status<=1009)||status==1)
                                 {
-                                    case DownloadManager.STATUS_FAILED:
-                                        throw new Exception("Download Failed.");
+                                    LogUtils.eTag("MyWallpaper","Download ERROR. "+String.valueOf(status));
+                                    throw new Exception("Download ERROR. "+String.valueOf(status));
                                 }
-                                //LogUtils.vTag("MyWallpaperTest",c.getString(c.getColumnIndex(DownloadManager.COLUMN_REASON)));
                                 int downloadBytesIdx = c.getColumnIndexOrThrow(
                                         DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
                                 int totalBytesIdx = c.getColumnIndexOrThrow(
@@ -384,7 +385,7 @@ public class MyWallpaper extends AppCompatActivity {
                         catch (Exception ex)
                         {
                             ex.printStackTrace();
-                            util.show_info_dialog("",getString(R.string.download_failed),context);
+                            util.show_info_dialog(getString(R.string.download_failed),ex.toString(),context);
                             loading_dialog.dismiss();
                             break;
                         }

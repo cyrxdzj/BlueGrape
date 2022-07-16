@@ -44,19 +44,6 @@ public class EditVideoWallpaper extends AppCompatActivity {
     private SeekBar alpha_seekbar;
     private Spinner fill_method_spinner,position_spinner;
     private CommonUtil util=new CommonUtil();
-    public void show_info_dialog(String title,String content)
-    {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(content)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).create();
-        dialog.show();
-    }
     public void show_delete_question_dialog()
     {
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -115,7 +102,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
             position_spinner=(Spinner)findViewById(R.id.position);
             position_spinner.setAdapter(position_adapter);
         } catch (Exception e) {
-            show_info_dialog(getString(R.string.load_failed),getString(R.string.load_failed));
+            util.show_info_dialog("",getString(R.string.load_failed),this);
             e.printStackTrace();
         }
     }
@@ -180,7 +167,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
             LogUtils.dTag("EditVideoWallpaper","Video path is: "+wallpaper_path);
             if(path==null)
             {
-                show_info_dialog("",getString(R.string.choose_video_failed));
+                util.show_info_dialog("",getString(R.string.choose_video_failed),this);
                 return;
             }
             wallpaper_path=path;
@@ -191,10 +178,10 @@ public class EditVideoWallpaper extends AppCompatActivity {
     {
         try {
             save_without_dialog();
-            show_info_dialog(getString(R.string.save_successfully),getString(R.string.save_successfully));
+            util.show_info_dialog("",getString(R.string.save_successfully),this);
         }
         catch (Exception ex) {
-            show_info_dialog(getString(R.string.save_failed),getString(R.string.save_failed));
+            util.show_info_dialog("",getString(R.string.save_failed),this);
         }
     }
     public void save_without_dialog() throws IOException {
@@ -213,7 +200,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
             save_without_dialog();
         }
         catch (Exception ex) {
-            show_info_dialog(getString(R.string.save_failed),getString(R.string.save_failed));
+            util.show_info_dialog("",getString(R.string.save_failed),this);
         }
         Intent intent=new Intent();
         intent.setClass(this,ApplyWallpaper.class);
@@ -239,7 +226,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
                 save_without_dialog();
             }
             catch (Exception ex) {
-                show_info_dialog(getString(R.string.save_failed),getString(R.string.save_failed));
+                util.show_info_dialog("",getString(R.string.save_failed),this);
             }
             this.finish();
             return true;

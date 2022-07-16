@@ -39,19 +39,6 @@ public class CurrentWallpaper extends AppCompatActivity {
         JSONObject config=new JSONObject(config_str);
         return URLDecoder.decode(config.getString("name"),"UTF-8");
     }
-    public void show_info_dialog(String title,String content)
-    {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(content)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).create();
-        dialog.show();
-    }
     public void show_delete_question_dialog(String delete_wallpaper)
     {
         AlertDialog dialog = new AlertDialog.Builder(this)
@@ -174,7 +161,7 @@ public class CurrentWallpaper extends AppCompatActivity {
                         show_info+=context.getPackageManager().getApplicationInfo(current_wallpaper.getJSONObject(position).getJSONArray("apps").getString(i),0).loadLabel(context.getPackageManager()).toString()+"\n";
                         LogUtils.dTag("CurrentWallpaper","This APP is using this wallpaper: "+current_wallpaper.getJSONObject(position).getJSONArray("apps").getString(i));
                     }
-                    show_info_dialog("",show_info);
+                    util.show_info_dialog("",show_info,context);
                 }
                 catch (JSONException | PackageManager.NameNotFoundException e) {
                     e.printStackTrace();
