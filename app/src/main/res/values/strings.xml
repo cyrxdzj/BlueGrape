@@ -58,4 +58,5 @@
     <string name="download_canceled">壁纸下载已取消。</string>
     <string name="download_failed">下载壁纸时出现了错误。</string>
     <string name="unzip_failed">解压壁纸时遇到了错误，也许壁纸还能用。</string>
+    <string name="settings">设置</string>
 </resources>

@@ -74,7 +74,7 @@ public class MyWallpaper extends AppCompatActivity {
         for(int i=0;i<get_wallpaper_list.length;i++)
         {
             try {
-                if (!get_wallpaper_list[i].equals("current_wallpaper.json")) {
+                if (new File(get_wallpaper_list[i]).isDirectory()) {
                     wallpaper_name_array.add(get_wallpaper_name(get_wallpaper_list[i]));
                     wallpaper_list_array.add(get_wallpaper_list[i]);
                 }

@@ -1,0 +1,35 @@
+[
+    {
+        "description": "常规设置",
+        "settings":
+        [
+            {
+                "id": "common.allow_start_on_boot",
+                "title": "允许BlueGrape开机自启",
+                "description": "若开启此项，BlueGrape就可以在开机时自动启动关键服务，但不会弹出主界面。",
+                "type": "bool",
+                "default": false
+            }
+        ]
+    },
+    {
+        "description": "动态壁纸网络设置",
+        "settings":
+        [
+            {
+                "id": "html_wallpaper.allow_mobile_network",
+                "title": "允许动态壁纸在移动数据网络下访问网络",
+                "description": "若开启此项，动态壁纸就可以在移动数据网络下访问网络，这可能会导致额外的流量费用。具体视运营商规则而定。",
+                "type": "bool",
+                "default": false
+            },
+            {
+                "id": "html_wallpaper.allow_wifi_network",
+                "title": "允许动态壁纸在Wifi下访问网络",
+                "description": "若开启此项，动态壁纸就可以在Wifi下访问网络。您可以禁止动态壁纸使用移动数据和Wifi来完全禁止其访问网络。",
+                "type": "bool",
+                "default": true
+            }
+        ]
+    }
+]

@@ -5,17 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.app.AlertDialog;
-import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Binder;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.Settings;
 ;
 import android.view.View;
@@ -27,7 +24,6 @@ import com.blankj.utilcode.util.PermissionUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Method;
 
 public class MainActivity extends AppCompatActivity {
     private Intent WallpaperServiceIntent,AppListenerIntent;
@@ -183,6 +179,12 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent intent=new Intent();
         intent.setClass(MainActivity.this,CurrentWallpaper.class);
+        MainActivity.this.startActivity(intent);
+    }
+    public void open_settings(View view)
+    {
+        Intent intent=new Intent();
+        intent.setClass(MainActivity.this,dzj.cyrxdzj.bluegrape.Settings.class);
         MainActivity.this.startActivity(intent);
     }
     public void open_about_this_software(View view)
