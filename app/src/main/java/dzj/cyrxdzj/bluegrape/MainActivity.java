@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 ;
+import android.util.Log;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
 import android.widget.Button;
@@ -22,8 +23,15 @@ import android.widget.Button;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PermissionUtils;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
     private Intent WallpaperServiceIntent,AppListenerIntent;
@@ -107,7 +115,6 @@ public class MainActivity extends AppCompatActivity {
         {
             folder.mkdirs();
         }
-        //LogUtils.dTag("MainActivityTest",getCacheDir().getAbsolutePath());
         File file=new File(util.get_storage_path()+"current_wallpaper.json");
         LogUtils.dTag("MainActivity","Files will storage at here: "+util.get_storage_path()+"current_wallpaper.json");
         if(!file.exists())
@@ -119,6 +126,12 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
                 System.exit(1);
             }
+        }
+        try {
+            create_settings_file();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(1);
         }
         WallpaperServiceIntent=new Intent(MainActivity.this, AppListener.class);
         AppListenerIntent=new Intent(MainActivity.this, WallpaperService.class);
@@ -221,5 +234,24 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = Uri.parse("https://cyrxdzj.github.io/BlueGrapeWeb");
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
+    }
+    private void create_settings_file() throws IOException, JSONException {
+        File file=new File(util.get_storage_path()+"settings.json");
+        if(!file.exists())
+        {
+            file.createNewFile();
+            JSONObject settings_object=new JSONObject();
+            JSONArray settings_template_object=new JSONArray(util.read_file(R.raw.settings,this));
+            for(int i=0;i<settings_template_object.length();i++)
+            {
+                JSONArray settings_part=settings_template_object.getJSONObject(i).getJSONArray("settings");
+                for(int j=0;j<settings_part.length();j++)
+                {
+                    settings_object.put(settings_part.getJSONObject(j).getString("id"),settings_part.getJSONObject(j).get("default"));
+                }
+            }
+            LogUtils.dTag("MainActivity",settings_object.toString());
+            util.write_file(util.get_storage_path()+"settings.json",settings_object.toString());
+        }
     }
 }

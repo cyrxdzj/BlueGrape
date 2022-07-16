@@ -1,6 +1,7 @@
 package dzj.cyrxdzj.bluegrape;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Environment;
@@ -12,6 +13,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -33,10 +35,16 @@ public class CommonUtil {
     }
     public String read_file(String path) throws IOException {
         FileReader reader=new FileReader(new File(path));
-        char[] temp=new char[500];
+        char[] temp=new char[1024*1024];
         reader.read(temp);
         reader.close();
         return new String(temp);
+    }
+    public String read_file(int res_id, Context context) throws IOException {
+        InputStream is=context.getResources().openRawResource(res_id);
+        byte[] buffer=new byte[is.available()];
+        is.read(buffer);
+        return new String(buffer,"UTF-8");
     }
     public void write_file(String path,String content) throws IOException
     {
