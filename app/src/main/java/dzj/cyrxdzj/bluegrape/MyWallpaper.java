@@ -76,7 +76,6 @@ public class MyWallpaper extends AppCompatActivity {
         {
             try {
                 if ((new File(util.get_storage_path()+get_wallpaper_list[i])).isDirectory()) {
-                    //LogUtils.vTag("MyWallpaperTest",(new File(get_wallpaper_list[i])).isDirectory());
                     wallpaper_name_array.add(get_wallpaper_name(get_wallpaper_list[i]));
                     wallpaper_list_array.add(get_wallpaper_list[i]);
                 }

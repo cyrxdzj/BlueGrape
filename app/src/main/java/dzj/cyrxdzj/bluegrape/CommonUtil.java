@@ -9,6 +9,12 @@ import android.os.Environment;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.blankj.utilcode.util.LogUtils;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -98,5 +104,25 @@ public class CommonUtil {
     public String get_storage_path()
     {
         return Environment.getDataDirectory()+"/data/dzj.cyrxdzj.bluegrape/files/";
+    }
+    public void refresh_settings(Context context) throws IOException, JSONException {
+        JSONObject settings_object = new JSONObject(read_file(get_storage_path()+"settings.json"));
+        JSONArray settings_template = new JSONArray(read_file(R.raw.settings,context));
+        for(int i=0;i<settings_template.length();i++) {
+            JSONObject settings_part = settings_template.getJSONObject(i);
+            JSONArray settings_detail_array = settings_part.getJSONArray("settings");
+            for (int j = 0; j < settings_detail_array.length(); j++) {
+                JSONObject settings_detail = settings_detail_array.getJSONObject(j);
+                String id = settings_detail.getString("id");
+                if (settings_detail.getString("type").equals("bool")) {
+                    Settings.bool_settings.put(id, settings_object.getBoolean(id));
+                } else if (settings_detail.getString("type").equals("string")) {
+                    Settings.string_settings.put(id, settings_object.getString(id));
+                } else if (settings_detail.getString("type").equals("int")) {
+                    Settings.int_settings.put(id, settings_object.getInt(id));
+                }
+            }
+        }
+        LogUtils.dTag("CommonUtils","Settings json content:\n"+settings_object.toString());
     }
 }

@@ -1,15 +1,20 @@
 package dzj.cyrxdzj.bluegrape;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.MenuItem;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
+
+import com.blankj.utilcode.util.LogUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,6 +27,9 @@ public class Settings extends AppCompatActivity {
     private Map<String, Switch> bool_settings_map=new HashMap<String,Switch>();
     private Map<String, EditText> string_settings_map=new HashMap<String,EditText>();
     private Map<String, EditText> int_settings_map=new HashMap<String,EditText>();
+    public static Map<String, Boolean> bool_settings=new HashMap<String,Boolean>();
+    public static Map<String, String> string_settings=new HashMap<String,String>();
+    public static Map<String, Integer> int_settings=new HashMap<String,Integer>();
     private CommonUtil util=new CommonUtil();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +59,12 @@ public class Settings extends AppCompatActivity {
                     if(settings_detail.getString("type").equals("bool"))
                     {
                         Switch bool_settings_switch=new Switch(this);
+                        bool_settings_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                            @Override
+                            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                                save_settings();
+                            }
+                        });
                         bool_settings_map.put(settings_detail.getString("id"),bool_settings_switch);
                         bool_settings_switch.setText(settings_detail.getString("title"));
                         try {
@@ -107,5 +121,52 @@ public class Settings extends AppCompatActivity {
             e.printStackTrace();
             System.exit(1);
         }
+    }
+    private boolean save_settings()
+    {
+        try {
+            JSONObject settings_object = new JSONObject();
+            JSONArray settings_template = new JSONArray(util.read_file(R.raw.settings, this));
+            for(int i=0;i<settings_template.length();i++) {
+                JSONObject settings_part = settings_template.getJSONObject(i);
+                JSONArray settings_detail_array = settings_part.getJSONArray("settings");
+                for (int j = 0; j < settings_detail_array.length(); j++) {
+                    JSONObject settings_detail = settings_detail_array.getJSONObject(j);
+                    String id = settings_detail.getString("id");
+                    if (settings_detail.getString("type").equals("bool")) {
+                        settings_object.put(id, bool_settings_map.get(id).isChecked());
+                        bool_settings.put(id, bool_settings_map.get(id).isChecked());
+                    } else if (settings_detail.getString("type").equals("string")) {
+                        settings_object.put(id, string_settings_map.get(id).getText().toString());
+                        string_settings.put(id, string_settings_map.get(id).getText().toString());
+                    } else if (settings_detail.getString("type").equals("int")) {
+                        settings_object.put(id, Integer.parseInt(int_settings_map.get(id).getText().toString()));
+                        int_settings.put(id, Integer.parseInt(int_settings_map.get(id).getText().toString()));
+                    }
+                }
+            }
+            LogUtils.dTag("Settings","Settings json content:\n"+settings_object.toString());
+            util.write_file(util.get_storage_path()+"settings.json",settings_object.toString());
+        } catch (Exception e) {
+            util.show_info_dialog("",getString(R.string.settings_save_failed)+e.toString(),this);
+            return false;
+        }
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            boolean status=save_settings();
+            if(status)
+            {
+                this.finish();
+            }
+            else
+            {
+                util.show_info_dialog("",getString(R.string.settings_save_failed),this);
+            }
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

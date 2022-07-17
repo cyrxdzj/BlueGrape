@@ -133,6 +133,15 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
             System.exit(1);
         }
+        try {
+            util.refresh_settings(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
         WallpaperServiceIntent=new Intent(MainActivity.this, AppListener.class);
         AppListenerIntent=new Intent(MainActivity.this, WallpaperService.class);
         startService(WallpaperServiceIntent);
