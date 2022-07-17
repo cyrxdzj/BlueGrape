@@ -163,7 +163,6 @@ public class AppListener extends AccessibilityService {
                 JSONObject wallpaper_config=new JSONObject(wallpaper_config_str);
                 if(util.is_image(wallpaper_id))
                 {
-                    LogUtils.vTag("AppListenerTest","Attention");
                     make_all_alpha();
                     WallpaperService.image_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
                     WallpaperService.image_view.setImageResource(R.drawable.default_image);

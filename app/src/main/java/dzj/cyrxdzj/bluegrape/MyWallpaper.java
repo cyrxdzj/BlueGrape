@@ -27,6 +27,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
@@ -74,7 +75,8 @@ public class MyWallpaper extends AppCompatActivity {
         for(int i=0;i<get_wallpaper_list.length;i++)
         {
             try {
-                if (new File(get_wallpaper_list[i]).isDirectory()) {
+                if ((new File(util.get_storage_path()+get_wallpaper_list[i])).isDirectory()) {
+                    //LogUtils.vTag("MyWallpaperTest",(new File(get_wallpaper_list[i])).isDirectory());
                     wallpaper_name_array.add(get_wallpaper_name(get_wallpaper_list[i]));
                     wallpaper_list_array.add(get_wallpaper_list[i]);
                 }
@@ -93,24 +95,9 @@ public class MyWallpaper extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_wallpaper);
-        //初始化壁纸列表
-        File folder=new File(util.get_storage_path());
-        String[] get_wallpaper_list=folder.list();
-        List<String> wallpaper_list_array=new ArrayList<String>(),wallpaper_name_array=new ArrayList<String>();
-        for(int i=0;i<get_wallpaper_list.length;i++)
-        {
-            try {
-                if (!(get_wallpaper_list[i].equals("current_wallpaper.json")||get_wallpaper_list[i].equals("log"))) {
-                    wallpaper_name_array.add(get_wallpaper_name(get_wallpaper_list[i]));
-                    wallpaper_list_array.add(get_wallpaper_list[i]);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
         my_wallpaper_list = (ListView) findViewById(R.id.my_wallpaper_list);
+        //初始化壁纸列表
+        refresh_list();
         my_wallpaper_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -165,7 +152,7 @@ public class MyWallpaper extends AppCompatActivity {
                         catch (IllegalArgumentException e)
                         {
                             e.printStackTrace();
-                            util.show_info_dialog("",getString(R.string.unzip_failed),context);
+                            Toast.makeText(context,getString(R.string.unzip_failed),Toast.LENGTH_LONG).show();
                         }
                         zip_file_object.delete();
                         Intent done_intent=new Intent();
@@ -372,9 +359,6 @@ public class MyWallpaper extends AppCompatActivity {
                                 long downloadBytes = c.getLong(downloadBytesIdx);
                                 long totalBytes = c.getLong(totalBytesIdx);
                                 loading_dialog.setProgress((int)(downloadBytes*100/totalBytes));
-                                /*LogUtils.vTag("MyWallpaperTest",String.valueOf(downloadBytes*100/totalBytes));
-                                LogUtils.vTag("MyWallpaperTest"+" "+String.valueOf(downloadBytes),String.valueOf(totalBytes));*/
-                                //loading_dialog.setProgress(50);
                                 loading_dialog.setProgressNumberFormat(String.format("%.2fKB/%.2fKB",downloadBytes/1024.0,totalBytes/1024.0));
                                 if(downloadBytes==totalBytes)
                                 {
@@ -385,7 +369,7 @@ public class MyWallpaper extends AppCompatActivity {
                         catch (Exception ex)
                         {
                             ex.printStackTrace();
-                            util.show_info_dialog(getString(R.string.download_failed),ex.toString(),context);
+                            Toast.makeText(context, getString(R.string.download_failed)+ex.toString(),Toast.LENGTH_LONG);
                             loading_dialog.dismiss();
                             break;
                         }
