@@ -23,10 +23,12 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.NetworkUtils;
 import com.warnyul.android.widget.FastVideoView;
 
 import java.io.ByteArrayInputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 
 public class WallpaperService extends Service {
     public static boolean isStarted = false;
@@ -54,6 +56,14 @@ public class WallpaperService extends Service {
             if(url.startsWith("file://")&&!url.startsWith("file://"+util.get_storage_path()+AppListener.wallpaper_id+"/src"))
             {
                 return new WebResourceResponse("text/html","utf-8",new ByteArrayInputStream("Wallpaper access to file protocol paths other than whitelist is prohibited.".getBytes()));
+            }
+            else if(!url.startsWith("file://")&& NetworkUtils.isMobileData()&& !dzj.cyrxdzj.bluegrape.Settings.bool_settings.get("html_wallpaper.allow_mobile_network"))
+            {
+                return new WebResourceResponse("text/html","utf-8",new ByteArrayInputStream("Set to prohibit wallpaper from accessing the network under the mobile data network.".getBytes()));
+            }
+            else if(!url.startsWith("file://")&& NetworkUtils.isWifiConnected()&& !dzj.cyrxdzj.bluegrape.Settings.bool_settings.get("html_wallpaper.allow_wifi_network"))
+            {
+                return new WebResourceResponse("text/html","utf-8",new ByteArrayInputStream("Set to prohibit wallpaper from accessing the network under the Wifi network.".getBytes()));
             }
             else
             {
