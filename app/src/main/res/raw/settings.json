@@ -1,18 +1,5 @@
 [
     {
-        "description": "常规设置",
-        "settings":
-        [
-            {
-                "id": "common.allow_start_on_boot",
-                "title": "允许BlueGrape开机自启",
-                "description": "若开启此项，BlueGrape就可以在开机时自动启动关键服务，但不会弹出主界面。",
-                "type": "bool",
-                "default": false
-            }
-        ]
-    },
-    {
         "description": "动态壁纸网络设置",
         "settings":
         [
