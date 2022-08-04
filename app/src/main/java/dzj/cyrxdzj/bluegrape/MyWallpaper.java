@@ -125,6 +125,7 @@ public class MyWallpaper extends AppCompatActivity {
                 long download_id=intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 if(download_wallpaper_id.get(download_id)!=null)
                 {
+                    String wallpaper_id=download_wallpaper_id.get(download_id);
                     try {
                         if(download_cancel.get(download_id)!=null)
                         {
@@ -132,7 +133,6 @@ public class MyWallpaper extends AppCompatActivity {
                             return;
                         }
                         LogUtils.dTag("MyWallpaper","Download done.");
-                        String wallpaper_id=download_wallpaper_id.get(download_id);
                         String zip_path=download_path.get(download_id);
                         File fobj=new File(util.get_storage_path()+wallpaper_id);
                         fobj.mkdirs();
@@ -162,6 +162,8 @@ public class MyWallpaper extends AppCompatActivity {
                     catch (Exception e)
                     {
                         util.show_info_dialog("",getString(R.string.download_failed),context);
+                        File file_obj=new File(util.get_storage_path()+wallpaper_id);
+                        util.delete_dir(file_obj);
                         e.printStackTrace();
                     }
                 }
