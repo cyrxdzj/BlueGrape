@@ -174,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
         AppListenerIntent=new Intent(MainActivity.this, WallpaperService.class);
         startService(WallpaperServiceIntent);
         startService(AppListenerIntent);
-        CrashReport.testJavaCrash();
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
