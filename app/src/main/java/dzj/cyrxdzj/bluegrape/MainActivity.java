@@ -22,6 +22,7 @@ import android.widget.Button;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.PermissionUtils;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,6 +33,8 @@ import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
     private Intent WallpaperServiceIntent,AppListenerIntent;
@@ -89,6 +92,31 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        CrashReport.UserStrategy user_strategy=new CrashReport.UserStrategy(this);
+        user_strategy.setCrashHandleCallback(new CrashReport.CrashHandleCallback(){
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public byte[] onCrashHandleStart2GetExtraDatas(int crashType, String errorType,
+                                                           String errorMessage, String errorStack) {
+                try {
+                    File log_folder=new File(getCacheDir().getAbsolutePath()+"/log");
+                    String[] file_list=log_folder.list();
+                    Arrays.sort(file_list);
+                    if(file_list.length!=0)
+                    {
+                        Log.v("MainActivityTest","Uploaded log.");
+                        return util.read_file(getCacheDir().getAbsolutePath()+"/log/"+file_list[file_list.length-1]).getBytes(StandardCharsets.UTF_8);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        });
+        CrashReport.initCrashReport(getApplicationContext(), "67561c096b", true,user_strategy);
         LogUtils.Config log_config=LogUtils.getConfig();
         log_config.setLogHeadSwitch(false);
         log_config.setBorderSwitch(false);
@@ -146,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
         AppListenerIntent=new Intent(MainActivity.this, WallpaperService.class);
         startService(WallpaperServiceIntent);
         startService(AppListenerIntent);
+        CrashReport.testJavaCrash();
     }
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override

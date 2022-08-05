@@ -41,7 +41,7 @@ public class CommonUtil {
     }
     public String read_file(String path) throws IOException {
         FileReader reader=new FileReader(new File(path));
-        char[] temp=new char[1024*1024];
+        char[] temp=new char[1024*1024*2];
         reader.read(temp);
         reader.close();
         return new String(temp);

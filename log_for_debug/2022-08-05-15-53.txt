@@ -1,0 +1,472 @@
+************* Log Head ****************
+Date of Log        : 2022_08_05
+Rom Info           : RomInfo{name=huawei, version=tas-an00-user 7.1.2 tas-an00 700220625 release-keys}
+Device Manufacturer: HUAWEI
+Device Model       : TAS-AN00
+Android Version    : 7.1.2
+Android SDK        : 25
+App VersionName    : 1.1.1
+App VersionCode    : 11
+Build Time         : 2022-08-05 15:16:01 UTC+8
+Build Type         : debug
+************* Log Head ****************
+
+15:16:29.420 D/MainActivity: Files will storage at here: /data/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json
+15:16:29.518 D/CommonUtils: Settings json content:
+{"html_wallpaper.allow_mobile_network":false,"html_wallpaper.allow_wifi_network":true}
+15:16:29.519 D/MainActivity: Activity resume
+15:16:29.520 D/MainActivity: Accessibility settings off
+15:16:29.522 D/WallpaperService: Run
+15:16:29.524 D/WallpaperService: Ready
+15:16:38.612 D/AppListener: Event infomation: packageName = com.android.settings eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:16:38.620 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:16:38.622 D/AppListener: Now package name: com.android.settings
+15:16:38.648 D/AppListener: Wallpaper Service ready
+15:16:38.648 D/AppListener: Event infomation: packageName = com.android.settings eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:16:38.649 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:16:38.649 D/AppListener: Event infomation: packageName = com.android.settings eventType = 8 eventTypeByString = TYPE_VIEW_FOCUSED
+15:16:38.650 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:16:41.387 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:16:41.390 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:16:41.408 D/AppListener: Event infomation: packageName = com.android.settings eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:16:41.409 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:16:41.409 D/AppListener: Event infomation: packageName = com.android.settings eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:16:41.410 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:16:41.530 D/AppListener: Event infomation: packageName = com.android.settings eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:16:41.531 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:16:41.537 D/AppListener: Event infomation: packageName = com.android.settings eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:16:41.538 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:16:42.299 D/MainActivity: Activity resume
+15:16:42.307 D/MainActivity: Float settings on
+15:16:42.532 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:16:42.536 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:16:42.540 D/AppListener: Now package name: dzj.cyrxdzj.bluegrape
+15:16:42.541 D/AppListener: Wallpaper Service ready
+15:17:23.800 D/MyWallpaper: Activity resume
+15:17:23.899 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:17:23.900 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:23.913 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 1 eventTypeByString = TYPE_VIEW_CLICKED
+15:17:23.914 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.024 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:17:24.025 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.085 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.087 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.088 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.089 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.091 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.100 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.101 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.102 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.103 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.103 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.105 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.124 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.126 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.126 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.127 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.127 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.128 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.128 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.128 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.129 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.129 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.130 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.130 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.130 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.131 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.131 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.132 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.132 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.132 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.133 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.133 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.134 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.134 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.134 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.135 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.135 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.136 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.136 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.136 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.137 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.137 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:24.138 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:24.138 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 4096 eventTypeByString = TYPE_VIEW_SCROLLED
+15:17:24.138 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:26.835 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:26.840 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:26.848 D/MyWallpaper: The ID of the new wallpaper is: wallpaper-1659683846848
+15:17:27.122 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:17:27.123 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:27.125 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 1 eventTypeByString = TYPE_VIEW_CLICKED
+15:17:27.127 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:27.128 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:17:27.128 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:27.129 D/AppListener: Event infomation: packageName = com.android.inputmethod.pinyin eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:27.130 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:27.232 D/AppListener: Event infomation: packageName = com.android.inputmethod.pinyin eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:17:27.233 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:27.237 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:27.237 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:27.293 D/AppListener: Event infomation: packageName = com.android.inputmethod.pinyin eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:27.294 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:30.684 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:30.689 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:30.689 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:30.690 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:31.838 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:31.839 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:31.841 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:31.842 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:32.406 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:32.407 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:32.409 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:32.410 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:32.957 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:32.959 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:32.960 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:32.961 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:33.717 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:33.718 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:33.720 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:33.721 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:33.911 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:33.912 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:33.913 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:33.914 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:35.636 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:35.636 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:35.638 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:35.639 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:36.427 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:36.428 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:36.429 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:36.429 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:37.026 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:37.026 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:37.028 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:37.029 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:37.659 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:37.660 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:37.661 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:37.662 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:38.220 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:38.222 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:38.222 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:38.223 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:38.786 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:38.787 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:38.787 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:38.788 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:39.383 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 16 eventTypeByString = TYPE_VIEW_TEXT_CHANGED
+15:17:39.383 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:39.384 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 8192 eventTypeByString = TYPE_VIEW_TEXT_SELECTION_CHANGED
+15:17:39.385 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:43.212 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:43.213 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:43.352 V/MyWallpaperTest: 97
+15:17:43.353 D/MyWallpaper: Wallpaper will be downloaded at /storage/emulated/0/Android/data/dzj.cyrxdzj.bluegrape/files/download/2022-08-05 15:17:43.zip
+15:17:43.387 D/MyWallpaper: Download started.
+15:17:43.399 V/MyWallpaperTest: 0
+15:17:44.303 V/MyWallpaperTest: 0
+15:17:44.322 V/MyWallpaperTest: 0
+15:17:44.329 V/MyWallpaperTest: 0
+15:17:44.340 V/MyWallpaperTest: 0
+15:17:44.359 V/MyWallpaperTest: 0
+15:17:44.363 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:17:44.364 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.381 V/MyWallpaperTest: 0
+15:17:44.405 V/MyWallpaperTest: 0
+15:17:44.407 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 1 eventTypeByString = TYPE_VIEW_CLICKED
+15:17:44.408 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.447 V/MyWallpaperTest: 0
+15:17:44.474 V/MyWallpaperTest: 0
+15:17:44.476 V/MyWallpaperTest: 0
+15:17:44.480 V/MyWallpaperTest: 0
+15:17:44.507 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:17:44.509 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.510 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.510 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.511 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.512 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.540 V/MyWallpaperTest: 1
+15:17:44.565 E/MyWallpaper: Download ERROR. 1
+15:17:44.605 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.605 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.611 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.612 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.613 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.613 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.723 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:17:44.724 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.762 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.762 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.860 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.861 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.861 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.866 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.867 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.867 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.870 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.871 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.872 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.875 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.875 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.876 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.877 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.878 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.901 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.901 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.902 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.902 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.903 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.903 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.904 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.904 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.930 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.942 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.943 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.943 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.944 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.944 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.944 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.945 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.945 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.947 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.950 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.953 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.953 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.954 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.955 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.955 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:44.956 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:44.956 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:49.612 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:49.617 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:51.171 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:17:51.172 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:51.177 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:51.178 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:53.749 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:53.749 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:53.753 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:53.753 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:53.778 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:53.779 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:53.783 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:53.784 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:53.788 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:53.790 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:53.791 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:53.792 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:53.796 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:53.797 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.237 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.238 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.244 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.244 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.249 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.250 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.254 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.255 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.258 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.259 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.274 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:17:54.275 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.278 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:54.278 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.355 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.356 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.427 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.429 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.431 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.431 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.463 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.464 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.466 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.468 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.472 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.474 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.476 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.476 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.479 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.480 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.496 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.497 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.498 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.498 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.529 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:54.530 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.530 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.531 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.565 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.566 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.640 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:17:54.641 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.646 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.647 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.654 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:54.655 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.673 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.673 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.757 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.757 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.778 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 4096 eventTypeByString = TYPE_VIEW_SCROLLED
+15:17:54.778 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:54.858 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:54.858 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:56.551 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:56.552 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:56.554 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:56.555 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:56.588 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:56.589 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:56.653 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:56.654 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:56.673 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:56.674 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:56.689 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 8 eventTypeByString = TYPE_VIEW_FOCUSED
+15:17:56.690 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:57.019 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:17:57.020 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:57.026 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:57.027 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:57.049 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:57.052 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:57.132 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 4096 eventTypeByString = TYPE_VIEW_SCROLLED
+15:17:57.133 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:57.157 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:17:57.158 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:57.159 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:57.160 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:58.509 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:58.510 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:59.125 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:59.126 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:59.156 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:59.159 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:59.792 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 16384 eventTypeByString = TYPE_ANNOUNCEMENT
+15:17:59.793 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:59.807 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:17:59.808 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:59.811 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:17:59.813 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:59.815 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:59.815 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:17:59.909 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:17:59.910 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:00.130 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:00.132 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:00.231 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:00.232 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:00.769 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:18:00.771 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:00.981 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:18:00.982 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:00.994 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:18:00.995 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:01.113 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:18:01.114 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:03.776 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:18:03.780 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:03.915 D/MainActivity: Activity resume
+15:18:03.916 D/MainActivity: Float settings on
+15:18:03.996 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 1 eventTypeByString = TYPE_VIEW_CLICKED
+15:18:03.997 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:18:04.012 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:18:04.013 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:18:04.043 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:18:04.043 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:18:05.567 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:18:05.572 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MainActivity
+15:18:05.774 D/MyWallpaper: Activity resume
+15:18:05.910 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 1 eventTypeByString = TYPE_VIEW_CLICKED
+15:18:05.911 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:05.912 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:18:05.913 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.008 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:18:06.008 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.087 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.091 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.092 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.092 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.093 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.093 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.093 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.094 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.094 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.095 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.095 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.095 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.096 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.096 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.096 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.097 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.097 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.097 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.098 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.098 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.099 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.099 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.100 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.101 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.102 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.102 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.110 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.110 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.114 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.118 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.118 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.118 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.119 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.119 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.120 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.120 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.120 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.121 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.121 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.121 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.122 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:06.122 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:06.123 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 4096 eventTypeByString = TYPE_VIEW_SCROLLED
+15:18:06.123 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:08.630 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:18:08.633 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:08.730 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:08.731 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.MyWallpaper
+15:18:08.743 D/MyWallpaper: This wallpaper was clicked: wallpaper-1659604202290
+15:18:08.792 D/EditHtmlWallpaper: This wallpaper will be edited: wallpaper-1659604202290
+15:18:08.888 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:18:08.890 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.EditHtmlWallpaper
+15:18:08.893 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 1 eventTypeByString = TYPE_VIEW_CLICKED
+15:18:08.894 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.EditHtmlWallpaper
+15:18:08.998 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:18:08.999 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.EditHtmlWallpaper
+15:18:09.097 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:09.099 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.EditHtmlWallpaper
+15:18:10.947 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 256 eventTypeByString = TYPE_VIEW_HOVER_EXIT
+15:18:10.950 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.EditHtmlWallpaper
+15:18:11.162 D/AppListener: Event infomation: packageName = dzj.cyrxdzj.bluegrape eventType = 1 eventTypeByString = TYPE_VIEW_CLICKED
+15:18:11.163 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.EditHtmlWallpaper
+15:18:11.164 D/AppListener: Event infomation: packageName = com.android.systemui eventType = 128 eventTypeByString = TYPE_VIEW_HOVER_ENTER
+15:18:11.170 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.EditHtmlWallpaper
+15:18:11.194 D/AppListener: Event infomation: packageName = com.android.inputmethod.pinyin eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:11.195 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.EditHtmlWallpaper
+15:18:11.222 D/AppListener: Event infomation: packageName = com.android.inputmethod.pinyin eventType = 32 eventTypeByString = TYPE_WINDOW_STATE_CHANGED
+15:18:11.224 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.EditHtmlWallpaper
+15:18:11.294 D/AppListener: Event infomation: packageName = com.android.inputmethod.pinyin eventType = 2048 eventTypeByString = TYPE_WINDOW_CONTENT_CHANGED
+15:18:11.295 D/AppListener: Now Activity class name: dzj.cyrxdzj.bluegrape.EditHtmlWallpaper
+15:41:36.694 D/MainActivity: Files will storage at here: /data/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json
+15:41:36.708 D/CommonUtils: Settings json content:
+{"html_wallpaper.allow_mobile_network":false,"html_wallpaper.allow_wifi_network":true}
+15:45:00.820 D/MainActivity: Files will storage at here: /data/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json
+15:46:42.831 D/MainActivity: Files will storage at here: /data/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json
+15:46:42.845 D/CommonUtils: Settings json content:
+{"html_wallpaper.allow_mobile_network":false,"html_wallpaper.allow_wifi_network":true}
+15:48:50.250 D/MainActivity: Files will storage at here: /data/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json
+15:48:50.274 D/CommonUtils: Settings json content:
+{"html_wallpaper.allow_mobile_network":false,"html_wallpaper.allow_wifi_network":true}
+15:51:47.551 D/MainActivity: Files will storage at here: /data/data/dzj.cyrxdzj.bluegrape/files/current_wallpaper.json
+15:51:47.558 D/CommonUtils: Settings json content:
+{"html_wallpaper.allow_mobile_network":false,"html_wallpaper.allow_wifi_network":true}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                

@@ -2,6 +2,4 @@
 
 # BlueGrape隐私政策
 
-BlueGrape不会收集用户的个人隐私。事实上，BlueGrape甚至没有服务器。
-
-未来，BlueGrape可能提供导出日志的功能。可以保证，BlueGrape输出的日志绝不包含个人隐私，并且BlueGrape不会主动发送日志。
+在BlueGrape产生崩溃时，Bugly插件会上传日志和崩溃情况。这些信息不包含用户个人信息。
