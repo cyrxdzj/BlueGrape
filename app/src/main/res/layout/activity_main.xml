@@ -104,9 +104,18 @@
             android:id="@+id/open_web_text_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="8dp"
             android:layout_weight="1"
             android:onClick="open_web"
             android:text="@string/open_web" />
+
+        <TextView
+            android:id="@+id/crash_deliberate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="crash_deliberate"
+            android:text="@string/crash_deliberate" />
 
     </LinearLayout>
 

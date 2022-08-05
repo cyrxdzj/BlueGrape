@@ -63,23 +63,25 @@ public class AppListener extends AccessibilityService {
     }
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-        String packageName = event.getPackageName().toString();
-        String activityName=((ActivityManager)getSystemService(this.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getClassName();
-        int eventType = event.getEventType();
-        LogUtils.dTag("AppListener", "Event infomation: "+"packageName = " + packageName+" eventType = "+eventType + " eventTypeByString = " + AccessibilityEvent.eventTypeToString(eventType));
-        LogUtils.dTag("AppListener", "Now Activity class name: "+activityName);
-        if(isInputMethodApp(this,packageName))
-        {
-            return;
+        try {
+            String packageName = event.getPackageName().toString();
+            String activityName = ((ActivityManager) getSystemService(this.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getClassName();
+            int eventType = event.getEventType();
+            LogUtils.dTag("AppListener", "Event infomation: " + "packageName = " + packageName + " eventType = " + eventType + " eventTypeByString = " + AccessibilityEvent.eventTypeToString(eventType));
+            LogUtils.dTag("AppListener", "Now Activity class name: " + activityName);
+            if (isInputMethodApp(this, packageName)) {
+                return;
+            }
+            if (packageName.equals("com.android.systemui") && !activityName.equals("com.android.systemui.recents.RecentsActivity")) {
+                return;
+            }
+            if (!packageName.equals(last_package_name)) {
+                last_package_name = packageName;
+                refresh();
+            }
         }
-        if(packageName.equals("com.android.systemui")&&!activityName.equals("com.android.systemui.recents.RecentsActivity"))
-        {
-            return;
-        }
-        if(!packageName.equals(last_package_name))
-        {
-            last_package_name=packageName;
-            refresh();
+        catch (NullPointerException ex){
+            ex.printStackTrace();
         }
     }
 

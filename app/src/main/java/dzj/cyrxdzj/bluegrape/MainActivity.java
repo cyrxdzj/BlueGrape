@@ -272,6 +272,26 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
+    public void crash_deliberate(View view)
+    {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(this)
+                .setMessage(R.string.crash_deleberate_description)
+                .setCancelable(true)
+                .setNegativeButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton(R.string.CONFIRM, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        CrashReport.testJavaCrash();
+                    }
+                });
+        dialog.show();
+    }
     private void create_settings_file() throws IOException, JSONException {
         File file=new File(util.get_storage_path()+"settings.json");
         if(!file.exists())
