@@ -56,7 +56,7 @@ BlueGrape是一个透明壁纸软件。它可以为你的APP创建透明壁纸�
 
 HTML壁纸是一种动态壁纸，主要受LivelyWallpaper这款Windows应用启发。基本原理是在应用上覆盖一层半透明的WebView（应用内置浏览器组件），在WebView里显示可以变化的HTML，以达到动态壁纸的效果。
 
-您可以在壁纸列表页面中点击“新建HTML壁纸”，然后输入壁纸压缩文件的网址（壁纸制作者应该会提供，您也可以使用示例壁纸`https://gitee.com/cyrxdzj/BlueGrapeHTMLWallpaper/raw/master/example.zip`）。壁纸下载完毕后，您就可以使用了。
+您可以在壁纸列表页面中点击“新建HTML壁纸”，然后输入壁纸压缩文件的网址（壁纸制作者应该会提供，您也可以使用示例壁纸`https://gitee.com/cyrxdzj/BlueGrapeHTMLWallpaper/releases/download/wallpaper-example-V1.0.1/example.zip`）。壁纸下载完毕后，您就可以使用了。
 
 目前手机端暂不支持编辑它的内容。
 
