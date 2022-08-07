@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-        CrashReport.initCrashReport(getApplicationContext(), "67561c096b", true,user_strategy);
+        CrashReport.initCrashReport(getApplicationContext(), "67561c096b", false,user_strategy);
         LogUtils.Config log_config=LogUtils.getConfig();
         log_config.setLogHeadSwitch(false);
         log_config.setBorderSwitch(false);

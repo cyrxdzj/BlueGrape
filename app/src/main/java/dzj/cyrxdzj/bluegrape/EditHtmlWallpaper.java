@@ -165,7 +165,7 @@ public class EditHtmlWallpaper extends AppCompatActivity {
                 }).create();
         dialog.show();
     }
-    public void update()
+    public void update(View view)
     {
         input_url_view=new EditText(this);
         input_url_view.setMaxLines(1);
@@ -211,8 +211,8 @@ public class EditHtmlWallpaper extends AppCompatActivity {
             Long download_id=manager.enqueue(request_wallpaper);
             MyWallpaper.download_wallpaper_id.put(download_id,wallpaper_id);
             MyWallpaper.download_path.put(download_id,path.getPath());
-            LogUtils.vTag("MyWallpaperTest",download_id);
-            LogUtils.dTag("MyWallpaper","Wallpaper will be downloaded at "+path.getPath());
+            LogUtils.vTag("EditHtmlWallpaperTest",download_id);
+            LogUtils.dTag("EditHtmlWallpaper","Wallpaper will be downloaded at "+path.getPath());
             loading_dialog = new ProgressDialog(this);
             loading_dialog.setMessage(getString(R.string.downloading_wallpaper));
             loading_dialog.setCancelable(false);
@@ -225,7 +225,7 @@ public class EditHtmlWallpaper extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     try {
                         MyWallpaper.download_cancel.put(download_id,true);
-                        LogUtils.iTag("MyWallpaper","Download canceled.");
+                        LogUtils.iTag("EditHtmlWallpaper","Download canceled.");
                     }
                     catch (Exception e)
                     {
@@ -241,7 +241,7 @@ public class EditHtmlWallpaper extends AppCompatActivity {
                 public void run()
                 {
                     Looper.prepare();
-                    LogUtils.dTag("MyWallpaper","Download started.");
+                    LogUtils.dTag("EditHtmlWallpaper","Download started.");
                     while(true)
                     {
                         try {
@@ -256,12 +256,12 @@ public class EditHtmlWallpaper extends AppCompatActivity {
                             Cursor c =  manager.query(query);
                             if(c.moveToFirst())
                             {
-                                //LogUtils.vTag("MyWallpaperTest",c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON)));
+                                //LogUtils.vTag("EditHtmlWallpaperTest",c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON)));
                                 int status=c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON));
-                                LogUtils.vTag("MyWallpaperTest",String.valueOf(status));
+                                LogUtils.vTag("EditHtmlWallpaperTest",String.valueOf(status));
                                 if((status>=1000&&status<=1009)||status==1)
                                 {
-                                    LogUtils.eTag("MyWallpaper","Download ERROR. "+String.valueOf(status));
+                                    LogUtils.eTag("EditHtmlWallpaper","Download ERROR. "+String.valueOf(status));
                                     throw new Exception("Download ERROR. "+String.valueOf(status));
                                 }
                                 int downloadBytesIdx = c.getColumnIndexOrThrow(
