@@ -14,14 +14,10 @@ import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
-import android.os.Environment;
 import android.provider.Settings;
 ;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityEvent;
-import android.webkit.WebResourceResponse;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.AbsoluteLayout;
 import android.widget.ImageView;
 

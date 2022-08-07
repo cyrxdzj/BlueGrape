@@ -26,7 +26,6 @@ import android.widget.Toast;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;

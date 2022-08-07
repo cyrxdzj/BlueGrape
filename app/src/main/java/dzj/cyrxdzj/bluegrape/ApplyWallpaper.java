@@ -11,7 +11,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 ;
 import android.util.Pair;
 import android.view.MenuItem;
