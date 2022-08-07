@@ -18,6 +18,7 @@
     <string name="save_wallpaper">保存壁纸</string>
     <string name="apply_wallpaper">应用壁纸</string>
     <string name="delete_wallpaper">删除壁纸</string>
+    <string name="update_wallpaper">更新壁纸</string>
     <string name="confirm_delete">确认删除壁纸吗？</string>
     <string name="choose_image">选择图片</string>
     <string name="choose_video">选择视频</string>

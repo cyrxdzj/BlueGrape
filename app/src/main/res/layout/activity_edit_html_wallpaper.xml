@@ -26,6 +26,14 @@
             android:text="@string/apply_wallpaper" />
 
         <Button
+            android:id="@+id/update_wallpaper"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="update"
+            android:text="@string/update_wallpaper" />
+
+        <Button
             android:id="@+id/delete_wallpaper"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
