@@ -151,7 +151,6 @@ public class EditVideoWallpaper extends AppCompatActivity {
         }
         return v_path;
     }
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

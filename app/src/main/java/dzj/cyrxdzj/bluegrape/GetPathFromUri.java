@@ -18,7 +18,6 @@ public class GetPathFromUri {
     /**
      * 专为Android4.4设计的从Uri获取文件绝对路径
      */
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static String getPath(final Context context, final Uri uri) {
         GetPathFromUri.context = context;
         GetPathFromUri.uri = uri;

@@ -137,69 +137,45 @@ public class EditWallpaper extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        String imagePath=null;
-        switch (requestCode){
-            case CHOOSE_IMAGE:
-                if(resultCode == RESULT_OK){
-                    //判断手机系统版本号
-                    if(Build.VERSION.SDK_INT>=19){
-                        Uri uri = data.getData();
-                        if(DocumentsContract.isDocumentUri(this,uri)){
-                            //如果是document类型的Uri，则通过document id处理
-                            String docId = DocumentsContract.getDocumentId(uri);
-                            if("com.android.providers.media.documents".equals(uri.getAuthority())){
-                                String id = docId.split(":")[1];  //解析出数字格式的id
-                                String selection = MediaStore.Images.Media._ID+"="+id;
-                                imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI,selection);
-                            }else if("com.android.providers.downloads.documents".equals(uri.getAuthority())){
-                                Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public downloads"),Long.valueOf(docId));
-                                imagePath = getImagePath(contentUri,null);
-                            }
-                        }else if("content".equalsIgnoreCase(uri.getScheme())){
-                            //如果是file类型的Uri，直接获取图片路径即可
-                            imagePath = getImagePath(uri,null);
-                        }else if("file".equalsIgnoreCase(uri.getScheme())){
-                            //如果是file类型的Uri，直接获取图片路径即可
-                            imagePath = uri.getPath();
-                        }
-                        LogUtils.dTag("EditWallpaper","Image path is: "+imagePath);
-                        Context context=this;
-                        String finalImagePath = imagePath;
-                        ProgressDialog loading_dialog = new ProgressDialog(context);
-                        loading_dialog.setMessage(getString(R.string.copying_image));
-                        loading_dialog.setCancelable(false);
-                        loading_dialog.show();
-                        new Thread()
-                        {
+        if(requestCode==CHOOSE_IMAGE&&resultCode == RESULT_OK){
+            String imagePath=GetPathFromUri.getPath(this,data.getData());
+            if(imagePath==null)
+            {
+                util.show_info_dialog("",getString(R.string.choose_image_failed),this);
+                return;
+            }
+            Context context=this;
+            String finalImagePath = imagePath;
+            ProgressDialog loading_dialog = new ProgressDialog(context);
+            loading_dialog.setMessage(getString(R.string.copying_image));
+            loading_dialog.setCancelable(false);
+            loading_dialog.show();
+            new Thread()
+            {
+                @Override
+                public void run()
+                {
+                    Looper.prepare();
+                    try {
+                        Bitmap image= BitmapFactory.decodeFile(finalImagePath);
+                        FileOutputStream writer=new FileOutputStream(new File(util.get_storage_path()+wallpaper_id+"/image.png"));
+                        image.compress(Bitmap.CompressFormat.PNG,100,writer);
+                        writer.flush();
+                        writer.close();
+                        //refresh_image();
+                        ImageView wallpaper_view=(ImageView)findViewById(R.id.wallpaper_image);
+                        wallpaper_view.post(new Runnable() {
                             @Override
-                            public void run()
-                            {
-                                Looper.prepare();
-                                try {
-                                    Bitmap image= BitmapFactory.decodeFile(finalImagePath);
-                                    FileOutputStream writer=new FileOutputStream(new File(util.get_storage_path()+wallpaper_id+"/image.png"));
-                                    image.compress(Bitmap.CompressFormat.PNG,100,writer);
-                                    writer.flush();
-                                    writer.close();
-                                    //refresh_image();
-                                    ImageView wallpaper_view=(ImageView)findViewById(R.id.wallpaper_image);
-                                    wallpaper_view.post(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            refresh_image();
-                                        }
-                                    });
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }
-                                loading_dialog.dismiss();
+                            public void run() {
+                                refresh_image();
                             }
-                        }.start();
+                        });
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
+                    loading_dialog.dismiss();
                 }
-                break;
-            default:
-                break;
+            }.start();
         }
     }
     public void save(View view)
