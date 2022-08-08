@@ -258,7 +258,7 @@ public class EditHtmlWallpaper extends AppCompatActivity {
                             {
                                 //LogUtils.vTag("EditHtmlWallpaperTest",c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON)));
                                 int status=c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON));
-                                LogUtils.vTag("EditHtmlWallpaperTest",String.valueOf(status));
+                                //LogUtils.vTag("EditHtmlWallpaperTest",String.valueOf(status));
                                 if((status>=1000&&status<=1009)||status==1)
                                 {
                                     LogUtils.eTag("EditHtmlWallpaper","Download ERROR. "+String.valueOf(status));
@@ -282,7 +282,7 @@ public class EditHtmlWallpaper extends AppCompatActivity {
                         catch (Exception ex)
                         {
                             ex.printStackTrace();
-                            Toast.makeText(context, getString(R.string.download_failed)+ex.toString(),Toast.LENGTH_LONG);
+                            Toast.makeText(context, getString(R.string.download_failed)+ex.toString(),Toast.LENGTH_LONG).show();
                             loading_dialog.dismiss();
                             break;
                         }

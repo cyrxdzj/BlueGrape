@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.AppUtils;
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
 import com.blankj.utilcode.util.ZipUtils;
@@ -119,56 +120,57 @@ public class MyWallpaper extends AppCompatActivity {
         download_done_receiver =new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
+                LogUtils.dTag("MyWallpaper","Download event received.");
                 long download_id=intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 if(download_wallpaper_id.get(download_id)!=null)
                 {
                     String wallpaper_id=download_wallpaper_id.get(download_id);
-                    try {
-                        if(download_cancel.get(download_id)!=null)
-                        {
-                            LogUtils.dTag("MyWallpaper","Download canceled.");
-                            return;
-                        }
-                        LogUtils.dTag("MyWallpaper","Download done.");
-                        String zip_path=download_path.get(download_id);
-                        File fobj=new File(util.get_storage_path()+wallpaper_id);
-                        if(!fobj.exists())
-                        {
-                            fobj.mkdirs();
-                            fobj=new File(util.get_storage_path()+wallpaper_id+"/config.json");
-                            fobj.createNewFile();
-                            fobj=new File(util.get_storage_path()+wallpaper_id+"/html_wallpaper");
-                            fobj.createNewFile();
-                            util.write_file(util.get_storage_path()+wallpaper_id+"/config.json","{\n"+
-                                    "\t\"name\":\""+ URLEncoder.encode("新建HTML壁纸","UTF-8")+"\",\n"+
-                                    "\t\"alpha\":25\n"+
-                                    "}");
-                        }
-                        else
-                        {
-                            util.delete_dir(new File(util.get_storage_path()+wallpaper_id+"/src"));
-                        }
-                        File zip_file_object=new File(zip_path);
-                        try {
-                            ZipUtils.unzipFile(zip_path,util.get_storage_path()+wallpaper_id+"/src");
-                        }
-                        catch (IllegalArgumentException e)
-                        {
-                            e.printStackTrace();
-                            Toast.makeText(context,getString(R.string.unzip_failed),Toast.LENGTH_LONG).show();
-                        }
-                        zip_file_object.delete();
-                        Intent done_intent=new Intent();
-                        done_intent.setClass(MyWallpaper.this,EditHtmlWallpaper.class);
-                        done_intent.putExtra("wallpaper_id",wallpaper_id);
-                        MyWallpaper.this.startActivity(done_intent);
-                    }
-                    catch (Exception e)
+                    String path=download_path.get(download_id);
+                    if(download_cancel.get(download_id)!=null)
                     {
-                        util.show_info_dialog("",getString(R.string.download_failed),context);
-                        File file_obj=new File(util.get_storage_path()+wallpaper_id);
-                        util.delete_dir(file_obj);
-                        e.printStackTrace();
+                        LogUtils.dTag("MyWallpaper","Download canceled.");
+                        return;
+                    }
+                    if(path==null|| path.equals(""))
+                    {
+                        LogUtils.eTag("MyWallpaper","Download ERROR.");
+                        return;
+                    }
+                    LogUtils.dTag("MyWallpaper","Download done.");
+                    if(path.endsWith(".zip")) {
+                        try {
+                            File fobj = new File(util.get_storage_path() + wallpaper_id);
+                            if (!fobj.exists()) {
+                                fobj.mkdirs();
+                                fobj = new File(util.get_storage_path() + wallpaper_id + "/config.json");
+                                fobj.createNewFile();
+                                fobj = new File(util.get_storage_path() + wallpaper_id + "/html_wallpaper");
+                                fobj.createNewFile();
+                                util.write_file(util.get_storage_path() + wallpaper_id + "/config.json", "{\n" +
+                                        "\t\"name\":\"" + URLEncoder.encode("新建HTML壁纸", "UTF-8") + "\",\n" +
+                                        "\t\"alpha\":25\n" +
+                                        "}");
+                            } else {
+                                util.delete_dir(new File(util.get_storage_path() + wallpaper_id + "/src"));
+                            }
+                            File zip_file_object = new File(path);
+                            try {
+                                ZipUtils.unzipFile(path, util.get_storage_path() + wallpaper_id + "/src");
+                            } catch (IllegalArgumentException e) {
+                                e.printStackTrace();
+                                Toast.makeText(context, getString(R.string.unzip_failed), Toast.LENGTH_LONG).show();
+                            }
+                            zip_file_object.delete();
+                            Intent done_intent = new Intent();
+                            done_intent.setClass(MyWallpaper.this, EditHtmlWallpaper.class);
+                            done_intent.putExtra("wallpaper_id", wallpaper_id);
+                            MyWallpaper.this.startActivity(done_intent);
+                        } catch (Exception e) {
+                            util.show_info_dialog("", getString(R.string.download_failed), context);
+                            File file_obj = new File(util.get_storage_path() + wallpaper_id);
+                            util.delete_dir(file_obj);
+                            e.printStackTrace();
+                        }
                     }
                 }
             }
@@ -351,7 +353,7 @@ public class MyWallpaper extends AppCompatActivity {
                             {
                                 //LogUtils.vTag("MyWallpaperTest",c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON)));
                                 int status=c.getInt(c.getColumnIndex(DownloadManager.COLUMN_REASON));
-                                LogUtils.vTag("MyWallpaperTest",String.valueOf(status));
+                                //LogUtils.vTag("MyWallpaperTest",String.valueOf(status));
                                 if((status>=1000&&status<=1009)||status==1)
                                 {
                                     LogUtils.eTag("MyWallpaper","Download ERROR. "+String.valueOf(status));

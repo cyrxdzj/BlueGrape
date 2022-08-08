@@ -65,4 +65,8 @@
     <string name="settings">设置</string>
     <string name="settings_save_successfully">保存设置成功</string>
     <string name="settings_save_failed">保存设置失败</string>
+    <string name="apk_download_task">安装包下载程序</string>
+    <string name="downloading_apk">安装包正在下载中……</string>
+    <string name="download_apk_failed">安装包下载失败</string>
+    <string name="download_apk_canceled">安装包下载已取消</string>
 </resources>
