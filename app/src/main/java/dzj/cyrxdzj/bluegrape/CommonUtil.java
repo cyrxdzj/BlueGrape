@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class CommonUtil {
+    public static final int CHOOSE_IMAGE=2;
+    public static final int CHOOSE_VIDEO=3;
     public boolean is_image(String wallpaper_id)
     {
         return !(is_video(wallpaper_id)||is_html(wallpaper_id));

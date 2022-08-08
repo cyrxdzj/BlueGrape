@@ -274,6 +274,7 @@ public class EditHtmlWallpaper extends AppCompatActivity {
                                 loading_dialog.setProgressNumberFormat(String.format("%.2fKB/%.2fKB",downloadBytes/1024.0,totalBytes/1024.0));
                                 if(downloadBytes==totalBytes)
                                 {
+                                    finish();
                                     break;
                                 }
                             }

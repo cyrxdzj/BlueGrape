@@ -34,7 +34,6 @@ import java.net.URLEncoder;
 public class EditVideoWallpaper extends AppCompatActivity {
 
     private String wallpaper_id,wallpaper_path;
-    public static final int CHOOSE_VIDEO = 3;
     private EditText wallpaper_name_editor;
     private SeekBar alpha_seekbar;
     private Spinner fill_method_spinner,position_spinner;
@@ -127,7 +126,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
     {
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("video/*");
-        startActivityForResult(intent,CHOOSE_VIDEO);
+        startActivityForResult(intent, CommonUtil.CHOOSE_VIDEO);
     }
     private String getVideoPath(Uri uri)
     {
@@ -154,7 +153,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==CHOOSE_VIDEO&&resultCode==RESULT_OK)
+        if(requestCode==CommonUtil.CHOOSE_VIDEO&&resultCode==RESULT_OK)
         {
             //String path=getVideoPath(data.getData());
             String path=GetPathFromUri.getPath(this,data.getData());

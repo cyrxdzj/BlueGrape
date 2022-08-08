@@ -143,35 +143,25 @@ public class MyWallpaper extends AppCompatActivity {
                                     "\t\"name\":\""+ URLEncoder.encode("新建HTML壁纸","UTF-8")+"\",\n"+
                                     "\t\"alpha\":25\n"+
                                     "}");
-                            File zip_file_object=new File(zip_path);
-                            try {
-                                ZipUtils.unzipFile(zip_path,util.get_storage_path()+wallpaper_id+"/src");
-                            }
-                            catch (IllegalArgumentException e)
-                            {
-                                e.printStackTrace();
-                                Toast.makeText(context,getString(R.string.unzip_failed),Toast.LENGTH_LONG).show();
-                            }
-                            zip_file_object.delete();
-                            Intent done_intent=new Intent();
-                            done_intent.setClass(MyWallpaper.this,EditHtmlWallpaper.class);
-                            done_intent.putExtra("wallpaper_id",wallpaper_id);
-                            MyWallpaper.this.startActivity(done_intent);
                         }
                         else
                         {
                             util.delete_dir(new File(util.get_storage_path()+wallpaper_id+"/src"));
-                            File zip_file_object=new File(zip_path);
-                            try {
-                                ZipUtils.unzipFile(zip_path,util.get_storage_path()+wallpaper_id+"/src");
-                            }
-                            catch (IllegalArgumentException e)
-                            {
-                                e.printStackTrace();
-                                Toast.makeText(context,getString(R.string.unzip_failed),Toast.LENGTH_LONG).show();
-                            }
-                            zip_file_object.delete();
                         }
+                        File zip_file_object=new File(zip_path);
+                        try {
+                            ZipUtils.unzipFile(zip_path,util.get_storage_path()+wallpaper_id+"/src");
+                        }
+                        catch (IllegalArgumentException e)
+                        {
+                            e.printStackTrace();
+                            Toast.makeText(context,getString(R.string.unzip_failed),Toast.LENGTH_LONG).show();
+                        }
+                        zip_file_object.delete();
+                        Intent done_intent=new Intent();
+                        done_intent.setClass(MyWallpaper.this,EditHtmlWallpaper.class);
+                        done_intent.putExtra("wallpaper_id",wallpaper_id);
+                        MyWallpaper.this.startActivity(done_intent);
                     }
                     catch (Exception e)
                     {

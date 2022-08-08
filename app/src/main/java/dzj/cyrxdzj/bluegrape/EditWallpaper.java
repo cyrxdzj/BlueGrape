@@ -43,7 +43,6 @@ import java.net.URLEncoder;
 public class EditWallpaper extends AppCompatActivity {
 
     private String wallpaper_id;
-    public static final int CHOOSE_IMAGE = 2;
     private EditText wallpaper_name_editor;
     private SeekBar alpha_seekbar;
     private Spinner fill_method_spinner,position_spinner;
@@ -120,7 +119,7 @@ public class EditWallpaper extends AppCompatActivity {
     {
         Intent intent=new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/");
-        startActivityForResult(intent,CHOOSE_IMAGE);
+        startActivityForResult(intent,CommonUtil.CHOOSE_IMAGE);
     }
     private String getImagePath(Uri uri,String selection){
         String path = null;
@@ -137,7 +136,7 @@ public class EditWallpaper extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==CHOOSE_IMAGE&&resultCode == RESULT_OK){
+        if(requestCode==CommonUtil.CHOOSE_IMAGE&&resultCode == RESULT_OK){
             String imagePath=GetPathFromUri.getPath(this,data.getData());
             if(imagePath==null)
             {
