@@ -127,4 +127,18 @@ public class CommonUtil {
         }
         LogUtils.dTag("CommonUtils","Settings json content:\n"+settings_object.toString());
     }
+    public int get_screen_width(Context context)
+    {
+        return context.getResources().getDisplayMetrics().widthPixels;
+    }
+    public int get_screen_height(Context context)
+    {
+        int status_bar_height=0;
+        int status_bar_r_id=context.getResources().getIdentifier("status_bar_height","dimen","android");
+        if(status_bar_r_id>0)
+        {
+            status_bar_height=context.getResources().getDimensionPixelSize(status_bar_r_id);
+        }
+        return context.getResources().getDisplayMetrics().heightPixels-status_bar_height;
+    }
 }

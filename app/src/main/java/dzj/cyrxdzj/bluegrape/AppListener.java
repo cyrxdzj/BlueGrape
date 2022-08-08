@@ -171,12 +171,12 @@ public class AppListener extends AccessibilityService {
                     int image_view_width,image_view_height;
                     if(wallpaper_config.getString("fill_method").equals("left-right"))
                     {
-                        image_view_width=this.getResources().getDisplayMetrics().widthPixels;
+                        image_view_width=util.get_screen_width(this);
                         image_view_height= (int) (image_height*(image_view_width*1.0/image_width));
                     }
                     else
                     {
-                        image_view_height=this.getResources().getDisplayMetrics().heightPixels;
+                        image_view_height=util.get_screen_height(this);
                         image_view_width=(int)(image_width*(image_view_height*1.0/image_height));
                     }
                     layoutParams.width=image_view_width;
@@ -192,11 +192,11 @@ public class AppListener extends AccessibilityService {
                         if(wallpaper_config.getString("fill_method").equals("left-right"))
                         {
                             x=0;
-                            y=this.getResources().getDisplayMetrics().heightPixels-image_view_height;
+                            y=util.get_screen_height(this)-image_view_height;
                         }
                         else
                         {
-                            x=this.getResources().getDisplayMetrics().widthPixels-image_view_width;
+                            x=util.get_screen_width(this)-image_view_width;
                             y=0;
                         }
                     }
@@ -242,12 +242,12 @@ public class AppListener extends AccessibilityService {
                     int video_view_width,video_view_height;
                     if(wallpaper_config.getString("fill_method").equals("left-right"))
                     {
-                        video_view_width=this.getResources().getDisplayMetrics().widthPixels;
+                        video_view_width=util.get_screen_width(this);
                         video_view_height= (int) (video_height*(video_view_width*1.0/video_width));
                     }
                     else
                     {
-                        video_view_height=this.getResources().getDisplayMetrics().heightPixels;
+                        video_view_height=util.get_screen_height(this);
                         video_view_width=(int)(video_width*(video_view_height*1.0/video_height));
                     }
                     layoutParams.width=video_view_width;
@@ -264,11 +264,11 @@ public class AppListener extends AccessibilityService {
                         if(wallpaper_config.getString("fill_method").equals("left-right"))
                         {
                             x=0;
-                            y=this.getResources().getDisplayMetrics().heightPixels-video_view_height;
+                            y=util.get_screen_height(this)-video_view_height;
                         }
                         else
                         {
-                            x=this.getResources().getDisplayMetrics().widthPixels-video_view_width;
+                            x=util.get_screen_width(this)-video_view_width;
                             y=0;
                         }
                     }
@@ -283,8 +283,8 @@ public class AppListener extends AccessibilityService {
                     WallpaperService.html_view.setAlpha((float) (wallpaper_config.getInt("alpha")/100.0));
                     WallpaperService.html_view.loadUrl("file://"+util.get_storage_path()+wallpaper_id+"/src/index.html");
                     AbsoluteLayout.LayoutParams layoutParams=(AbsoluteLayout.LayoutParams)WallpaperService.html_view.getLayoutParams();
-                    layoutParams.height=this.getResources().getDisplayMetrics().heightPixels;
-                    layoutParams.width=this.getResources().getDisplayMetrics().widthPixels;
+                    layoutParams.height=util.get_screen_height(this);
+                    layoutParams.width=util.get_screen_width(this);
                     layoutParams.x=0;
                     layoutParams.y=0;
                     WallpaperService.html_view.setLayoutParams(layoutParams);

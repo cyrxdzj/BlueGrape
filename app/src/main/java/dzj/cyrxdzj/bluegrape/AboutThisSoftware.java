@@ -104,7 +104,7 @@ public class AboutThisSoftware extends AppCompatActivity {
     }
     private void download_and_install(String url)
     {
-        url="https://ip73861753.out.azhimalayanvh.com/fs08/2021/12/31/1/106_5ea1071c4419c525d9f2e301784e5376.apk?yingid=wdj_web&fname=12306%E5%AE%98%E6%96%B9%E7%89%88&productid=2011&pos=wdj_web%2Fdetail_normal_dl%2F0&appid=2194885&packageid=601100218&apprd=2194885&iconUrl=http%3A%2F%2Fandroid-artworks.25pp.com%2Ffs08%2F2022%2F01%2F04%2F6%2F106_a1dd08e052f299a41297a4e92cdec8fb_con.png&pkg=com.MobileTicket&did=e50093f5f8b7ffebb7170f61e57f11a4&vcode=255&md5=f303a64c6366c55657c7a7db135f687f&ali_redirect_domain=alissl.ucdl.pp.uc.cn&ali_redirect_ex_ftag=a41c5ac264566d2c85614495442a7f14de520cfc78e8bfef&ali_redirect_ex_tmining_ts=1659932918&ali_redirect_ex_tmining_expire=3600&ali_redirect_ex_hot=100";
+        //url="https://ip73861753.out.azhimalayanvh.com/fs08/2021/12/31/1/106_5ea1071c4419c525d9f2e301784e5376.apk?yingid=wdj_web&fname=12306%E5%AE%98%E6%96%B9%E7%89%88&productid=2011&pos=wdj_web%2Fdetail_normal_dl%2F0&appid=2194885&packageid=601100218&apprd=2194885&iconUrl=http%3A%2F%2Fandroid-artworks.25pp.com%2Ffs08%2F2022%2F01%2F04%2F6%2F106_a1dd08e052f299a41297a4e92cdec8fb_con.png&pkg=com.MobileTicket&did=e50093f5f8b7ffebb7170f61e57f11a4&vcode=255&md5=f303a64c6366c55657c7a7db135f687f&ali_redirect_domain=alissl.ucdl.pp.uc.cn&ali_redirect_ex_ftag=a41c5ac264566d2c85614495442a7f14de520cfc78e8bfef&ali_redirect_ex_tmining_ts=1659932918&ali_redirect_ex_tmining_expire=3600&ali_redirect_ex_hot=100";
         try {
             Context context=this;
             String[] temp=url.split("\\?")[0].split("/");
