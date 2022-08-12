@@ -71,6 +71,10 @@ public class AppListener extends AccessibilityService {
             if (packageName.equals("com.android.systemui") && !activityName.equals("com.android.systemui.recents.RecentsActivity")) {
                 return;
             }
+            if(packageName.equals("android"))
+            {
+                return;
+            }
             if (!packageName.equals(last_package_name)) {
                 last_package_name = packageName;
                 refresh();
