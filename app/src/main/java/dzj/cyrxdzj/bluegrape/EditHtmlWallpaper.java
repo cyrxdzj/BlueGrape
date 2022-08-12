@@ -45,19 +45,6 @@ public class EditHtmlWallpaper extends AppCompatActivity {
     private ProgressDialog loading_dialog;
     private CommonUtil util=new CommonUtil();
     private Context context;
-    public void show_info_dialog(String title,String content)
-    {
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle(title)
-                .setMessage(content)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                }).create();
-        dialog.show();
-    }
     public void show_delete_question_dialog()
     {
         AlertDialog dialog = new AlertDialog.Builder(this)

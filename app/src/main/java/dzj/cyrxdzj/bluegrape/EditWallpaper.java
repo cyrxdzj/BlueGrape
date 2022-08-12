@@ -157,6 +157,10 @@ public class EditWallpaper extends AppCompatActivity {
                     Looper.prepare();
                     try {
                         Bitmap image= BitmapFactory.decodeFile(finalImagePath);
+                        if(image==null)
+                        {
+                            util.show_info_dialog("",getString(R.string.choose_image_failed),context);
+                        }
                         FileOutputStream writer=new FileOutputStream(new File(util.get_storage_path()+wallpaper_id+"/image.png"));
                         image.compress(Bitmap.CompressFormat.PNG,100,writer);
                         writer.flush();
