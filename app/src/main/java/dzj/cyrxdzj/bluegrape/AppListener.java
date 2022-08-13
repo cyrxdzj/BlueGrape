@@ -61,7 +61,12 @@ public class AppListener extends AccessibilityService {
     public void onAccessibilityEvent(AccessibilityEvent event) {
         try {
             String packageName = event.getPackageName().toString();
-            String activityName = ((ActivityManager) getSystemService(this.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getClassName();
+            //String activityName = ((ActivityManager) getSystemService(this.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getClassName();
+            String activityName="";
+            if(((ActivityManager) getSystemService(this.ACTIVITY_SERVICE)).getRunningTasks(1).size()>0)
+            {
+                activityName=((ActivityManager) getSystemService(this.ACTIVITY_SERVICE)).getRunningTasks(1).get(0).topActivity.getClassName();
+            }
             int eventType = event.getEventType();
             LogUtils.dTag("AppListener", "Event infomation: " + "packageName = " + packageName + " eventType = " + eventType + " eventTypeByString = " + AccessibilityEvent.eventTypeToString(eventType));
             LogUtils.dTag("AppListener", "Now Activity class name: " + activityName);
