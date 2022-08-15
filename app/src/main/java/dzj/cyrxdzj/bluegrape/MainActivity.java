@@ -125,6 +125,9 @@ public class MainActivity extends AppCompatActivity {
         log_config.addFileExtraHead("Build Type",BuildConfig.BUILD_TYPE);
         log_config.setSaveDays(30);
         log_config.setLog2FileSwitch(true);
+        CaocConfig.Builder.create()
+                .errorActivity(CrashActivity.class)
+                .apply();
         try {
             String[] PERMISSIONS_STORAGE = {
                 "android.permission.READ_EXTERNAL_STORAGE",

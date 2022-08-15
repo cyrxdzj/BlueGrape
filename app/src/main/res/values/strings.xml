@@ -69,4 +69,5 @@
     <string name="downloading_apk">安装包正在下载中……</string>
     <string name="download_apk_failed">安装包下载失败</string>
     <string name="download_apk_canceled">安装包下载已取消</string>
+    <string name="crash_message">抱歉，BlueGrape遇到了错误。联网情况下，Bugly插件会上传错误详情以帮助开发者修复问题。您可以联系哔哩哔哩@cyrxdzj。另外，请查看官网，也许上面有修复了这个BUG的版本更新。</string>
 </resources>
