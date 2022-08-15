@@ -9,7 +9,9 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 
-import androidx.annotation.RequiresApi;
+import com.blankj.utilcode.util.UriUtils;
+
+import java.io.File;
 
 public class GetPathFromUri {
     private static Context context;
@@ -19,13 +21,16 @@ public class GetPathFromUri {
      * 专为Android4.4设计的从Uri获取文件绝对路径
      */
     public static String getPath(final Context context, final Uri uri) {
+        File file_obj= UriUtils.uri2File(uri);
+        return file_obj.getAbsolutePath();
+        /*
         GetPathFromUri.context = context;
         GetPathFromUri.uri = uri;
 
-        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        //final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
 
         // DocumentProvider
-        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && DocumentsContract.isDocumentUri(context, uri)) {
             // ExternalStorageProvider
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
@@ -74,7 +79,7 @@ public class GetPathFromUri {
         else if ("file".equalsIgnoreCase(uri.getScheme())) {
             return uri.getPath();
         }
-        return null;
+        return null;*/
     }
 
     /**

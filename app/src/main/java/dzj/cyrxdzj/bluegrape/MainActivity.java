@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
+import cat.ereza.customactivityoncrash.config.CaocConfig;
+
 public class MainActivity extends AppCompatActivity {
     private Intent WallpaperServiceIntent,AppListenerIntent;
     private AlertDialog dialog1,dialog2;

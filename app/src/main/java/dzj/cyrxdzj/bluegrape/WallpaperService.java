@@ -24,6 +24,7 @@ import androidx.annotation.RequiresApi;
 
 import com.blankj.utilcode.util.LogUtils;
 import com.blankj.utilcode.util.NetworkUtils;
+import com.blankj.utilcode.util.PermissionUtils;
 import com.warnyul.android.widget.FastVideoView;
 
 import java.io.ByteArrayInputStream;
@@ -102,7 +103,7 @@ public class WallpaperService extends Service {
     @SuppressLint("SetJavaScriptEnabled")
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void showFloatingWindow() {
-        if (Settings.canDrawOverlays(this)) {
+        if (PermissionUtils.isGrantedDrawOverlays()) {
             ready=true;
             LogUtils.dTag("WallpaperService","Ready");
             image_view = new ImageView(this);

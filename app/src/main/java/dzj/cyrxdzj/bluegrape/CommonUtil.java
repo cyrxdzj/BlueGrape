@@ -4,12 +4,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Environment;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.blankj.utilcode.util.LogUtils;
+import com.blankj.utilcode.util.UriUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -140,5 +142,18 @@ public class CommonUtil {
             status_bar_height=context.getResources().getDimensionPixelSize(status_bar_r_id);
         }
         return context.getResources().getDisplayMetrics().heightPixels-status_bar_height;
+    }
+    public String get_path_from_uri(Uri uri)
+    {
+        try
+        {
+            File fobj= UriUtils.uri2File(uri);
+            return fobj.getAbsolutePath();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }

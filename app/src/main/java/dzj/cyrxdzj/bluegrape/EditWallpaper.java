@@ -137,7 +137,8 @@ public class EditWallpaper extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==CommonUtil.CHOOSE_IMAGE&&resultCode == RESULT_OK){
-            String imagePath=GetPathFromUri.getPath(this,data.getData());
+            String imagePath=util.get_path_from_uri(data.getData());
+            LogUtils.dTag("EditWallpaper","Image path is "+imagePath);
             if(imagePath==null)
             {
                 util.show_info_dialog("",getString(R.string.choose_image_failed),this);
@@ -173,7 +174,8 @@ public class EditWallpaper extends AppCompatActivity {
                                 refresh_image();
                             }
                         });
-                    } catch (IOException e) {
+                    } catch (Exception e) {
+                        util.show_info_dialog("",getString(R.string.choose_image_failed),context);
                         e.printStackTrace();
                     }
                     loading_dialog.dismiss();

@@ -156,7 +156,7 @@ public class EditVideoWallpaper extends AppCompatActivity {
         if(requestCode==CommonUtil.CHOOSE_VIDEO&&resultCode==RESULT_OK)
         {
             //String path=getVideoPath(data.getData());
-            String path=GetPathFromUri.getPath(this,data.getData());
+            String path=util.get_path_from_uri(data.getData());
             LogUtils.dTag("EditVideoWallpaper","Video path is: "+wallpaper_path);
             if(path==null)
             {
