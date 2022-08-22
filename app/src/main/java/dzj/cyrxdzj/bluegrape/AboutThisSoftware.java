@@ -55,14 +55,14 @@ public class AboutThisSoftware extends AppCompatActivity {
     {
         Context context=this;
         AlertDialog dialog = new AlertDialog.Builder(this)
-                .setMessage("当前版本"+now_version+"，最新版本"+latest_version+"，是否更新？")
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                .setMessage(getString(R.string.current_version)+now_version+"\n"+getString(R.string.latest_version)+latest_version+"\n"+getString(R.string.do_update_question))
+                .setNegativeButton(R.string.CANCEL, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 })
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton(R.string.OK, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         LogUtils.dTag("AboutThisSoftware","Info: "+now_version+" "+latest_version+" "+url);

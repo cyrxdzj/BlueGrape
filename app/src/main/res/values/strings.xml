@@ -40,7 +40,7 @@
     <string name="current_wallpaper_list_tip">短按以查看详情，长按以取消应用。</string>
     <string name="accessibility_description">这是BlueGrape运行的必要权限，用于检测当前位于哪个窗口，以决定播放哪个壁纸。</string>
     <string name="accessibility_permission_requests">程序需要无障碍权限以获取当前正在使用的应用后决定是否显示壁纸以及显示哪个壁纸，请在列表中找到“BlueGrape”后手动开启权限。</string>
-    <string name="accessibility_permission_requests_on_close">Android系统关闭了程序的无障碍权限，这有可能不是您的本意。打开无障碍权限设置吗？\n请在列表中找到“BlueGrape”后手动开启权限。\n如果您觉得这个对话框弹出太频繁，可以停止BlueGrape运行。</string>
+    <string name="accessibility_permission_requests_on_close">Android系统关闭了程序的无障碍权限，这有可能不是您的本意。打开无障碍权限设置吗？ 请在列表中找到“BlueGrape”后手动开启权限。 如果您觉得这个对话框弹出太频繁，可以停止BlueGrape运行。</string>
     <string name="overlay_permission_requests">程序需要“在应用上层显示”权限以显示壁纸。请授权。</string>
     <string name="check_update">检查更新</string>
     <string name="checking_update">正在检查更新，点击空白处可取消。</string>
@@ -50,7 +50,7 @@
     <string name="crash_deliberate">崩溃测试</string>
     <string name="crash_deleberate_description">崩溃测试用于故意触发崩溃以上传日志至Bugly，仅在软件出现问题时使用。</string>
     <string name="reward_and_contribution">赞赏与贡献</string>
-    <string name="info_text_load_failed">壁纸加载失败</string>
+    <string name="info_text_load_failed">壁纸加载失败。</string>
     <string name="gif_unsupported">不支持GIF。但这个网站可能对您有所帮助：</string>
     <string name="input_url">输入壁纸URL</string>
     <string name="OK">好的</string>
@@ -63,11 +63,24 @@
     <string name="download_failed">下载壁纸时出现了错误。</string>
     <string name="unzip_failed">解压壁纸时遇到了错误，也许壁纸还能用。</string>
     <string name="settings">设置</string>
-    <string name="settings_save_successfully">保存设置成功</string>
-    <string name="settings_save_failed">保存设置失败</string>
+    <string name="settings_save_successfully">保存设置成功。</string>
+    <string name="settings_save_failed">保存设置失败。</string>
     <string name="apk_download_task">安装包下载程序</string>
     <string name="downloading_apk">安装包正在下载中……</string>
-    <string name="download_apk_failed">安装包下载失败</string>
-    <string name="download_apk_canceled">安装包下载已取消</string>
+    <string name="download_apk_failed">安装包下载失败。</string>
+    <string name="download_apk_canceled">安装包下载已取消。</string>
     <string name="crash_message">抱歉，BlueGrape遇到了错误。联网情况下，Bugly插件会上传错误详情以帮助开发者修复问题。您可以联系哔哩哔哩@cyrxdzj。另外，请查看官网，也许上面有修复了这个BUG的版本更新。</string>
+    <string name="filling_left_right">左右填充</string>
+    <string name="filling_top_bottom">上下填充</string>
+    <string name="position_left_top">左/上位置</string>
+    <string name="position_right_bottom">右/下位置</string>
+    <string name="reward">赞赏</string>
+    <string name="contribution">贡献</string>
+    <string name="about_text_1">BlueGrape是开源软件，开源代码托管于Gitee和Github上。若您是开源开发者，欢迎前来提交ISSUE或Pull Requests。</string>
+    <string name="about_text_2">记得给一个Star和Watch哦~</string>
+    <string name="url_website">官网地址</string>
+    <string name="url_opensrc_repo">开源仓库地址</string>
+    <string name="current_version">当前版本</string>
+    <string name="latest_version">最新版本</string>
+    <string name="do_update_question">是否更新？</string>
 </resources>
