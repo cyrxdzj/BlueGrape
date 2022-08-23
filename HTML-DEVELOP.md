@@ -46,11 +46,11 @@
 
 ### 6、发布
 
-将zip文件放到网络上某个地方，将zip文件的网址公布给大家即可。
+将zip文件放到网络上某个地方，将zip文件的网址公布给大家即可。也可以向[这里](https://gitee.com/cyrxdzj/BlueGrapeHTMLWallpaper)投稿。
 
 ### 二、示例
 
-可以[在这里](https://pan.baidu.com/s/1sAEdtaRJNNIsRJK18wMCoQ?pwd=64w4)下载示例压缩包。
+可以[在这里](https://gitee.com/cyrxdzj/BlueGrapeHTMLWallpaper)下载示例压缩包以及也许你会用到的工具。
 
 ### 三、其他事项
 
