@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
         //if(!checkFloatPermission(this))
-        if(!PermissionUtils.isGrantedDrawOverlays())
+        if(Build.VERSION_CODES>=Build.VERSION_CODES.O&&!PermissionUtils.isGrantedDrawOverlays())
         {
             LogUtils.dTag("MainActivity","Float settings off");
             show_ask_permission2_dialog();
