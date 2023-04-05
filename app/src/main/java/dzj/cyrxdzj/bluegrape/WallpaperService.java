@@ -7,8 +7,6 @@ import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.IBinder;
-import android.provider.Settings;
-;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,8 +26,8 @@ import com.blankj.utilcode.util.PermissionUtils;
 import com.warnyul.android.widget.FastVideoView;
 
 import java.io.ByteArrayInputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
+
+;
 
 public class WallpaperService extends Service {
     public static boolean isStarted = false;
@@ -42,36 +40,31 @@ public class WallpaperService extends Service {
     public static FastVideoView video_view;
     public static WebView html_view;
     public static TextView info_text_view;
-    private CommonUtil util=new CommonUtil();
-    public static boolean ready=false;
+    private CommonUtil util = new CommonUtil();
+    public static boolean ready = false;
+
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
-    private WebViewClient web_view_client=new WebViewClient(){
+
+    private WebViewClient web_view_client = new WebViewClient() {
         @Override
-        public WebResourceResponse shouldInterceptRequest(WebView html_view, String url)
-        {
-            LogUtils.dTag("WallpaperService","Request: "+url);
-            if(url.startsWith("file://")&&!url.startsWith("file://"+util.get_storage_path()+AppListener.wallpaper_id+"/src"))
-            {
-                return new WebResourceResponse("text/html","utf-8",new ByteArrayInputStream("Wallpaper access to file protocol paths other than whitelist is prohibited.".getBytes()));
-            }
-            else if(!url.startsWith("file://")&& NetworkUtils.isMobileData()&& !dzj.cyrxdzj.bluegrape.Settings.bool_settings.get("html_wallpaper.allow_mobile_network"))
-            {
-                return new WebResourceResponse("text/html","utf-8",new ByteArrayInputStream("Set to prohibit wallpaper from accessing the network under the mobile data network.".getBytes()));
-            }
-            else if(!url.startsWith("file://")&& NetworkUtils.isWifiConnected()&& !dzj.cyrxdzj.bluegrape.Settings.bool_settings.get("html_wallpaper.allow_wifi_network"))
-            {
-                return new WebResourceResponse("text/html","utf-8",new ByteArrayInputStream("Set to prohibit wallpaper from accessing the network under the Wifi network.".getBytes()));
-            }
-            else
-            {
+        public WebResourceResponse shouldInterceptRequest(WebView html_view, String url) {
+            LogUtils.dTag("WallpaperService", "Request: " + url);
+            if (url.startsWith("file://") && !url.startsWith("file://" + util.get_storage_path() + AppListener.wallpaper_id + "/src")) {
+                return new WebResourceResponse("text/html", "utf-8", new ByteArrayInputStream("Wallpaper access to file protocol paths other than whitelist is prohibited.".getBytes()));
+            } else if (!url.startsWith("file://") && NetworkUtils.isMobileData() && !dzj.cyrxdzj.bluegrape.Settings.bool_settings.get("html_wallpaper.allow_mobile_network")) {
+                return new WebResourceResponse("text/html", "utf-8", new ByteArrayInputStream("Set to prohibit wallpaper from accessing the network under the mobile data network.".getBytes()));
+            } else if (!url.startsWith("file://") && NetworkUtils.isWifiConnected() && !dzj.cyrxdzj.bluegrape.Settings.bool_settings.get("html_wallpaper.allow_wifi_network")) {
+                return new WebResourceResponse("text/html", "utf-8", new ByteArrayInputStream("Set to prohibit wallpaper from accessing the network under the Wifi network.".getBytes()));
+            } else {
                 return null;
             }
         }
     };
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -85,12 +78,12 @@ public class WallpaperService extends Service {
         }
         layoutParams.format = PixelFormat.RGBA_8888;
         layoutParams.gravity = Gravity.LEFT | Gravity.TOP;
-        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE|WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
+        layoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE;
         layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
         layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         layoutParams.x = 0;
         layoutParams.y = 0;
-        LogUtils.dTag("WallpaperService","Run");
+        LogUtils.dTag("WallpaperService", "Run");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -104,8 +97,8 @@ public class WallpaperService extends Service {
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void showFloatingWindow() {
         if (PermissionUtils.isGrantedDrawOverlays()) {
-            ready=true;
-            LogUtils.dTag("WallpaperService","Ready");
+            ready = true;
+            LogUtils.dTag("WallpaperService", "Ready");
             image_view = new ImageView(this);
             video_view = new FastVideoView(this);
             html_view = new WebView(this);
@@ -114,9 +107,16 @@ public class WallpaperService extends Service {
             html_view.getSettings().setJavaScriptEnabled(true);
             html_view.getSettings().setJavaScriptCanOpenWindowsAutomatically(false);
             html_view.getSettings().setAllowFileAccessFromFileURLs(false);
-            info_text_view=new TextView(this);
-            info_text_view.setTextColor(Color.argb(255,0,0,255));
-            layout=new AbsoluteLayout(this);
+            info_text_view = new TextView(this);
+            info_text_view.setTextColor(Color.argb(255, 0, 0, 255));
+            if (layout != null) {
+                try {
+                    windowManager.removeView(layout);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            layout = new AbsoluteLayout(this);
             layout.addView(image_view);
             layout.addView(video_view);
             layout.addView(html_view);

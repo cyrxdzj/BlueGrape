@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
 }
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 android {
     signingConfigs {
@@ -12,8 +15,8 @@ android {
         applicationId "dzj.cyrxdzj.bluegrape"
         minSdkVersion 16
         targetSdk 25
-        versionCode 17
-        versionName '1.1.7'
+        versionCode 18
+        versionName '1.1.8'
         buildConfigField "String", "BUILD_TIME", getDate()
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -32,6 +35,20 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    signingConfigs {
+        debug {
+            storeFile file(keystoreProperties["store_path"])
+            storePassword keystoreProperties["store_password"]
+            keyAlias keystoreProperties["key_alias"]
+            keyPassword keystoreProperties["key_password"]
+        }
+        release {
+            storeFile file(keystoreProperties["store_path"])
+            storePassword keystoreProperties["store_password"]
+            keyAlias keystoreProperties["key_alias"]
+            keyPassword keystoreProperties["key_password"]
+        }
     }
     lintOptions {
         tasks.lint.enabled = false
@@ -55,5 +72,5 @@ dependencies {
 
 static String getDate() {
     Date date = new Date();
-    return "\""+date.format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("GMT+8"))+" UTC+8\"";
+    return "\"" + date.format("yyyy-MM-dd HH:mm:ss", TimeZone.getTimeZone("GMT+8")) + " UTC+8\"";
 }
